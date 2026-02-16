@@ -66,6 +66,8 @@ export default class StationSearch {
   /** @type {HTMLSelectElement|null} */ #elPrefSelect
   /** @type {HTMLElement|null} */  #elTitle
   /** @type {HTMLElement|null} */  #elStepBody
+  /** @type {HTMLElement|null} */  #elStepLines
+  /** @type {HTMLElement|null} */  #elStepConditions
   /** @type {HTMLElement|null} */  #elAdjacentStep
   /** @type {HTMLElement|null} */  #elAdjacentHeader
   /** @type {HTMLElement|null} */  #elAdjacentBody
@@ -88,7 +90,9 @@ export default class StationSearch {
   #cacheElements() {
     this.#elTitle    = $(SELECTOR.stationTitle)
     this.#elStepBody = $(SELECTOR.stationStepBody)
-    // data-step="adjacent" で堅牢に特定（HTML 構造への依存を排除）
+    // data-step 属性で堅牢に特定（HTML 構造への依存を排除）
+    this.#elStepLines      = this.#elContainer.querySelector('[data-step="lines"]')
+    this.#elStepConditions = this.#elContainer.querySelector('[data-step="conditions"]')
     this.#elAdjacentStep   = this.#elContainer.querySelector('[data-step="adjacent"]')
     this.#elAdjacentHeader = this.#elAdjacentStep?.querySelector('.station-select__step-header')
     this.#elAdjacentBody   = this.#elAdjacentStep?.querySelector('.station-select__step-body')
@@ -153,7 +157,8 @@ export default class StationSearch {
       if (area && STATION_DATA[area]) {
         this.#switchPrefecture(area)
       } else {
-        // エリア未選択状態に戻った場合、前回の路線表示をクリア
+        // エリア未選択状態に戻った場合、ステップを非表示に戻す
+        this.#hideSteps()
         if (this.#elStepBody) this.#elStepBody.innerHTML = ''
         if (this.#elAdjacentBody) this.#elAdjacentBody.innerHTML = ''
       }
@@ -191,6 +196,25 @@ export default class StationSearch {
     this.#updateTitle(data.name)
     this.#renderRailways(data.railways)
     this.#renderAdjacentAreas(data.name, data.adjacent)
+    this.#showSteps()
+  }
+
+  // ==============================================================
+  // ステップ表示制御
+  // ==============================================================
+
+  /** 都道府県選択後に STEP1・STEP2・隣接エリアを表示 */
+  #showSteps() {
+    for (const el of [this.#elStepLines, this.#elStepConditions, this.#elAdjacentStep]) {
+      if (el) el.hidden = false
+    }
+  }
+
+  /** ステップを非表示に戻す */
+  #hideSteps() {
+    for (const el of [this.#elStepLines, this.#elStepConditions, this.#elAdjacentStep]) {
+      if (el) el.hidden = true
+    }
   }
 
   // ==============================================================
