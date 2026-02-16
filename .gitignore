@@ -1,0 +1,22 @@
+# 依存パッケージ
+node_modules/
+
+# ビルド出力
+dist/
+
+# macOS
+.DS_Store
+
+# エディタ設定
+.vscode/
+*.swp
+*.swo
+*~
+
+# 環境変数
+.env
+.env.local
+.env.*.local
+
+# ログ
+npm-debug.log*

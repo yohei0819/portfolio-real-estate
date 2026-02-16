@@ -1,0 +1,243 @@
+// ==========================================
+// ヘッダー
+// ==========================================
+
+.header
+  position fixed
+  top 0
+  left 0
+  right 0
+  z-index 1000
+  background $bg-white
+  box-shadow $shadow-sm
+  transition transform 0.3s ease
+
+  &.is-hidden
+    transform translateY(-100%)
+
+  &__inner
+    container()
+    flex-between()
+    height $header-height
+
+  &__logo
+    display flex
+    align-items center
+    gap 8px
+
+    &-img
+      height 36px
+      width auto
+
+    &-text
+      font-size $font-size-lg
+      font-weight bold
+      color $primary
+      letter-spacing 1px
+
+  &__nav
+    display flex
+    align-items center
+    gap 0
+
+    +sp()
+      display none
+
+  // ==========================================
+  // ナビゲーションアイテム
+  // ==========================================
+  &__nav-item
+    position relative
+    padding 0 16px
+    height $header-height
+    flex-center()
+    flex-direction column
+    font-size $font-size-sm
+    color $text-gray
+    transition color $transition-base, border-color $transition-base
+    border-bottom 2px solid transparent
+
+    // ホバー時の背景ハイライト（疑似要素）
+    &::before
+      content ''
+      position absolute
+      inset 0
+      background $primary
+      opacity 0
+      transition opacity $transition-base
+      z-index -1
+
+    &:hover
+      color $primary
+      border-bottom-color $primary
+
+      &::before
+        opacity 0.06
+
+      .icon
+        transform scale(1.4) translateY(-2px)
+
+      .label
+        letter-spacing 1px
+
+    .icon
+      display inline-block
+      margin-bottom 2px
+      font-size 18px
+      text-align center
+      // バウンス感のあるキュービックベジェでアイコンを拡大
+      transition transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+
+    .label
+      display block
+      font-size 10px
+      text-align center
+      transition letter-spacing $transition-base
+
+  // ==========================================
+  // PC用ドロップダウンメニュー
+  // ホバーで右からスライドインするメニューパネル
+  // ==========================================
+  &__nav-menu
+    position relative
+
+    +sp()
+      display none
+
+    // ホバー時にドロップダウンを表示し、トリガー項目もアクティブ状態に
+    &:hover
+      .header__dropdown
+        opacity 1
+        visibility visible
+        transform translateX(0)
+
+      .header__nav-item--menu
+        color $primary
+        border-bottom-color $primary
+
+        &::before
+          opacity 0.06
+
+        .icon
+          transform scale(1.4) translateY(-2px)
+
+  &__dropdown
+    position absolute
+    top 100%
+    right 0
+    width 220px
+    background $bg-white
+    border-radius 0 0 $border-radius-lg $border-radius-lg
+    box-shadow $shadow-lg
+    padding 8px 0
+    // 初期状態: 非表示＋右に20pxオフセット
+    opacity 0
+    visibility hidden
+    transform translateX(20px)
+    transition opacity $transition-base, visibility $transition-base, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    z-index 1001
+
+  &__dropdown-item
+    display flex
+    align-items center
+    gap 10px
+    padding 12px 20px
+    font-size $font-size-sm
+    color $text-dark
+    transition background $transition-fast, padding-left $transition-fast
+    white-space nowrap
+
+    &:hover
+      background $bg-pink
+      padding-left 26px
+      color $primary
+
+  // ==========================================
+  // モバイルハンバーガーボタン
+  // ==========================================
+  &__menu-btn
+    display none
+    flex-direction column
+    justify-content center
+    align-items center
+    width 44px
+    height 44px
+    gap 5px
+    cursor pointer
+    border-radius $border-radius-lg
+    transition all $transition-base
+
+    +sp()
+      display flex
+
+    // ホバー時: 背景ハイライト＋ラインが広がる
+    &:hover
+      background rgba(0, 0, 0, 0.05)
+
+      span:nth-child(1)
+        transform translateY(-2px)
+      span:nth-child(3)
+        transform translateY(2px)
+
+    span
+      display block
+      width 24px
+      height 2px
+      background $text-dark
+      transition all $transition-base
+
+    &.is-active
+      span:nth-child(1)
+        transform rotate(45deg) translate(5px, 5px)
+      span:nth-child(2)
+        opacity 0
+      span:nth-child(3)
+        transform rotate(-45deg) translate(5px, -5px)
+
+// モバイルメニュー
+.mobile-nav
+  position fixed
+  top $header-height
+  left 0
+  right 0
+  bottom 0
+  background rgba(0, 0, 0, 0.5)
+  z-index 999
+  opacity 0
+  visibility hidden
+  transition all $transition-base
+
+  &.is-open
+    opacity 1
+    visibility visible
+
+  &__inner
+    background $bg-white
+    width 80%
+    max-width 320px
+    height 100%
+    padding 20px
+    overflow-y auto
+    transform translateX(-100%)
+    transition transform $transition-base
+
+    .mobile-nav.is-open &
+      transform translateX(0)
+
+  &__item
+    display block
+    padding 14px 16px
+    border-bottom 1px solid $border-light
+    font-size $font-size-base
+    color $text-dark
+    transition background $transition-fast
+
+    &:hover
+      background $bg-pink
+
+  &__sub
+    padding-left 16px
+
+    .mobile-nav__item
+      font-size $font-size-sm
+      color $text-gray

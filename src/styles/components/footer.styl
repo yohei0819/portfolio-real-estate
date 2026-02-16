@@ -1,0 +1,114 @@
+// ==========================================
+// フッター
+// ==========================================
+
+.footer
+  background $text-dark
+  color #fff
+  padding-top 60px
+
+  &__inner
+    container()
+
+  &__top
+    display grid
+    grid-template-columns repeat(4, 1fr)
+    gap 40px
+    padding-bottom 40px
+    border-bottom 1px solid rgba(255, 255, 255, 0.15)
+
+    +tab()
+      grid-template-columns repeat(2, 1fr)
+      gap 30px
+
+    +sp()
+      grid-template-columns 1fr
+      gap 20px
+
+  &__col-title
+    font-size $font-size-lg
+    font-weight bold
+    margin-bottom 16px
+    color #fff
+    position relative
+    padding-bottom 10px
+
+    &::after
+      content ''
+      position absolute
+      bottom 0
+      left 0
+      width 30px
+      height 2px
+      background $primary
+
+  &__col-list
+    li
+      margin-bottom 8px
+
+    a
+      font-size $font-size-sm
+      color rgba(255, 255, 255, 0.7)
+      hover-opacity()
+
+      &:hover
+        color #fff
+
+  &__middle
+    padding 30px 0
+    border-bottom 1px solid rgba(255, 255, 255, 0.15)
+
+  &__area-title
+    font-size $font-size-base
+    margin-bottom 12px
+    color rgba(255, 255, 255, 0.9)
+
+  &__area-links
+    display flex
+    flex-wrap wrap
+    gap 8px
+
+    a
+      display inline-block
+      padding 4px 12px
+      background rgba(255, 255, 255, 0.1)
+      border-radius 20px
+      font-size $font-size-sm
+      color rgba(255, 255, 255, 0.7)
+      transition all $transition-base
+
+      &:hover
+        background $primary
+        color #fff
+
+  &__bottom
+    padding 20px 0
+    flex-between()
+    flex-wrap wrap
+    gap 16px
+
+    +sp()
+      flex-direction column
+      text-align center
+
+  &__sns
+    display flex
+    gap 16px
+
+    a
+      width 36px
+      height 36px
+      flex-center()
+      background rgba(255, 255, 255, 0.15)
+      border-radius 50%
+      color #fff
+      font-size 16px
+      transition all $transition-base
+
+      &:hover
+        background $primary
+        transform translateY(-2px)
+
+  &__copyright
+    font-size $font-size-sm
+    color rgba(255, 255, 255, 0.5)

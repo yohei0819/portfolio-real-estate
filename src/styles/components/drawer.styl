@@ -1,0 +1,279 @@
+// ==========================================
+// ドロワー（お気に入り・最近見た物件・検索履歴）
+// ==========================================
+
+// オーバーレイ
+.drawer-overlay
+  position fixed
+  top 0
+  left 0
+  width 100%
+  height 100%
+  background rgba(0, 0, 0, 0.5)
+  z-index 9998
+  opacity 0
+  visibility hidden
+  transition opacity $transition-base, visibility $transition-base
+
+  &.is-visible
+    opacity 1
+    visibility visible
+
+// ドロワー本体
+.drawer
+  position fixed
+  top 0
+  right -400px
+  width 380px
+  max-width 90vw
+  height 100vh
+  height 100dvh // iOS Safari 対応: 動的ビューポート高さ
+  background $bg-white
+  z-index 9999
+  box-shadow -4px 0 24px rgba(0, 0, 0, 0.15)
+  transition right $transition-base
+  display flex
+  flex-direction column
+
+  &.is-open
+    right 0
+
+  &__header
+    display flex
+    align-items center
+    justify-content space-between
+    padding 16px 20px
+    border-bottom 1px solid $border-color
+    flex-shrink 0
+
+  &__title
+    font-size $font-size-lg
+    font-weight 700
+    margin 0
+
+  &__close
+    background none
+    border none
+    font-size $font-size-xl
+    cursor pointer
+    color $text-gray
+    padding 4px 8px
+    border-radius $border-radius
+    transition background $transition-fast
+
+    &:hover
+      background $bg-gray
+
+  &__body
+    flex 1
+    overflow-y auto
+    padding 12px 0
+
+  // ドロワー内の物件アイテム
+  &__item
+    display flex
+    align-items center
+    padding 10px 20px
+    border-bottom 1px solid $border-light
+    transition background $transition-fast
+
+    &:hover
+      background $bg-gray
+
+    &-link
+      display flex
+      align-items center
+      gap 12px
+      flex 1
+      text-decoration none
+      color inherit
+      min-width 0
+
+    &-image
+      width 56px
+      height 56px
+      border-radius $border-radius
+      flex-shrink 0
+      background-size cover
+      background-position center
+
+    &-body
+      flex 1
+      min-width 0
+
+    &-name
+      font-size $font-size-base
+      font-weight 500
+      margin 0 0 2px
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+
+    &-price
+      font-size $font-size-sm
+      color $text-gray
+      margin 0 0 2px
+
+    &-location
+      font-size $font-size-sm
+      color $text-light
+      margin 0
+
+    &-remove
+      flex-shrink 0
+      background none
+      border none
+      font-size $font-size-base
+      cursor pointer
+      color $text-light
+      padding 8px
+      border-radius 50%
+      transition background $transition-fast, color $transition-fast
+      margin-left 4px
+
+      &:hover
+        background rgba(230, 0, 51, 0.1)
+        color $primary
+
+  // 空状態
+  &__empty
+    padding 48px 20px
+    text-align center
+    color $text-gray
+
+    p
+      margin 0 0 8px
+
+    &-hint
+      font-size $font-size-sm
+      color $text-light
+
+  // フッター（検索履歴のクリアボタン等）
+  &__footer
+    padding 16px 20px
+    border-top 1px solid $border-color
+
+  &__clear-btn
+    width 100%
+    padding 10px
+    background none
+    border 1px solid $border-color
+    border-radius $border-radius
+    cursor pointer
+    font-size $font-size-sm
+    color $text-gray
+    transition background $transition-fast, color $transition-fast
+
+    &:hover
+      background $bg-pink
+      color $primary
+      border-color $primary
+
+// ==========================================
+// お気に入りボタン
+// ==========================================
+
+.fav-btn
+  background none
+  border none
+  cursor pointer
+  z-index 2
+  transition transform $transition-fast
+
+  &:hover
+    transform scale(1.15)
+
+  &:active
+    transform scale(0.95)
+
+  &__icon
+    font-size 1.25rem
+    line-height 1
+
+  &__label
+    font-size $font-size-sm
+
+  // カード・横型カード上のハートボタン（共通ベース）
+  &--card
+  &--row
+    position absolute
+    padding 6px
+    background rgba(255, 255, 255, 0.85)
+    border-radius 50%
+    box-shadow $shadow-sm
+    width 36px
+    height 36px
+    display flex
+    align-items center
+    justify-content center
+
+    &:hover
+      background rgba(255, 255, 255, 1)
+      box-shadow $shadow-md
+
+  // カード上ボタン — 位置指定
+  &--card
+    top 8px
+    right 8px
+
+  // 横型カード上ボタン — 位置指定
+  &--row
+    top 12px
+    right 12px
+
+  // アクティブ状態
+  &.is-fav-active
+    .fav-btn__icon
+      animation fav-pulse 0.3s ease
+
+// fav-btn の position:absolute を有効にするため
+// （cards.styl の card-base() で position:relative が設定されていないケース用）
+.property-row
+  position relative
+
+// property-card の position は cards.styl で設定済み
+
+// ==========================================
+// ヘッダーバッジ（件数表示）
+// ==========================================
+
+.header__nav-badge
+  display inline-flex
+  align-items center
+  justify-content center
+  min-width 18px
+  height 18px
+  padding 0 5px
+  background $primary
+  color #fff
+  font-size 0.625rem
+  font-weight 700
+  border-radius 9px
+  line-height 1
+  position absolute
+  top 2px
+  right -2px
+
+// バッジの position:absolute を有効にするため
+// （header.styl で設定されていないケース用）
+.header__nav-item
+  position relative
+
+// ==========================================
+// アニメーション
+// ==========================================
+
+@keyframes fav-pulse
+  0%
+    transform scale(1)
+  50%
+    transform scale(1.3)
+  100%
+    transform scale(1)
+
+// サイドバーのお気に入りボタン（物件詳細）
+.detail__sidebar-btn--fav
+  &.is-fav-active
+    background $bg-pink
+    border-color $primary
+    color $primary

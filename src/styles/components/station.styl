@@ -1,0 +1,391 @@
+// ==========================================
+// 路線・駅選択（station.html）
+// ==========================================
+
+.station-select
+  container()
+  padding-top 24px
+  padding-bottom 100px  // フローティングバー分の余白
+
+  &__title
+    font-size $font-size-xl
+    font-weight bold
+    text-align center
+    margin-bottom 8px
+    color $text-dark
+    position relative
+    padding-bottom 12px
+
+    &::after
+      content ''
+      position absolute
+      bottom 0
+      left 50%
+      transform translateX(-50%)
+      width 50px
+      height 3px
+      background $primary
+
+  &__subtitle
+    text-align center
+    font-size $font-size-sm
+    color $text-gray
+    margin-bottom 32px
+
+  // 都道府県セレクタ
+  &__prefecture-selector
+    margin-bottom 32px
+    background $bg-white
+    border 1px solid $border-color
+    border-radius $border-radius-lg
+    padding 24px
+    text-align center
+
+  &__pref-label
+    display block
+    font-size $font-size-lg
+    font-weight bold
+    color $text-dark
+    margin-bottom 16px
+
+  &__pref-icon
+    margin-right 4px
+
+  &__pref-select
+    custom-select()
+    width 100%
+    max-width 400px
+    padding 12px 16px
+    border-width 2px
+    background-position right 16px center
+
+  &__step
+    margin-bottom 40px
+    background $bg-white
+    border 1px solid $border-color
+    border-radius $border-radius-lg
+    overflow hidden
+
+  &__step-header
+    background $primary
+    color #fff
+    padding 12px 20px
+    font-size $font-size-base
+    font-weight bold
+    flex-between()
+
+    span
+      font-size $font-size-sm
+      font-weight normal
+
+  &__step-body
+    padding 24px
+
+  &__railway
+    margin-bottom 24px
+    border-bottom 1px solid $border-light
+    padding-bottom 24px
+
+    &:last-child
+      border-bottom none
+      margin-bottom 0
+      padding-bottom 0
+
+  &__railway-name
+    font-size $font-size-lg
+    font-weight bold
+    margin-bottom 12px
+    color $text-dark
+    padding-left 12px
+    border-left 3px solid $primary
+
+  &__railway-lines
+    display flex
+    flex-wrap wrap
+    gap 12px
+
+  &__line-item
+    width 100%
+
+    label
+      checkbox-label()
+
+    &.is-checked label
+      border-color $primary
+      background $bg-pink
+      color $primary
+
+  &__station-count
+    font-size $font-size-sm
+    color $text-gray
+    margin-left 4px
+
+// ==========================================
+// 人気の駅から探す
+// ==========================================
+
+.popular-stations
+  margin-bottom 32px
+  background $bg-white
+  border 1px solid $border-color
+  border-radius $border-radius-lg
+  padding 24px
+  overflow hidden
+
+  &__title
+    font-size $font-size-lg
+    font-weight bold
+    margin-bottom 16px
+    color $text-dark
+    text-align center
+
+  &__grid
+    display grid
+    grid-template-columns repeat(4, 1fr)
+    gap 12px
+
+    +sp()
+      grid-template-columns repeat(2, 1fr)
+      gap 8px
+
+  &__item
+    display flex
+    flex-direction column
+    align-items center
+    padding 16px 8px
+    border 1px solid $border-color
+    border-radius $border-radius-lg
+    text-decoration none
+    color $text-dark
+    transition all .25s ease
+
+    &:hover
+      border-color $primary
+      background $bg-pink
+      transform translateY(-2px)
+      box-shadow $shadow-sm
+
+  &__name
+    font-size $font-size-lg
+    font-weight bold
+    margin-bottom 4px
+
+  &__line
+    font-size 11px
+    color $text-gray
+    margin-bottom 6px
+    text-align center
+
+  &__count
+    font-size $font-size-sm
+    color $primary
+    font-weight bold
+
+// ==========================================
+// 駅一覧（路線チェック時に展開）
+// ==========================================
+
+.station-stops
+  max-height 0
+  overflow hidden
+  opacity 0
+  transition max-height .35s ease, opacity .25s ease, margin .25s ease, padding .25s ease
+  margin-top 0
+  padding 0 16px
+  background $bg-light
+  border-radius 0 0 $border-radius $border-radius
+
+  &.is-open
+    max-height 800px
+    overflow-y auto
+    opacity 1
+    margin-top 12px
+    padding 16px
+    border-top 1px solid $border-light
+
+  &__header
+    display flex
+    align-items center
+    justify-content space-between
+    margin-bottom 12px
+
+  &__label
+    font-size $font-size-sm
+    font-weight bold
+    color $text-gray
+
+  &__toggle-all
+    background none
+    border 1px solid $primary
+    color $primary
+    border-radius $border-radius
+    padding 4px 12px
+    font-size 12px
+    cursor pointer
+    transition all .2s ease
+
+    &:hover
+      background $primary
+      color #fff
+
+  &__grid
+    display grid
+    grid-template-columns repeat(auto-fill, minmax(160px, 1fr))
+    gap 8px
+
+    +sp()
+      grid-template-columns repeat(2, 1fr)
+
+  &__item
+    display flex
+    align-items center
+    gap 6px
+    padding 6px 10px
+    border-radius $border-radius
+    cursor pointer
+    transition background .2s ease
+    font-size $font-size-sm
+
+    &:hover
+      background $bg-white
+
+    input[type="checkbox"]
+      accent-color $primary
+      width 16px
+      height 16px
+      flex-shrink 0
+
+  &__name
+    flex 1
+    color $text-dark
+
+  &__count
+    font-size 11px
+    color $text-gray
+    white-space nowrap
+
+  &__all-notice
+    text-align center
+    padding 12px
+    color $text-gray
+    font-size $font-size-sm
+    background $bg-white
+    border-radius $border-radius
+    border 1px dashed $border-color
+
+// ==========================================
+// フローティング選択バー
+// ==========================================
+
+.station-summary
+  position fixed
+  bottom 0
+  left 0
+  right 0
+  z-index 100
+  background rgba(255, 255, 255, .96)
+  border-top 2px solid $primary
+  box-shadow 0 -4px 20px rgba(0, 0, 0, .1)
+  backdrop-filter blur(8px)
+  animation slideUp .3s ease
+
+  &[hidden]
+    display none
+
+  &__inner
+    container()
+    display flex
+    align-items center
+    justify-content space-between
+    padding 12px 20px
+    gap 16px
+
+    +sp()
+      flex-direction column
+      gap 8px
+      padding 10px 16px
+
+  &__count
+    font-size $font-size-base
+    color $text-dark
+    white-space nowrap
+
+    strong
+      font-size $font-size-lg
+      color $primary
+      margin 0 2px
+
+  &__icon
+    margin-right 4px
+
+  &__sep
+    color $text-gray
+    margin 0 4px
+
+  &__btn
+    flex-shrink 0
+    white-space nowrap
+
+@keyframes slideUp
+  from
+    transform translateY(100%)
+    opacity 0
+  to
+    transform translateY(0)
+    opacity 1
+
+// 隣接都道府県リンク
+.adjacent-area
+  display flex
+  flex-wrap wrap
+  gap 12px
+
+// 検索ボタンセンタリング
+.search-action
+  text-align center
+  margin-top 32px
+
+// ==========================================
+// こだわり条件
+// ==========================================
+
+.condition-section
+  margin-top 40px
+
+  &__title
+    section-underline()
+    font-size $font-size-lg
+    margin-bottom 16px
+
+  &__group
+    margin-bottom 24px
+
+  &__group-title
+    font-size $font-size-base
+    font-weight bold
+    margin-bottom 12px
+    color $text-gray
+
+  &__options
+    display flex
+    flex-wrap wrap
+    gap 10px
+
+  &__option
+    label
+      checkbox-label()
+      padding 6px 14px
+
+  &__range
+    display flex
+    align-items center
+    gap 8px
+
+    select
+      padding 8px 12px
+      border 1px solid $border-color
+      border-radius $border-radius
+      font-size $font-size-sm
+
+    span
+      color $text-gray

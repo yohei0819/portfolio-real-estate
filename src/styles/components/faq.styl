@@ -1,0 +1,76 @@
+// ==========================================
+// よくある質問（FAQ）
+// ==========================================
+
+.faq
+  max-width 800px
+  margin 0 auto
+
+  &__item
+    border-bottom 1px solid $border-color
+
+    &[open] .faq__question::after
+      transform rotate(180deg)
+
+  &__question
+    display flex
+    align-items center
+    gap 12px
+    padding 20px 0
+    cursor pointer
+    list-style none
+    font-size $font-size-base
+    font-weight bold
+    color $text-dark
+    transition color $transition-base
+    position relative
+    padding-right 32px
+
+    &::-webkit-details-marker
+      display none
+
+    &::after
+      content '▼'
+      position absolute
+      right 0
+      font-size 12px
+      color $text-light
+      transition transform $transition-base
+
+    &:hover
+      color $primary
+
+  &__q-icon
+    display inline-flex
+    align-items center
+    justify-content center
+    width 28px
+    height 28px
+    min-width 28px
+    background $primary
+    color #fff
+    font-size $font-size-sm
+    font-weight bold
+    border-radius 50%
+
+  &__q-text
+    flex 1
+
+  &__answer
+    padding 0 0 20px 40px
+    color $text-gray
+    line-height 1.8
+    font-size $font-size-base
+
+  &__a-icon
+    display inline-flex
+    align-items center
+    justify-content center
+    width 28px
+    height 28px
+    min-width 28px
+    background $bg-pink
+    color $primary
+    font-size $font-size-sm
+    font-weight bold
+    border-radius 50%

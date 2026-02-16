@@ -1,0 +1,140 @@
+// ==========================================
+// お役立ち情報
+// ==========================================
+
+.info-grid
+  display grid
+  grid-template-columns repeat(4, 1fr)
+  gap 20px
+
+  +tab()
+    grid-template-columns repeat(2, 1fr)
+
+  +sp()
+    grid-template-columns 1fr
+    gap 16px
+
+.info-card
+  card-base()
+  cursor pointer
+
+  &__image
+    width 100%
+    height 160px
+    background-size cover
+    background-position center
+    background-color $bg-pink
+
+  &__body
+    padding 16px
+
+  &__category
+    display inline-block
+    padding 2px 10px
+    background $bg-pink
+    color $primary
+    font-size $font-size-xs
+    font-weight bold
+    border-radius 3px
+    margin-bottom 8px
+
+  &__title
+    font-size $font-size-base
+    font-weight bold
+    line-height 1.5
+    margin-bottom 6px
+
+  &__excerpt
+    font-size $font-size-sm
+    color $text-gray
+    line-height 1.6
+    display -webkit-box
+    -webkit-line-clamp 2
+    -webkit-box-orient vertical
+    overflow hidden
+
+// ==========================================
+// サポートセクション
+// ==========================================
+
+.support-grid
+  display grid
+  grid-template-columns repeat(3, 1fr)
+  gap 24px
+
+  +tab()
+    grid-template-columns repeat(2, 1fr)
+
+  +sp()
+    grid-template-columns 1fr
+
+.support-card
+  background $bg-white
+  border 1px solid $border-color
+  border-radius $border-radius-lg
+  padding 32px 24px
+  text-align center
+  hover-lift()
+
+  &__icon
+    width 64px
+    height 64px
+    margin 0 auto 16px
+    flex-center()
+    background $bg-pink
+    border-radius 50%
+    font-size 28px
+
+  &__title
+    font-size $font-size-lg
+    font-weight bold
+    margin-bottom 8px
+
+  &__desc
+    font-size $font-size-sm
+    color $text-gray
+    line-height 1.6
+
+// ==========================================
+// 数字で見るホームナビ（実績セクション）
+// ==========================================
+
+.stats-grid
+  display grid
+  grid-template-columns repeat(4, 1fr)
+  gap 24px
+
+  +tab()
+    grid-template-columns repeat(2, 1fr)
+
+  +sp()
+    grid-template-columns repeat(2, 1fr)
+    gap 16px
+
+.stats-card
+  background $bg-white
+  border-radius $border-radius-lg
+  padding 32px 16px
+  text-align center
+  box-shadow $shadow-sm
+  hover-lift()
+
+  &__icon
+    font-size 36px
+    margin-bottom 12px
+
+  &__number
+    font-size 36px
+    font-weight bold
+    color $primary
+    line-height 1.2
+    margin-bottom 8px
+
+    span
+      font-size $font-size-base
+      color $text-gray
+      font-weight normal
+
+  &__label
+    font-size $font-size-sm
+    color $text-gray

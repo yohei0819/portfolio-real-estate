@@ -1,0 +1,57 @@
+/**
+ * 都道府県マスタデータ（47都道府県）
+ * AreaSearch, StationSearch 等で共通利用する一元管理データ
+ */
+
+/** 都道府県マスタ（key → { name, region }） */
+const PREFECTURES = {
+  hokkaido:  { name: '北海道',   region: '北海道' },
+  aomori:    { name: '青森県',   region: '東北' },
+  iwate:     { name: '岩手県',   region: '東北' },
+  miyagi:    { name: '宮城県',   region: '東北' },
+  akita:     { name: '秋田県',   region: '東北' },
+  yamagata:  { name: '山形県',   region: '東北' },
+  fukushima: { name: '福島県',   region: '東北' },
+  ibaraki:   { name: '茨城県',   region: '関東' },
+  tochigi:   { name: '栃木県',   region: '関東' },
+  gunma:     { name: '群馬県',   region: '関東' },
+  saitama:   { name: '埼玉県',   region: '関東' },
+  chiba:     { name: '千葉県',   region: '関東' },
+  tokyo:     { name: '東京都',   region: '関東' },
+  kanagawa:  { name: '神奈川県', region: '関東' },
+  niigata:   { name: '新潟県',   region: '中部' },
+  toyama:    { name: '富山県',   region: '中部' },
+  ishikawa:  { name: '石川県',   region: '中部' },
+  fukui:     { name: '福井県',   region: '中部' },
+  yamanashi: { name: '山梨県',   region: '中部' },
+  nagano:    { name: '長野県',   region: '中部' },
+  gifu:      { name: '岐阜県',   region: '中部' },
+  shizuoka:  { name: '静岡県',   region: '中部' },
+  aichi:     { name: '愛知県',   region: '中部' },
+  mie:       { name: '三重県',   region: '近畿' },
+  shiga:     { name: '滋賀県',   region: '近畿' },
+  kyoto:     { name: '京都府',   region: '近畿' },
+  osaka:     { name: '大阪府',   region: '近畿' },
+  hyogo:     { name: '兵庫県',   region: '近畿' },
+  nara:      { name: '奈良県',   region: '近畿' },
+  wakayama:  { name: '和歌山県', region: '近畿' },
+  tottori:   { name: '鳥取県',   region: '中国' },
+  shimane:   { name: '島根県',   region: '中国' },
+  okayama:   { name: '岡山県',   region: '中国' },
+  hiroshima: { name: '広島県',   region: '中国' },
+  yamaguchi: { name: '山口県',   region: '中国' },
+  tokushima: { name: '徳島県',   region: '四国' },
+  kagawa:    { name: '香川県',   region: '四国' },
+  ehime:     { name: '愛媛県',   region: '四国' },
+  kochi:     { name: '高知県',   region: '四国' },
+  fukuoka:   { name: '福岡県',   region: '九州・沖縄' },
+  saga:      { name: '佐賀県',   region: '九州・沖縄' },
+  nagasaki:  { name: '長崎県',   region: '九州・沖縄' },
+  kumamoto:  { name: '熊本県',   region: '九州・沖縄' },
+  oita:      { name: '大分県',   region: '九州・沖縄' },
+  miyazaki:  { name: '宮崎県',   region: '九州・沖縄' },
+  kagoshima: { name: '鹿児島県', region: '九州・沖縄' },
+  okinawa:   { name: '沖縄県',   region: '九州・沖縄' },
+}
+
+export default PREFECTURES

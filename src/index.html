@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ホームナビ｜賃貸マンション・アパート・賃貸物件を探す</title>
+  <meta name="description" content="賃貸マンション・アパートなど賃貸物件の情報サイト「ホームナビ」">
+  <meta name="theme-color" content="#e60033">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="canonical" href="https://homenavi.example.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ホームナビ｜賃貸マンション・アパート・賃貸物件を探す">
+  <meta property="og:description" content="賃貸マンション・アパートなど賃貸物件の情報サイト「ホームナビ」">
+  <meta property="og:url" content="https://homenavi.example.com/">
+  <meta property="og:image" content="https://homenavi.example.com/ogp.png">
+  <meta property="og:site_name" content="ホームナビ">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="./styles/main.styl">
+</head>
+<body>
+  <!-- スキップナビゲーション -->
+  <a href="#main" class="skip-nav">メインコンテンツへスキップ</a>
+
+  <!-- JS無効時フォールバック -->
+  <noscript>
+    <style>.loading { display: none !important; } .js-fade-in, .hero__title, .hero__subtitle, .hero__search { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+
+  <!-- ローディング -->
+  <div class="loading" id="loading">
+    <div class="loading__logo">ホームナビ</div>
+    <div class="loading__bar">
+      <div class="loading__progress" id="loadingProgress"></div>
+    </div>
+  </div>
+
+  <!-- ページ遷移 -->
+  <div class="page-transition" id="pageTransition">
+    <div class="page-transition__layer"></div>
+  </div>
+
+  <!-- カーソルフォロワー -->
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- ヘッダー -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="./" class="header__logo">
+        <span class="header__logo-text"><span aria-hidden="true">🏠</span> ホームナビ</span>
+      </a>
+
+      <nav class="header__nav">
+        <a href="./" class="header__nav-item">
+          <span class="icon" aria-hidden="true">🔍</span>
+          <span class="label">物件検索</span>
+        </a>
+        <a href="./station.html" class="header__nav-item">
+          <span class="icon" aria-hidden="true">🚃</span>
+          <span class="label">沿線・駅</span>
+        </a>
+        <a href="./search.html" class="header__nav-item">
+          <span class="icon" aria-hidden="true">📍</span>
+          <span class="label">エリア</span>
+        </a>
+        <a href="#" class="header__nav-item" data-fav-drawer-toggle>
+          <span class="icon" aria-hidden="true">⭐</span>
+          <span class="label">お気に入り</span>
+          <span class="header__nav-badge" data-fav-badge hidden></span>
+        </a>
+        <a href="#" class="header__nav-item" data-recent-drawer-toggle>
+          <span class="icon" aria-hidden="true">🕐</span>
+          <span class="label">最近見た物件</span>
+          <span class="header__nav-badge" data-recent-badge hidden></span>
+        </a>
+        <a href="#" class="header__nav-item" data-search-drawer-toggle>
+          <span class="icon" aria-hidden="true">📋</span>
+          <span class="label">検索した条件</span>
+          <span class="header__nav-badge" data-search-badge hidden></span>
+        </a>
+        <div class="header__nav-menu">
+          <a href="#" class="header__nav-item header__nav-item--menu" tabindex="0">
+            <span class="icon" aria-hidden="true">☰</span>
+            <span class="label">メニュー</span>
+          </a>
+          <div class="header__dropdown">
+            <a href="./" class="header__dropdown-item"><span aria-hidden="true">🔍</span> 物件検索</a>
+            <a href="./station.html" class="header__dropdown-item"><span aria-hidden="true">🚃</span> 沿線・駅から探す</a>
+            <a href="./search.html" class="header__dropdown-item"><span aria-hidden="true">📍</span> エリアから探す</a>
+            <a href="./property.html" class="header__dropdown-item"><span aria-hidden="true">🏠</span> 物件一覧</a>
+          </div>
+        </div>
+      </nav>
+
+      <button class="header__menu-btn" id="menuBtn" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- モバイルメニュー -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="モバイルナビゲーション">
+    <div class="mobile-nav__inner">
+      <a href="./" class="mobile-nav__item"><span aria-hidden="true">🔍</span> 物件検索</a>
+      <a href="./station.html" class="mobile-nav__item"><span aria-hidden="true">🚃</span> 沿線・駅から探す</a>
+      <a href="./search.html" class="mobile-nav__item"><span aria-hidden="true">📍</span> エリアから探す</a>
+      <a href="./property.html" class="mobile-nav__item"><span aria-hidden="true">🏠</span> 物件一覧</a>
+      <a href="#" class="mobile-nav__item" data-fav-drawer-toggle><span aria-hidden="true">⭐</span> お気に入り <span class="header__nav-badge" data-fav-badge hidden></span></a>
+      <a href="#" class="mobile-nav__item" data-recent-drawer-toggle><span aria-hidden="true">🕐</span> 最近見た物件 <span class="header__nav-badge" data-recent-badge hidden></span></a>
+      <a href="#" class="mobile-nav__item" data-search-drawer-toggle><span aria-hidden="true">📋</span> 検索した条件 <span class="header__nav-badge" data-search-badge hidden></span></a>
+    </div>
+  </nav>
+
+  <!-- メインコンテンツ -->
+  <main id="main">
+    <!-- ヒーロー -->
+    <section class="hero" id="hero">
+      <div class="hero__bg">
+        <div class="hero__slide hero__slide--1 is-active"></div>
+        <div class="hero__slide hero__slide--2"></div>
+        <div class="hero__slide hero__slide--3"></div>
+      </div>
+      <div class="hero__overlay"></div>
+
+      <div class="hero__content">
+        <h1 class="hero__title">理想のお部屋を見つけよう</h1>
+        <p class="hero__subtitle">賃貸マンション・アパート・一戸建て 全国の物件情報</p>
+
+        <div class="hero__search">
+          <p class="hero__search-title">🔍 キーワードで探す</p>
+          <form class="hero__search-form" action="/search.html">
+            <select class="hero__search-select" name="area" aria-label="エリア選択">
+              <option value="">都道府県を選択</option>
+              <optgroup label="北海道">
+                <option value="hokkaido">北海道</option>
+              </optgroup>
+              <optgroup label="東北">
+                <option value="aomori">青森県</option>
+                <option value="iwate">岩手県</option>
+                <option value="miyagi">宮城県</option>
+                <option value="akita">秋田県</option>
+                <option value="yamagata">山形県</option>
+                <option value="fukushima">福島県</option>
+              </optgroup>
+              <optgroup label="関東">
+                <option value="ibaraki">茨城県</option>
+                <option value="tochigi">栃木県</option>
+                <option value="gunma">群馬県</option>
+                <option value="saitama">埼玉県</option>
+                <option value="chiba">千葉県</option>
+                <option value="tokyo">東京都</option>
+                <option value="kanagawa">神奈川県</option>
+              </optgroup>
+              <optgroup label="中部">
+                <option value="niigata">新潟県</option>
+                <option value="toyama">富山県</option>
+                <option value="ishikawa">石川県</option>
+                <option value="fukui">福井県</option>
+                <option value="yamanashi">山梨県</option>
+                <option value="nagano">長野県</option>
+                <option value="gifu">岐阜県</option>
+                <option value="shizuoka">静岡県</option>
+                <option value="aichi">愛知県</option>
+              </optgroup>
+              <optgroup label="近畿">
+                <option value="mie">三重県</option>
+                <option value="shiga">滋賀県</option>
+                <option value="kyoto">京都府</option>
+                <option value="osaka">大阪府</option>
+                <option value="hyogo">兵庫県</option>
+                <option value="nara">奈良県</option>
+                <option value="wakayama">和歌山県</option>
+              </optgroup>
+              <optgroup label="中国">
+                <option value="tottori">鳥取県</option>
+                <option value="shimane">島根県</option>
+                <option value="okayama">岡山県</option>
+                <option value="hiroshima">広島県</option>
+                <option value="yamaguchi">山口県</option>
+              </optgroup>
+              <optgroup label="四国">
+                <option value="tokushima">徳島県</option>
+                <option value="kagawa">香川県</option>
+                <option value="ehime">愛媛県</option>
+                <option value="kochi">高知県</option>
+              </optgroup>
+              <optgroup label="九州・沖縄">
+                <option value="fukuoka">福岡県</option>
+                <option value="saga">佐賀県</option>
+                <option value="nagasaki">長崎県</option>
+                <option value="kumamoto">熊本県</option>
+                <option value="oita">大分県</option>
+                <option value="miyazaki">宮崎県</option>
+                <option value="kagoshima">鹿児島県</option>
+                <option value="okinawa">沖縄県</option>
+              </optgroup>
+            </select>
+            <select class="hero__search-select" name="type" aria-label="物件タイプ選択">
+              <option value="">物件タイプ</option>
+              <option value="mansion">マンション</option>
+              <option value="apartment">アパート</option>
+              <option value="house">一戸建て</option>
+              <option value="maisonette">メゾネット</option>
+            </select>
+            <button type="submit" class="hero__search-btn">検索する</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="hero__indicators">
+        <button class="hero__indicator is-active" data-slide="0" aria-label="スライド1"></button>
+        <button class="hero__indicator" data-slide="1" aria-label="スライド2"></button>
+        <button class="hero__indicator" data-slide="2" aria-label="スライド3"></button>
+      </div>
+    </section>
+
+    <!-- こだわり条件 -->
+    <section class="section" id="categorySection">
+      <div class="section__inner">
+        <div class="section__header js-fade-in">
+          <h2 class="section__title">こだわり賃貸物件</h2>
+          <p class="section__subtitle">あなたにぴったりの条件で、お部屋を探しましょう</p>
+        </div>
+
+        <div class="category-grid">
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">🏢</div>
+            <h3 class="category-card__title">賃貸マンション</h3>
+            <p class="category-card__desc">お部屋探しにぴったりのマンション物件</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">👤</div>
+            <h3 class="category-card__title">一人暮らし</h3>
+            <p class="category-card__desc">なるべく安くて良い物件を探す</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">🏠</div>
+            <h3 class="category-card__title">賃貸アパート</h3>
+            <p class="category-card__desc">お手頃な家賃のアパート物件</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">✨</div>
+            <h3 class="category-card__title">ホームナビオリジナル</h3>
+            <p class="category-card__desc">独自の特典付き物件</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">💼</div>
+            <h3 class="category-card__title">テレワーク可</h3>
+            <p class="category-card__desc">在宅勤務対応のお部屋</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">💰</div>
+            <h3 class="category-card__title">初期費用</h3>
+            <p class="category-card__desc">敷金・礼金が安い物件</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">🛋️</div>
+            <h3 class="category-card__title">室内設備</h3>
+            <p class="category-card__desc">充実した設備の物件</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">🏗️</div>
+            <h3 class="category-card__title">建物・構造</h3>
+            <p class="category-card__desc">鉄筋コンクリート造等</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 生活施設周辺 -->
+    <section class="section section--pink" id="facilitySection">
+      <div class="section__inner">
+        <div class="section__header js-fade-in">
+          <h2 class="section__title">生活施設の周辺から賃貸物件を探す</h2>
+          <p class="section__subtitle">ショッピング、病院、学校などの近くの物件</p>
+        </div>
+
+        <div class="category-grid">
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">🛒</div>
+            <h3 class="category-card__title">ショッピング施設</h3>
+            <p class="category-card__desc">お気に入りの店舗の近くに</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">🚃</div>
+            <h3 class="category-card__title">交通アクセス</h3>
+            <p class="category-card__desc">駅・バス停に近い物件</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">🏥</div>
+            <h3 class="category-card__title">病院</h3>
+            <p class="category-card__desc">医療施設が近い安心物件</p>
+          </a>
+          <a href="./search.html" class="category-card js-fade-in">
+            <div class="category-card__icon">🎓</div>
+            <h3 class="category-card__title">学校</h3>
+            <p class="category-card__desc">通学に便利な物件</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 人気エリアランキング -->
+    <section class="section" id="areaSection">
+      <div class="section__inner">
+        <div class="section__header js-fade-in">
+          <h2 class="section__title">人気エリアランキング</h2>
+          <p class="section__subtitle">今注目されているエリアの賃貸物件をチェック</p>
+        </div>
+
+        <div class="area-grid">
+          <a href="./search.html?area=tokyo" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0);">
+              <span class="area-card__rank">1</span>
+              <span class="area-card__name">東京都</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>85,420</span>件</p>
+            </div>
+          </a>
+          <a href="./search.html?area=osaka" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #e8eaf6, #c5cae9);">
+              <span class="area-card__rank">2</span>
+              <span class="area-card__name">大阪府</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>42,310</span>件</p>
+            </div>
+          </a>
+          <a href="./search.html?area=kanagawa" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9);">
+              <span class="area-card__rank">3</span>
+              <span class="area-card__name">神奈川県</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>38,750</span>件</p>
+            </div>
+          </a>
+          <a href="./search.html?area=aichi" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2);">
+              <span class="area-card__rank">4</span>
+              <span class="area-card__name">愛知県</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>28,640</span>件</p>
+            </div>
+          </a>
+          <a href="./search.html?area=fukuoka" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2);">
+              <span class="area-card__rank">5</span>
+              <span class="area-card__name">福岡県</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>24,180</span>件</p>
+            </div>
+          </a>
+          <a href="./search.html?area=saitama" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #f3e5f5, #e1bee7);">
+              <span class="area-card__rank">6</span>
+              <span class="area-card__name">埼玉県</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>21,530</span>件</p>
+            </div>
+          </a>
+          <a href="./search.html?area=chiba" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #fce4ec, #f48fb1);">
+              <span class="area-card__rank">7</span>
+              <span class="area-card__name">千葉県</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>19,870</span>件</p>
+            </div>
+          </a>
+          <a href="./search.html?area=hyogo" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #e8eaf6, #9fa8da);">
+              <span class="area-card__rank">8</span>
+              <span class="area-card__name">兵庫県</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>16,420</span>件</p>
+            </div>
+          </a>
+          <a href="./search.html?area=hokkaido" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #e8f5e9, #a5d6a7);">
+              <span class="area-card__rank">9</span>
+              <span class="area-card__name">北海道</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>14,950</span>件</p>
+            </div>
+          </a>
+          <a href="./search.html?area=kyoto" class="area-card js-fade-in">
+            <div class="area-card__image" style="background: linear-gradient(135deg, #fff8e1, #ffcc02);">
+              <span class="area-card__rank">10</span>
+              <span class="area-card__name">京都府</span>
+            </div>
+            <div class="area-card__info">
+              <p class="area-card__count"><span>12,680</span>件</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 新着物件 -->
+    <section class="section section--pink" id="newPropertySection">
+      <div class="section__inner">
+        <div class="section__header js-fade-in">
+          <h2 class="section__title">新着のおすすめ物件</h2>
+          <p class="section__subtitle">新しく掲載された注目の賃貸物件をピックアップ</p>
+        </div>
+
+        <div class="new-properties__list">
+          <!-- NewProperties.js により動的生成 -->
+        </div>
+
+        <div class="new-properties__more">
+          <a href="./search.html" class="btn btn--primary btn--lg btn--arrow">物件一覧をもっと見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 数字で見るホームナビ -->
+    <section class="section" id="statsSection">
+      <div class="section__inner">
+        <div class="section__header js-fade-in">
+          <h2 class="section__title">数字で見るホームナビ</h2>
+          <p class="section__subtitle">多くのお客様にご利用いただいています</p>
+        </div>
+
+        <div class="stats-grid js-fade-in">
+          <div class="stats-card">
+            <div class="stats-card__icon">🏠</div>
+            <div class="stats-card__number">120,000<span>件+</span></div>
+            <div class="stats-card__label">掲載物件数</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card__icon">👥</div>
+            <div class="stats-card__number">500<span>万人+</span></div>
+            <div class="stats-card__label">累計利用者数</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card__icon">🏢</div>
+            <div class="stats-card__number">2,400<span>社+</span></div>
+            <div class="stats-card__label">提携不動産会社</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card__icon">⭐</div>
+            <div class="stats-card__number">4.6<span>/5.0</span></div>
+            <div class="stats-card__label">お客様満足度</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- お部屋探しのお得な情報 -->
+    <section class="section" id="infoSection">
+      <div class="section__inner">
+        <div class="section__header js-fade-in">
+          <h2 class="section__title">お部屋探しのお得な情報</h2>
+          <p class="section__subtitle">引越し・お部屋探しに役立つ情報をお届けします</p>
+        </div>
+
+        <div class="info-grid">
+          <a href="#" class="info-card js-fade-in" aria-disabled="true" tabindex="-1">
+            <div class="info-card__image" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0);"></div>
+            <div class="info-card__body">
+              <span class="info-card__category">女性向け</span>
+              <h3 class="info-card__title">女性の一人暮らしにおすすめの物件特集</h3>
+              <p class="info-card__excerpt">防犯性能が高く、安心して暮らせる物件をまとめました。</p>
+            </div>
+          </a>
+          <a href="#" class="info-card js-fade-in" aria-disabled="true" tabindex="-1">
+            <div class="info-card__image" style="background: linear-gradient(135deg, #e8eaf6, #c5cae9);"></div>
+            <div class="info-card__body">
+              <span class="info-card__category">学生向け</span>
+              <h3 class="info-card__title">学生・新生活応援キャンペーン</h3>
+              <p class="info-card__excerpt">お得な初期費用プランで新生活をスタートしましょう。</p>
+            </div>
+          </a>
+          <a href="#" class="info-card js-fade-in" aria-disabled="true" tabindex="-1">
+            <div class="info-card__image" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9);"></div>
+            <div class="info-card__body">
+              <span class="info-card__category">ファミリー</span>
+              <h3 class="info-card__title">ファミリー向け賃貸特集</h3>
+              <p class="info-card__excerpt">広い間取りで子育てしやすいお部屋をご紹介。</p>
+            </div>
+          </a>
+          <a href="#" class="info-card js-fade-in" aria-disabled="true" tabindex="-1">
+            <div class="info-card__image" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2);"></div>
+            <div class="info-card__body">
+              <span class="info-card__category">引越し</span>
+              <h3 class="info-card__title">リピート引越し割引キャンペーン</h3>
+              <p class="info-card__excerpt">引越し費用をお得に抑えるキャンペーン中です。</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- サポート -->
+    <section class="section section--gray" id="supportSection">
+      <div class="section__inner">
+        <div class="section__header js-fade-in">
+          <h2 class="section__title">ホームナビ お部屋探しサポート</h2>
+          <p class="section__subtitle">はじめてのお部屋探しも安心サポート</p>
+        </div>
+
+        <div class="support-grid">
+          <div class="support-card js-fade-in">
+            <div class="support-card__icon">📊</div>
+            <h3 class="support-card__title">全国の相場情報・人気ランキング</h3>
+            <p class="support-card__desc">人気の沿線・駅ランキング、空間賃貸物件データなど</p>
+          </div>
+          <div class="support-card js-fade-in">
+            <div class="support-card__icon">📖</div>
+            <h3 class="support-card__title">お部屋探し・暮らしに役立つ情報</h3>
+            <p class="support-card__desc">賃貸の基本知識やお役立ちコラムを掲載</p>
+          </div>
+          <div class="support-card js-fade-in">
+            <div class="support-card__icon">💬</div>
+            <h3 class="support-card__title">契約・入居後サポート</h3>
+            <p class="support-card__desc">お引越しから入居後のサポートを行います</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 法人向けサービス -->
+    <section class="section" id="corporateSection">
+      <div class="section__inner">
+        <div class="section__header js-fade-in">
+          <h2 class="section__title">ホームナビの法人向けサービス</h2>
+        </div>
+
+        <div class="support-grid">
+          <div class="support-card js-fade-in">
+            <div class="support-card__icon">🏬</div>
+            <h3 class="support-card__title">法人企業様向けサービス</h3>
+            <p class="support-card__desc">社宅手配サービス、福利厚生として物件紹介が可能です。</p>
+          </div>
+          <div class="support-card js-fade-in">
+            <div class="support-card__icon">🏘️</div>
+            <h3 class="support-card__title">不動産会社様向けサービス</h3>
+            <p class="support-card__desc">物件掲載や管理ツールをご提供いたします。</p>
+          </div>
+          <div class="support-card js-fade-in">
+            <div class="support-card__icon">📱</div>
+            <h3 class="support-card__title">公式アプリ・ブログ情報</h3>
+            <p class="support-card__desc">公式SNSやブログで最新のキャンペーン情報をお届け</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- よくある質問 -->
+    <section class="section section--gray" id="faqSection">
+      <div class="section__inner">
+        <div class="section__header js-fade-in">
+          <h2 class="section__title">よくある質問</h2>
+          <p class="section__subtitle">お部屋探しでよくいただくご質問にお答えします</p>
+        </div>
+
+        <div class="faq js-fade-in">
+          <details class="faq__item">
+            <summary class="faq__question">
+              <span class="faq__q-icon">Q</span>
+              <span class="faq__q-text">初期費用の目安はどのくらいですか？</span>
+            </summary>
+            <div class="faq__answer">
+              <span class="faq__a-icon">A</span>
+              <p>一般的に家賃の4〜6ヶ月分が目安です。内訳は敷金（1〜2ヶ月）、礼金（0〜2ヶ月）、前家賃（1ヶ月）、仲介手数料（0.5〜1ヶ月）、火災保険料（約1〜2万円）となります。ホームナビでは「初期費用が安い物件」で絞り込み検索が可能です。</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">
+              <span class="faq__q-icon">Q</span>
+              <span class="faq__q-text">申し込みから入居までの流れを教えてください</span>
+            </summary>
+            <div class="faq__answer">
+              <span class="faq__a-icon">A</span>
+              <p>①物件を見つけて内見予約 → ②内見・比較検討 → ③入居申し込み → ④入居審査（3〜7日程度）→ ⑤重要事項説明・契約 → ⑥初期費用のお支払い → ⑦鍵の引き渡し・入居 という流れが一般的です。お急ぎの場合は即入居可の物件もございます。</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">
+              <span class="faq__q-icon">Q</span>
+              <span class="faq__q-text">保証人がいない場合でも契約できますか？</span>
+            </summary>
+            <div class="faq__answer">
+              <span class="faq__a-icon">A</span>
+              <p>はい、多くの物件で「保証会社利用可」となっています。保証会社を利用することで、連帯保証人なしでもご契約いただけます。費用は初回に月額賃料の50%〜100%程度、以降は年1万円程度の更新料が一般的です。</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">
+              <span class="faq__q-icon">Q</span>
+              <span class="faq__q-text">ペットを飼いたいのですが、対応物件はありますか？</span>
+            </summary>
+            <div class="faq__answer">
+              <span class="faq__a-icon">A</span>
+              <p>ペット可・相談可の物件も多数掲載しております。「こだわり条件」から「ペット可」にチェックを入れて検索できます。ペットの種類・頭数によって条件が異なる場合がありますので、詳細はお問い合わせください。</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">
+              <span class="faq__q-icon">Q</span>
+              <span class="faq__q-text">内見は無料ですか？</span>
+            </summary>
+            <div class="faq__answer">
+              <span class="faq__a-icon">A</span>
+              <p>はい、内見は完全無料です。気になる物件がございましたら、お気軽にお問い合わせください。オンライン内見にも対応している物件もございますので、遠方の方も安心してご利用いただけます。</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__question">
+              <span class="faq__q-icon">Q</span>
+              <span class="faq__q-text">家賃の値下げ交渉はできますか？</span>
+            </summary>
+            <div class="faq__answer">
+              <span class="faq__a-icon">A</span>
+              <p>物件やオーナー様によりますが、交渉は可能な場合があります。特に空室期間が長い物件や、閑散期（6〜8月）は交渉に応じてもらいやすい傾向があります。ホームナビの担当スタッフが交渉のサポートもいたします。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__col">
+          <h3 class="footer__col-title">物件を探す</h3>
+          <ul class="footer__col-list">
+            <li><a href="./station.html">沿線・駅から探す</a></li>
+            <li><a href="./search.html">エリアから探す</a></li>
+            <li><a href="./search.html">地図から探す</a></li>
+            <li><a href="./search.html">通勤・通学時間から探す</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">こだわり条件</h3>
+          <ul class="footer__col-list">
+            <li><a href="./search.html">ペット可</a></li>
+            <li><a href="./search.html">デザイナーズ</a></li>
+            <li><a href="./search.html">タワーマンション</a></li>
+            <li><a href="./search.html">リノベーション</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">お役立ち情報</h3>
+          <ul class="footer__col-list">
+            <li><a href="#" aria-disabled="true" tabindex="-1">家賃相場</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">引越しの手続き</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">住まいの基礎知識</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">よくある質問</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">ホームナビについて</h3>
+          <ul class="footer__col-list">
+            <li><a href="#" aria-disabled="true" tabindex="-1">会社概要</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">採用情報</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">プライバシーポリシー</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">お問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__middle">
+        <p class="footer__area-title">■ 全国の地域から賃貸物件を探す</p>
+        <div class="footer__area-links">
+          <a href="./search.html?area=hokkaido">北海道</a>
+          <a href="./search.html?area=aomori">青森</a>
+          <a href="./search.html?area=iwate">岩手</a>
+          <a href="./search.html?area=miyagi">宮城</a>
+          <a href="./search.html?area=akita">秋田</a>
+          <a href="./search.html?area=yamagata">山形</a>
+          <a href="./search.html?area=fukushima">福島</a>
+          <a href="./search.html?area=ibaraki">茨城</a>
+          <a href="./search.html?area=tochigi">栃木</a>
+          <a href="./search.html?area=gunma">群馬</a>
+          <a href="./search.html?area=saitama">埼玉</a>
+          <a href="./search.html?area=chiba">千葉</a>
+          <a href="./search.html?area=tokyo">東京</a>
+          <a href="./search.html?area=kanagawa">神奈川</a>
+          <a href="./search.html?area=niigata">新潟</a>
+          <a href="./search.html?area=toyama">富山</a>
+          <a href="./search.html?area=ishikawa">石川</a>
+          <a href="./search.html?area=fukui">福井</a>
+          <a href="./search.html?area=yamanashi">山梨</a>
+          <a href="./search.html?area=nagano">長野</a>
+          <a href="./search.html?area=gifu">岐阜</a>
+          <a href="./search.html?area=shizuoka">静岡</a>
+          <a href="./search.html?area=aichi">愛知</a>
+          <a href="./search.html?area=mie">三重</a>
+          <a href="./search.html?area=shiga">滋賀</a>
+          <a href="./search.html?area=kyoto">京都</a>
+          <a href="./search.html?area=osaka">大阪</a>
+          <a href="./search.html?area=hyogo">兵庫</a>
+          <a href="./search.html?area=nara">奈良</a>
+          <a href="./search.html?area=wakayama">和歌山</a>
+          <a href="./search.html?area=tottori">鳥取</a>
+          <a href="./search.html?area=shimane">島根</a>
+          <a href="./search.html?area=okayama">岡山</a>
+          <a href="./search.html?area=hiroshima">広島</a>
+          <a href="./search.html?area=yamaguchi">山口</a>
+          <a href="./search.html?area=tokushima">徳島</a>
+          <a href="./search.html?area=kagawa">香川</a>
+          <a href="./search.html?area=ehime">愛媛</a>
+          <a href="./search.html?area=kochi">高知</a>
+          <a href="./search.html?area=fukuoka">福岡</a>
+          <a href="./search.html?area=saga">佐賀</a>
+          <a href="./search.html?area=nagasaki">長崎</a>
+          <a href="./search.html?area=kumamoto">熊本</a>
+          <a href="./search.html?area=oita">大分</a>
+          <a href="./search.html?area=miyazaki">宮崎</a>
+          <a href="./search.html?area=kagoshima">鹿児島</a>
+          <a href="./search.html?area=okinawa">沖縄</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <div class="footer__sns">
+          <a href="#" aria-label="Twitter" aria-disabled="true" tabindex="-1">𝕏</a>
+          <a href="#" aria-label="Facebook" aria-disabled="true" tabindex="-1">f</a>
+          <a href="#" aria-label="Instagram" aria-disabled="true" tabindex="-1">📷</a>
+          <a href="#" aria-label="YouTube" aria-disabled="true" tabindex="-1">▶</a>
+        </div>
+        <p class="footer__copyright">&copy; 2026 HomeNavi Corporation. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- トップへ戻る -->
+  <button class="back-to-top" id="backToTop" aria-label="ページトップへ戻る">↑</button>
+
+  <!-- ドロワー: お気に入り -->
+  <div class="drawer-overlay" id="favDrawerOverlay"></div>
+  <aside class="drawer" id="favDrawer" aria-label="お気に入り一覧">
+    <div class="drawer__header">
+      <h2 class="drawer__title">⭐ お気に入り</h2>
+      <button class="drawer__close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="drawer__body" id="favDrawerContent"></div>
+  </aside>
+
+  <!-- ドロワー: 最近見た物件 -->
+  <div class="drawer-overlay" id="recentDrawerOverlay"></div>
+  <aside class="drawer" id="recentDrawer" aria-label="最近見た物件">
+    <div class="drawer__header">
+      <h2 class="drawer__title">🕐 最近見た物件</h2>
+      <button class="drawer__close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="drawer__body" id="recentDrawerContent"></div>
+  </aside>
+
+  <!-- ドロワー: 検索した条件 -->
+  <div class="drawer-overlay" id="searchDrawerOverlay"></div>
+  <aside class="drawer" id="searchDrawer" aria-label="検索した条件">
+    <div class="drawer__header">
+      <h2 class="drawer__title">📋 検索した条件</h2>
+      <button class="drawer__close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="drawer__body" id="searchDrawerContent"></div>
+  </aside>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

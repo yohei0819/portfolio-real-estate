@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>パークタワー新宿｜物件詳細｜ホームナビ</title>
+  <meta name="description" content="パークタワー新宿の賃貸物件詳細情報">
+  <meta name="theme-color" content="#e60033">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="canonical" href="https://homenavi.example.com/property.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="パークタワー新宿｜物件詳細｜ホームナビ">
+  <meta property="og:description" content="パークタワー新宿の賃貸物件詳細情報">
+  <meta property="og:url" content="https://homenavi.example.com/property.html">
+  <meta property="og:image" content="https://homenavi.example.com/ogp.png">
+  <meta property="og:site_name" content="ホームナビ">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="./styles/main.styl">
+</head>
+<body>
+  <!-- スキップナビゲーション -->
+  <a href="#main" class="skip-nav">メインコンテンツへスキップ</a>
+
+  <!-- JS無効時フォールバック -->
+  <noscript>
+    <style>.js-fade-in { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+
+  <!-- ページ遷移 -->
+  <div class="page-transition" id="pageTransition">
+    <div class="page-transition__layer"></div>
+  </div>
+
+  <!-- カーソルフォロワー -->
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- ヘッダー -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="./" class="header__logo">
+        <span class="header__logo-text"><span aria-hidden="true">🏠</span> ホームナビ</span>
+      </a>
+
+      <nav class="header__nav">
+        <a href="./" class="header__nav-item">
+          <span class="icon" aria-hidden="true">🔍</span>
+          <span class="label">物件検索</span>
+        </a>
+        <a href="./station.html" class="header__nav-item">
+          <span class="icon" aria-hidden="true">🚃</span>
+          <span class="label">沿線・駅</span>
+        </a>
+        <a href="./search.html" class="header__nav-item">
+          <span class="icon" aria-hidden="true">📍</span>
+          <span class="label">エリア</span>
+        </a>
+        <a href="#" class="header__nav-item" data-fav-drawer-toggle>
+          <span class="icon" aria-hidden="true">⭐</span>
+          <span class="label">お気に入り</span>
+          <span class="header__nav-badge" data-fav-badge hidden></span>
+        </a>
+        <a href="#" class="header__nav-item" data-recent-drawer-toggle>
+          <span class="icon" aria-hidden="true">🕐</span>
+          <span class="label">最近見た物件</span>
+          <span class="header__nav-badge" data-recent-badge hidden></span>
+        </a>
+        <a href="#" class="header__nav-item" data-search-drawer-toggle>
+          <span class="icon" aria-hidden="true">📋</span>
+          <span class="label">検索した条件</span>
+          <span class="header__nav-badge" data-search-badge hidden></span>
+        </a>
+        <div class="header__nav-menu">
+          <a href="#" class="header__nav-item header__nav-item--menu" tabindex="0">
+            <span class="icon" aria-hidden="true">☰</span>
+            <span class="label">メニュー</span>
+          </a>
+          <div class="header__dropdown">
+            <a href="./" class="header__dropdown-item"><span aria-hidden="true">🔍</span> 物件検索</a>
+            <a href="./station.html" class="header__dropdown-item"><span aria-hidden="true">🚃</span> 沿線・駅から探す</a>
+            <a href="./search.html" class="header__dropdown-item"><span aria-hidden="true">📍</span> エリアから探す</a>
+            <a href="./property.html" class="header__dropdown-item"><span aria-hidden="true">🏠</span> 物件一覧</a>
+          </div>
+        </div>
+      </nav>
+
+      <button class="header__menu-btn" id="menuBtn" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- モバイルメニュー -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="モバイルナビゲーション">
+    <div class="mobile-nav__inner">
+      <a href="./" class="mobile-nav__item"><span aria-hidden="true">🔍</span> 物件検索</a>
+      <a href="./station.html" class="mobile-nav__item"><span aria-hidden="true">🚃</span> 沿線・駅から探す</a>
+      <a href="./search.html" class="mobile-nav__item"><span aria-hidden="true">📍</span> エリアから探す</a>
+      <a href="./property.html" class="mobile-nav__item"><span aria-hidden="true">🏠</span> 物件一覧</a>
+      <a href="#" class="mobile-nav__item" data-fav-drawer-toggle><span aria-hidden="true">⭐</span> お気に入り <span class="header__nav-badge" data-fav-badge hidden></span></a>
+      <a href="#" class="mobile-nav__item" data-recent-drawer-toggle><span aria-hidden="true">🕐</span> 最近見た物件 <span class="header__nav-badge" data-recent-badge hidden></span></a>
+      <a href="#" class="mobile-nav__item" data-search-drawer-toggle><span aria-hidden="true">📋</span> 検索した条件 <span class="header__nav-badge" data-search-badge hidden></span></a>
+    </div>
+  </nav>
+
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <div class="breadcrumb__inner">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="./">賃貸のホームナビ</a></li>
+        <li class="breadcrumb__item"><a href="./search.html?area=tokyo">東京都</a></li>
+        <li class="breadcrumb__item"><a href="./search.html?area=tokyo">新宿区</a></li>
+        <li class="breadcrumb__item" aria-current="page">パークタワー新宿</li>
+      </ol>
+    </div>
+  </nav>
+
+  <main class="detail" id="main">
+    <!-- ヒーロー画像 -->
+    <div class="detail__hero js-fade-in">
+      <span class="detail__hero-badge">おすすめ物件</span>
+      <span class="detail__hero-text">📸 物件写真</span>
+    </div>
+
+    <div class="detail__inner">
+      <!-- メインコンテンツ -->
+      <div class="detail__main js-fade-in">
+        <h1 class="detail__title">パークタワー新宿</h1>
+        <p class="detail__address">📍 東京都新宿区西新宿 ／ 新宿駅まで徒歩5分 ／ 15階建</p>
+
+        <div class="detail__price-box">
+          <span class="detail__price-num">12.5</span>
+          <span class="detail__price-unit">万円</span>
+          <span class="detail__price-sub">管理費: 12,000円 ／ 敷金: 1ヶ月 ／ 礼金: 1ヶ月</span>
+        </div>
+
+        <h2 class="detail__section-title">物件概要</h2>
+        <table class="detail__table">
+          <tr>
+            <th>物件種別</th>
+            <td>マンション</td>
+          </tr>
+          <tr>
+            <th>間取り</th>
+            <td>1LDK</td>
+          </tr>
+          <tr>
+            <th>専有面積</th>
+            <td>42.3㎡</td>
+          </tr>
+          <tr>
+            <th>築年月</th>
+            <td>2023年6月 (築3年)</td>
+          </tr>
+          <tr>
+            <th>所在階</th>
+            <td>10階 / 15階建</td>
+          </tr>
+          <tr>
+            <th>方位</th>
+            <td>南東</td>
+          </tr>
+          <tr>
+            <th>構造</th>
+            <td>RC造（鉄筋コンクリート）</td>
+          </tr>
+          <tr>
+            <th>駐車場</th>
+            <td>なし（近隣月極駐車場あり）</td>
+          </tr>
+          <tr>
+            <th>入居可能日</th>
+            <td>即入居可</td>
+          </tr>
+          <tr>
+            <th>契約期間</th>
+            <td>2年間（普通借家）</td>
+          </tr>
+          <tr>
+            <th>保証会社</th>
+            <td>利用必須（月額賃料の50%）</td>
+          </tr>
+          <tr>
+            <th>取引態様</th>
+            <td>仲介</td>
+          </tr>
+        </table>
+
+        <h2 class="detail__section-title">設備・特徴</h2>
+        <div class="detail__features">
+          <span class="detail__feature-tag">バス・トイレ別</span>
+          <span class="detail__feature-tag">エアコン</span>
+          <span class="detail__feature-tag">フローリング</span>
+          <span class="detail__feature-tag">オートロック</span>
+          <span class="detail__feature-tag">宅配ボックス</span>
+          <span class="detail__feature-tag">追い焚き風呂</span>
+          <span class="detail__feature-tag">浴室乾燥機</span>
+          <span class="detail__feature-tag">温水洗浄便座</span>
+          <span class="detail__feature-tag">室内洗濯機置場</span>
+          <span class="detail__feature-tag">TVモニター付きインターホン</span>
+          <span class="detail__feature-tag">24時間ゴミ出し可</span>
+          <span class="detail__feature-tag">システムキッチン</span>
+          <span class="detail__feature-tag">ウォークインクローゼット</span>
+          <span class="detail__feature-tag">インターネット無料</span>
+        </div>
+
+        <h2 class="detail__section-title">初期費用シミュレーション</h2>
+        <div class="detail__cost-sim">
+          <table class="detail__table">
+            <tr>
+              <th>敷金</th>
+              <td>125,000円（1ヶ月）</td>
+            </tr>
+            <tr>
+              <th>礼金</th>
+              <td>125,000円（1ヶ月）</td>
+            </tr>
+            <tr>
+              <th>前家賃</th>
+              <td>125,000円（1ヶ月）</td>
+            </tr>
+            <tr>
+              <th>管理費・共益費</th>
+              <td>12,000円</td>
+            </tr>
+            <tr>
+              <th>仲介手数料</th>
+              <td>137,500円（税込）</td>
+            </tr>
+            <tr>
+              <th>火災保険料</th>
+              <td>20,000円（2年間）</td>
+            </tr>
+            <tr>
+              <th>保証会社利用料</th>
+              <td>62,500円（賃料50%）</td>
+            </tr>
+            <tr>
+              <th>鍵交換費用</th>
+              <td>22,000円（税込）</td>
+            </tr>
+            <tr class="detail__cost-total">
+              <th>初期費用合計（税込）</th>
+              <td>629,000円</td>
+            </tr>
+          </table>
+          <p class="detail__cost-note">※ 上記は概算です。実際の費用は契約時にご確認ください。</p>
+        </div>
+
+        <h2 class="detail__section-title">間取り図</h2>
+        <div class="detail__floorplan">
+          <div class="detail__floorplan-image">
+            <span class="detail__floorplan-label">1LDK ／ 42.3㎡</span>
+            <div class="detail__floorplan-rooms">
+              <div class="detail__floorplan-room detail__floorplan-room--ldk">
+                <span>LDK</span>
+                <span>10.5帖</span>
+              </div>
+              <div class="detail__floorplan-room detail__floorplan-room--bed">
+                <span>洋室</span>
+                <span>5.5帖</span>
+              </div>
+              <div class="detail__floorplan-room detail__floorplan-room--bath">
+                <span>浴室</span>
+              </div>
+              <div class="detail__floorplan-room detail__floorplan-room--wc">
+                <span>WC</span>
+              </div>
+              <div class="detail__floorplan-room detail__floorplan-room--entrance">
+                <span>玄関</span>
+              </div>
+              <div class="detail__floorplan-room detail__floorplan-room--balcony">
+                <span>バルコニー</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="detail__section-title">室内写真</h2>
+        <div class="detail__gallery">
+          <div class="detail__gallery-item">リビング</div>
+          <div class="detail__gallery-item">キッチン</div>
+          <div class="detail__gallery-item">浴室</div>
+          <div class="detail__gallery-item">洗面所</div>
+          <div class="detail__gallery-item">洋室</div>
+          <div class="detail__gallery-item">バルコニー</div>
+        </div>
+
+        <h2 class="detail__section-title">周辺地図</h2>
+        <div class="detail__map">🗺️ 地図表示エリア（Google Maps等の埋め込み想定）</div>
+
+        <h2 class="detail__section-title">周辺施設情報</h2>
+        <div class="detail__nearby">
+          <div class="detail__nearby-category">
+            <h3 class="detail__nearby-category-title"><span aria-hidden="true">🛒</span> 買い物</h3>
+            <ul class="detail__nearby-list">
+              <li>
+                <span class="detail__nearby-name">セブンイレブン西新宿店</span>
+                <span class="detail__nearby-distance">徒歩2分（約160m）</span>
+              </li>
+              <li>
+                <span class="detail__nearby-name">成城石井ガーデン</span>
+                <span class="detail__nearby-distance">徒歩4分（約320m）</span>
+              </li>
+              <li>
+                <span class="detail__nearby-name">ルミネ新宿店</span>
+                <span class="detail__nearby-distance">徒歩5分（約400m）</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="detail__nearby-category">
+            <h3 class="detail__nearby-category-title"><span aria-hidden="true">🏥</span> 医療</h3>
+            <ul class="detail__nearby-list">
+              <li>
+                <span class="detail__nearby-name">東京医科大学病院</span>
+                <span class="detail__nearby-distance">徒歩8分（約640m）</span>
+              </li>
+              <li>
+                <span class="detail__nearby-name">新宿駅前クリニック</span>
+                <span class="detail__nearby-distance">徒歩3分（約240m）</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="detail__nearby-category">
+            <h3 class="detail__nearby-category-title"><span aria-hidden="true">🎓</span> 教育</h3>
+            <ul class="detail__nearby-list">
+              <li>
+                <span class="detail__nearby-name">新宿区立西新宿小学校</span>
+                <span class="detail__nearby-distance">徒歩6分（約480m）</span>
+              </li>
+              <li>
+                <span class="detail__nearby-name">新宿区立西新宿中学校</span>
+                <span class="detail__nearby-distance">徒歩8分（約640m）</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="detail__nearby-category">
+            <h3 class="detail__nearby-category-title"><span aria-hidden="true">🏦</span> 金融・公共</h3>
+            <ul class="detail__nearby-list">
+              <li>
+                <span class="detail__nearby-name">三菱UFJ銀行新宿支店</span>
+                <span class="detail__nearby-distance">徒歩4分（約320m）</span>
+              </li>
+              <li>
+                <span class="detail__nearby-name">新宿郵便局</span>
+                <span class="detail__nearby-distance">徒歩5分（約400m）</span>
+              </li>
+              <li>
+                <span class="detail__nearby-name">JR新宿駅</span>
+                <span class="detail__nearby-distance">徒歩5分（約400m）</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- サイドバー -->
+      <aside class="detail__sidebar">
+        <div class="detail__sidebar-box js-fade-in">
+          <h3 class="detail__sidebar-title">この物件に問い合わせる</h3>
+          <a href="#" class="detail__sidebar-btn detail__sidebar-btn--primary" aria-disabled="true" tabindex="-1">📧 メールで問い合わせ</a>
+          <a href="#" class="detail__sidebar-btn detail__sidebar-btn--secondary" aria-disabled="true" tabindex="-1">📞 電話で問い合わせ</a>
+          <a href="#" class="detail__sidebar-btn detail__sidebar-btn--secondary detail__sidebar-btn--fav" aria-pressed="false">⭐ <span class="fav-btn__label">お気に入りに追加</span></a>
+        </div>
+
+        <div class="detail__sidebar-box js-fade-in">
+          <h3 class="detail__sidebar-title">この物件の管理会社</h3>
+          <p class="detail__sidebar-company">ホームナビ新宿店</p>
+          <p class="detail__sidebar-info" data-company-address>東京都新宿区西新宿1-1-1</p>
+          <p class="detail__sidebar-info" data-company-hours>営業時間: 10:00〜19:00</p>
+          <p class="detail__sidebar-info" data-company-holiday>定休日: 水曜日</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 類似物件 -->
+    <div class="detail__similar">
+      <h2 class="detail__similar-title">おすすめの物件</h2>
+      <div class="detail__similar-grid">
+        <div class="property-card js-fade-in">
+          <a href="./property.html?id=2" class="property-card__link">
+          <div class="property-card__badge property-card__badge--new">NEW</div>
+          <div class="property-card__image" style="background: linear-gradient(135deg, #d3e5f5, #c4d5e8);"></div>
+          <div class="property-card__body">
+            <div class="property-card__price">
+              <span class="property-card__price-num">9.8</span>
+              <span class="property-card__price-unit">万円</span>
+            </div>
+            <h3 class="property-card__name">グランメゾン梅田</h3>
+            <div class="property-card__details">
+              <span class="property-card__tag">1LDK</span>
+              <span class="property-card__tag">45.8㎡</span>
+              <span class="property-card__tag">築5年</span>
+            </div>
+            <p class="property-card__location">大阪市北区梅田</p>
+          </div>
+          </a>
+        </div>
+
+        <div class="property-card js-fade-in">
+          <a href="./property.html?id=3" class="property-card__link">
+          <div class="property-card__image" style="background: linear-gradient(135deg, #e8d3f5, #d5c4e8);"></div>
+          <div class="property-card__body">
+            <div class="property-card__price">
+              <span class="property-card__price-num">8.9</span>
+              <span class="property-card__price-unit">万円</span>
+            </div>
+            <h3 class="property-card__name">レジデンス横浜みなとみらい</h3>
+            <div class="property-card__details">
+              <span class="property-card__tag">1K</span>
+              <span class="property-card__tag">35.2㎡</span>
+              <span class="property-card__tag">築2年</span>
+            </div>
+            <p class="property-card__location">横浜市西区みなとみらい</p>
+          </div>
+          </a>
+        </div>
+
+        <div class="property-card js-fade-in">
+          <a href="./property.html?id=4" class="property-card__link">
+          <div class="property-card__badge property-card__badge--recommended">おすすめ</div>
+          <div class="property-card__image" style="background: linear-gradient(135deg, #d3f5e8, #c4e8d5);"></div>
+          <div class="property-card__body">
+            <div class="property-card__price">
+              <span class="property-card__price-num">7.5</span>
+              <span class="property-card__price-unit">万円</span>
+            </div>
+            <h3 class="property-card__name">プレミスト栄</h3>
+            <div class="property-card__details">
+              <span class="property-card__tag">1DK</span>
+              <span class="property-card__tag">38.2㎡</span>
+              <span class="property-card__tag">築6年</span>
+            </div>
+            <p class="property-card__location">名古屋市中区栄</p>
+          </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__col">
+          <h3 class="footer__col-title">物件を探す</h3>
+          <ul class="footer__col-list">
+            <li><a href="./station.html">沿線・駅から探す</a></li>
+            <li><a href="./search.html">エリアから探す</a></li>
+            <li><a href="./search.html">地図から探す</a></li>
+            <li><a href="./search.html">通勤・通学時間から探す</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">こだわり条件</h3>
+          <ul class="footer__col-list">
+            <li><a href="./search.html">ペット可</a></li>
+            <li><a href="./search.html">デザイナーズ</a></li>
+            <li><a href="./search.html">タワーマンション</a></li>
+            <li><a href="./search.html">リノベーション</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">お役立ち情報</h3>
+          <ul class="footer__col-list">
+            <li><a href="#" aria-disabled="true" tabindex="-1">家賃相場</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">引越しの手続き</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">住まいの基礎知識</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">よくある質問</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">ホームナビについて</h3>
+          <ul class="footer__col-list">
+            <li><a href="#" aria-disabled="true" tabindex="-1">会社概要</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">採用情報</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">プライバシーポリシー</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">お問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__middle">
+        <p class="footer__area-title">■ 全国の地域から賃貸物件を探す</p>
+        <div class="footer__area-links">
+          <a href="./search.html?area=hokkaido">北海道</a>
+          <a href="./search.html?area=aomori">青森</a>
+          <a href="./search.html?area=iwate">岩手</a>
+          <a href="./search.html?area=miyagi">宮城</a>
+          <a href="./search.html?area=akita">秋田</a>
+          <a href="./search.html?area=yamagata">山形</a>
+          <a href="./search.html?area=fukushima">福島</a>
+          <a href="./search.html?area=ibaraki">茨城</a>
+          <a href="./search.html?area=tochigi">栃木</a>
+          <a href="./search.html?area=gunma">群馬</a>
+          <a href="./search.html?area=saitama">埼玉</a>
+          <a href="./search.html?area=chiba">千葉</a>
+          <a href="./search.html?area=tokyo">東京</a>
+          <a href="./search.html?area=kanagawa">神奈川</a>
+          <a href="./search.html?area=niigata">新潟</a>
+          <a href="./search.html?area=toyama">富山</a>
+          <a href="./search.html?area=ishikawa">石川</a>
+          <a href="./search.html?area=fukui">福井</a>
+          <a href="./search.html?area=yamanashi">山梨</a>
+          <a href="./search.html?area=nagano">長野</a>
+          <a href="./search.html?area=gifu">岐阜</a>
+          <a href="./search.html?area=shizuoka">静岡</a>
+          <a href="./search.html?area=aichi">愛知</a>
+          <a href="./search.html?area=mie">三重</a>
+          <a href="./search.html?area=shiga">滋賀</a>
+          <a href="./search.html?area=kyoto">京都</a>
+          <a href="./search.html?area=osaka">大阪</a>
+          <a href="./search.html?area=hyogo">兵庫</a>
+          <a href="./search.html?area=nara">奈良</a>
+          <a href="./search.html?area=wakayama">和歌山</a>
+          <a href="./search.html?area=tottori">鳥取</a>
+          <a href="./search.html?area=shimane">島根</a>
+          <a href="./search.html?area=okayama">岡山</a>
+          <a href="./search.html?area=hiroshima">広島</a>
+          <a href="./search.html?area=yamaguchi">山口</a>
+          <a href="./search.html?area=tokushima">徳島</a>
+          <a href="./search.html?area=kagawa">香川</a>
+          <a href="./search.html?area=ehime">愛媛</a>
+          <a href="./search.html?area=kochi">高知</a>
+          <a href="./search.html?area=fukuoka">福岡</a>
+          <a href="./search.html?area=saga">佐賀</a>
+          <a href="./search.html?area=nagasaki">長崎</a>
+          <a href="./search.html?area=kumamoto">熊本</a>
+          <a href="./search.html?area=oita">大分</a>
+          <a href="./search.html?area=miyazaki">宮崎</a>
+          <a href="./search.html?area=kagoshima">鹿児島</a>
+          <a href="./search.html?area=okinawa">沖縄</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <div class="footer__sns">
+          <a href="#" aria-label="Twitter" aria-disabled="true" tabindex="-1">𝕏</a>
+          <a href="#" aria-label="Facebook" aria-disabled="true" tabindex="-1">f</a>
+          <a href="#" aria-label="Instagram" aria-disabled="true" tabindex="-1">📷</a>
+          <a href="#" aria-label="YouTube" aria-disabled="true" tabindex="-1">▶</a>
+        </div>
+        <p class="footer__copyright">&copy; 2026 HomeNavi Corporation. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="ページトップへ戻る">↑</button>
+
+  <!-- ドロワー: お気に入り -->
+  <div class="drawer-overlay" id="favDrawerOverlay"></div>
+  <aside class="drawer" id="favDrawer" aria-label="お気に入り一覧">
+    <div class="drawer__header">
+      <h2 class="drawer__title">⭐ お気に入り</h2>
+      <button class="drawer__close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="drawer__body" id="favDrawerContent"></div>
+  </aside>
+
+  <!-- ドロワー: 最近見た物件 -->
+  <div class="drawer-overlay" id="recentDrawerOverlay"></div>
+  <aside class="drawer" id="recentDrawer" aria-label="最近見た物件">
+    <div class="drawer__header">
+      <h2 class="drawer__title">🕐 最近見た物件</h2>
+      <button class="drawer__close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="drawer__body" id="recentDrawerContent"></div>
+  </aside>
+
+  <!-- ドロワー: 検索した条件 -->
+  <div class="drawer-overlay" id="searchDrawerOverlay"></div>
+  <aside class="drawer" id="searchDrawer" aria-label="検索した条件">
+    <div class="drawer__header">
+      <h2 class="drawer__title">📋 検索した条件</h2>
+      <button class="drawer__close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="drawer__body" id="searchDrawerContent"></div>
+  </aside>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

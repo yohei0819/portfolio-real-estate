@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全国の路線・沿線・駅から賃貸物件を探す｜ホームナビ</title>
+  <meta name="description" content="全国の路線・沿線・駅から賃貸マンション・アパートを探す">
+  <meta name="theme-color" content="#e60033">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="canonical" href="https://homenavi.example.com/station.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="全国の路線・沿線・駅から賃貸物件を探す｜ホームナビ">
+  <meta property="og:description" content="全国の路線・沿線・駅から賃貸マンション・アパートを探す">
+  <meta property="og:url" content="https://homenavi.example.com/station.html">
+  <meta property="og:image" content="https://homenavi.example.com/ogp.png">
+  <meta property="og:site_name" content="ホームナビ">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="./styles/main.styl">
+</head>
+<body>
+  <!-- スキップナビゲーション -->
+  <a href="#main" class="skip-nav">メインコンテンツへスキップ</a>
+
+  <!-- JS無効時フォールバック -->
+  <noscript>
+    <style>.js-fade-in { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+
+  <!-- ページ遷移 -->
+  <div class="page-transition" id="pageTransition">
+    <div class="page-transition__layer"></div>
+  </div>
+
+  <!-- カーソルフォロワー -->
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- ヘッダー -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="./" class="header__logo">
+        <span class="header__logo-text"><span aria-hidden="true">🏠</span> ホームナビ</span>
+      </a>
+
+      <nav class="header__nav">
+        <a href="./" class="header__nav-item">
+          <span class="icon" aria-hidden="true">🔍</span>
+          <span class="label">物件検索</span>
+        </a>
+        <a href="./station.html" class="header__nav-item">
+          <span class="icon" aria-hidden="true">🚃</span>
+          <span class="label">沿線・駅</span>
+        </a>
+        <a href="./search.html" class="header__nav-item">
+          <span class="icon" aria-hidden="true">📍</span>
+          <span class="label">エリア</span>
+        </a>
+        <a href="#" class="header__nav-item" data-fav-drawer-toggle>
+          <span class="icon" aria-hidden="true">⭐</span>
+          <span class="label">お気に入り</span>
+          <span class="header__nav-badge" data-fav-badge hidden></span>
+        </a>
+        <a href="#" class="header__nav-item" data-recent-drawer-toggle>
+          <span class="icon" aria-hidden="true">🕐</span>
+          <span class="label">最近見た物件</span>
+          <span class="header__nav-badge" data-recent-badge hidden></span>
+        </a>
+        <a href="#" class="header__nav-item" data-search-drawer-toggle>
+          <span class="icon" aria-hidden="true">📋</span>
+          <span class="label">検索した条件</span>
+          <span class="header__nav-badge" data-search-badge hidden></span>
+        </a>
+        <div class="header__nav-menu">
+          <a href="#" class="header__nav-item header__nav-item--menu" tabindex="0">
+            <span class="icon" aria-hidden="true">☰</span>
+            <span class="label">メニュー</span>
+          </a>
+          <div class="header__dropdown">
+            <a href="./" class="header__dropdown-item"><span aria-hidden="true">🔍</span> 物件検索</a>
+            <a href="./station.html" class="header__dropdown-item"><span aria-hidden="true">🚃</span> 沿線・駅から探す</a>
+            <a href="./search.html" class="header__dropdown-item"><span aria-hidden="true">📍</span> エリアから探す</a>
+            <a href="./property.html" class="header__dropdown-item"><span aria-hidden="true">🏠</span> 物件一覧</a>
+          </div>
+        </div>
+      </nav>
+
+      <button class="header__menu-btn" id="menuBtn" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- モバイルメニュー -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="モバイルナビゲーション">
+    <div class="mobile-nav__inner">
+      <a href="./" class="mobile-nav__item"><span aria-hidden="true">🔍</span> 物件検索</a>
+      <a href="./station.html" class="mobile-nav__item"><span aria-hidden="true">🚃</span> 沿線・駅から探す</a>
+      <a href="./search.html" class="mobile-nav__item"><span aria-hidden="true">📍</span> エリアから探す</a>
+      <a href="./property.html" class="mobile-nav__item"><span aria-hidden="true">🏠</span> 物件一覧</a>
+      <a href="#" class="mobile-nav__item" data-fav-drawer-toggle><span aria-hidden="true">⭐</span> お気に入り <span class="header__nav-badge" data-fav-badge hidden></span></a>
+      <a href="#" class="mobile-nav__item" data-recent-drawer-toggle><span aria-hidden="true">🕐</span> 最近見た物件 <span class="header__nav-badge" data-recent-badge hidden></span></a>
+      <a href="#" class="mobile-nav__item" data-search-drawer-toggle><span aria-hidden="true">📋</span> 検索した条件 <span class="header__nav-badge" data-search-badge hidden></span></a>
+    </div>
+  </nav>
+
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <div class="breadcrumb__inner">
+      <ol class="breadcrumb__list">
+        <li class="breadcrumb__item"><a href="./">賃貸のホームナビ</a></li>
+        <li class="breadcrumb__item" aria-current="page">路線・沿線・駅から賃貸物件を探す</li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <div class="station-select">
+      <h1 class="station-select__title">全国の路線・沿線・駅から賃貸物件(賃貸マンション・アパート)を探す</h1>
+      <p class="station-select__subtitle">都道府県を選択して路線・沿線・駅から探す</p>
+
+      <!-- 人気の駅 -->
+      <div class="popular-stations js-fade-in">
+        <h2 class="popular-stations__title"><span aria-hidden="true">🔥</span> 人気の駅から探す</h2>
+        <div class="popular-stations__grid">
+          <a href="./search.html?station=新宿" class="popular-stations__item">
+            <span class="popular-stations__name">新宿</span>
+            <span class="popular-stations__line">JR山手線 ほか</span>
+            <span class="popular-stations__count">3,240件</span>
+          </a>
+          <a href="./search.html?station=渋谷" class="popular-stations__item">
+            <span class="popular-stations__name">渋谷</span>
+            <span class="popular-stations__line">JR山手線 ほか</span>
+            <span class="popular-stations__count">2,180件</span>
+          </a>
+          <a href="./search.html?station=池袋" class="popular-stations__item">
+            <span class="popular-stations__name">池袋</span>
+            <span class="popular-stations__line">JR山手線 ほか</span>
+            <span class="popular-stations__count">2,460件</span>
+          </a>
+          <a href="./search.html?station=横浜" class="popular-stations__item">
+            <span class="popular-stations__name">横浜</span>
+            <span class="popular-stations__line">JR東海道本線 ほか</span>
+            <span class="popular-stations__count">4,120件</span>
+          </a>
+          <a href="./search.html?station=梅田" class="popular-stations__item">
+            <span class="popular-stations__name">梅田</span>
+            <span class="popular-stations__line">Osaka Metro御堂筋線 ほか</span>
+            <span class="popular-stations__count">3,860件</span>
+          </a>
+          <a href="./search.html?station=名古屋" class="popular-stations__item">
+            <span class="popular-stations__name">名古屋</span>
+            <span class="popular-stations__line">名古屋市営東山線 ほか</span>
+            <span class="popular-stations__count">5,340件</span>
+          </a>
+          <a href="./search.html?station=博多" class="popular-stations__item">
+            <span class="popular-stations__name">博多</span>
+            <span class="popular-stations__line">JR鹿児島本線 ほか</span>
+            <span class="popular-stations__count">3,920件</span>
+          </a>
+          <a href="./search.html?station=札幌" class="popular-stations__item">
+            <span class="popular-stations__name">札幌</span>
+            <span class="popular-stations__line">札幌市営南北線 ほか</span>
+            <span class="popular-stations__count">6,240件</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- STEP1: 路線を選択 -->
+      <div class="station-select__step js-fade-in">
+        <h2 class="station-select__step-header">
+          <span>STEP1</span> 路線を選択
+          <span>路線にチェックを入れると、駅が選択できます。</span>
+        </h2>
+        <div class="station-select__step-body">
+
+          <!-- JR在来線 -->
+          <div class="station-select__railway">
+            <h3 class="station-select__railway-name">西日本旅客鉄道 (JR)  ─ JR在来線</h3>
+            <div class="station-select__railway-lines">
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="sanyo">
+                  ＪＲ山陽本線(神戸〜門司) <span class="station-select__station-count">(6,836件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="kure">
+                  ＪＲ呉線 <span class="station-select__station-count">(1,301件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="takehara">
+                  ＪＲ高松線 <span class="station-select__station-count">(3,702件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="geibi">
+                  ＪＲ芸備線 <span class="station-select__station-count">(1,810件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="fukuen">
+                  ＪＲ可部線 <span class="station-select__station-count">(2,185件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="kisuki">
+                  JR木次線 <span class="station-select__station-count">(0件)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 新幹線 -->
+          <div class="station-select__railway">
+            <h3 class="station-select__railway-name">新幹線</h3>
+            <div class="station-select__railway-lines">
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="shinkansen">
+                  ＪＲ山陽新幹線 <span class="station-select__station-count">(2,912件)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 井原鉄道 -->
+          <div class="station-select__railway">
+            <h3 class="station-select__railway-name">井原鉄道</h3>
+            <div class="station-select__railway-lines">
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="ibara">
+                  井原鉄道 <span class="station-select__station-count">(309件)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 広島高速交通 -->
+          <div class="station-select__railway">
+            <h3 class="station-select__railway-name">広島高速交通</h3>
+            <div class="station-select__railway-lines">
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="astram">
+                  広島高速交通アストラムライン <span class="station-select__station-count">(1,492件)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 広島電鉄 -->
+          <div class="station-select__railway">
+            <h3 class="station-select__railway-name">広島電鉄</h3>
+            <div class="station-select__railway-lines">
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="hiroden-miyajima">
+                  広島電鉄宮島線 <span class="station-select__station-count">(1,332件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="hiroden-honsen">
+                  広島電鉄本線 <span class="station-select__station-count">(1,516件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="hiroden-ujina">
+                  広島電鉄宇品線 <span class="station-select__station-count">(938件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="hiroden-yokogawa">
+                  広島電鉄横川線 <span class="station-select__station-count">(120件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="hiroden-hakushima">
+                  広島電鉄白島線 <span class="station-select__station-count">(863件)</span>
+                </label>
+              </div>
+              <div class="station-select__line-item">
+                <label>
+                  <input type="checkbox" name="line" value="hiroden-eba">
+                  広島電鉄江波線 <span class="station-select__station-count">(804件)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP2: 条件を指定 -->
+      <div class="station-select__step js-fade-in">
+        <h2 class="station-select__step-header">
+          <span>STEP2</span> 希望の条件を指定
+          <span>絞り込みたい条件にチェックを入れると、物件が絞り込めます。</span>
+        </h2>
+        <div class="station-select__step-body">
+
+          <div class="condition-section">
+            <div class="condition-section__group">
+              <h3 class="condition-section__group-title">賃料</h3>
+              <div class="condition-section__range">
+                <select name="rent_min" aria-label="賃料下限">
+                  <option value="">下限なし</option>
+                  <option value="3">3万円</option>
+                  <option value="4">4万円</option>
+                  <option value="5">5万円</option>
+                  <option value="6">6万円</option>
+                  <option value="7">7万円</option>
+                  <option value="8">8万円</option>
+                </select>
+                <span>～</span>
+                <select name="rent_max" aria-label="賃料上限">
+                  <option value="">上限なし</option>
+                  <option value="5">5万円</option>
+                  <option value="6">6万円</option>
+                  <option value="7">7万円</option>
+                  <option value="8">8万円</option>
+                  <option value="10">10万円</option>
+                  <option value="15">15万円</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="condition-section__group">
+              <h3 class="condition-section__group-title">間取りタイプ</h3>
+              <div class="condition-section__options">
+                <div class="condition-section__option"><label><input type="checkbox" name="layout" value="1R"> ワンルーム</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="layout" value="1K"> 1K</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="layout" value="1DK"> 1DK</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="layout" value="1LDK"> 1LDK</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="layout" value="2K"> 2K</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="layout" value="2DK"> 2DK</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="layout" value="2LDK"> 2LDK</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="layout" value="3LDK+"> 3LDK以上</label></div>
+              </div>
+            </div>
+
+            <div class="condition-section__group">
+              <h3 class="condition-section__group-title">築年数</h3>
+              <div class="condition-section__options">
+                <div class="condition-section__option"><label><input type="checkbox" name="age" value="0"> 新築</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="age" value="3"> 3年以内</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="age" value="5"> 5年以内</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="age" value="10"> 10年以内</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="age" value="15"> 15年以内</label></div>
+                <div class="condition-section__option"><label><input type="checkbox" name="age" value="any"> 指定なし</label></div>
+              </div>
+            </div>
+
+            <div class="search-action">
+              <a href="./search.html" class="btn btn--primary btn--lg btn--arrow" data-station-search>この条件で検索する</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 隣接する都道府県 -->
+      <div class="station-select__step js-fade-in" data-step="adjacent">
+        <h2 class="station-select__step-header">
+          隣接する都道府県の賃貸物件を探す
+        </h2>
+        <div class="station-select__step-body">
+          <div class="adjacent-area">
+            <a href="./station.html?area=okayama" class="btn btn--outline">岡山</a>
+            <a href="./station.html?area=yamaguchi" class="btn btn--outline">山口</a>
+            <a href="./station.html?area=hiroshima" class="btn btn--outline">広島</a>
+            <a href="./station.html?area=tokyo" class="btn btn--outline">東京</a>
+            <a href="./station.html?area=osaka" class="btn btn--outline">大阪</a>
+            <a href="./station.html?area=fukuoka" class="btn btn--outline">福岡</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- フローティング選択バー -->
+  <div class="station-summary" id="stationSummary" hidden>
+    <div class="station-summary__inner">
+      <p class="station-summary__count">
+        <span class="station-summary__icon" aria-hidden="true">🚃</span>
+        <strong data-selected-line-count>0</strong>路線 <span class="station-summary__sep">/</span>
+        <strong data-selected-station-count>0</strong>駅 を選択中
+      </p>
+      <a href="./search.html" class="btn btn--primary btn--arrow station-summary__btn" id="stationSearchBtn">
+        この条件で検索する
+      </a>
+    </div>
+  </div>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__col">
+          <h3 class="footer__col-title">物件を探す</h3>
+          <ul class="footer__col-list">
+            <li><a href="./station.html">沿線・駅から探す</a></li>
+            <li><a href="./search.html">エリアから探す</a></li>
+            <li><a href="./search.html">地図から探す</a></li>
+            <li><a href="./search.html">通勤・通学時間から探す</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">こだわり条件</h3>
+          <ul class="footer__col-list">
+            <li><a href="./search.html">ペット可</a></li>
+            <li><a href="./search.html">デザイナーズ</a></li>
+            <li><a href="./search.html">タワーマンション</a></li>
+            <li><a href="./search.html">リノベーション</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">お役立ち情報</h3>
+          <ul class="footer__col-list">
+            <li><a href="#" aria-disabled="true" tabindex="-1">家賃相場</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">引越しの手続き</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">住まいの基礎知識</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">よくある質問</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">ホームナビについて</h3>
+          <ul class="footer__col-list">
+            <li><a href="#" aria-disabled="true" tabindex="-1">会社概要</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">採用情報</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">プライバシーポリシー</a></li>
+            <li><a href="#" aria-disabled="true" tabindex="-1">お問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__middle">
+        <p class="footer__area-title">■ 全国の地域から賃貸物件を探す</p>
+        <div class="footer__area-links">
+          <a href="./search.html?area=hokkaido">北海道</a>
+          <a href="./search.html?area=aomori">青森</a>
+          <a href="./search.html?area=iwate">岩手</a>
+          <a href="./search.html?area=miyagi">宮城</a>
+          <a href="./search.html?area=akita">秋田</a>
+          <a href="./search.html?area=yamagata">山形</a>
+          <a href="./search.html?area=fukushima">福島</a>
+          <a href="./search.html?area=ibaraki">茨城</a>
+          <a href="./search.html?area=tochigi">栃木</a>
+          <a href="./search.html?area=gunma">群馬</a>
+          <a href="./search.html?area=saitama">埼玉</a>
+          <a href="./search.html?area=chiba">千葉</a>
+          <a href="./search.html?area=tokyo">東京</a>
+          <a href="./search.html?area=kanagawa">神奈川</a>
+          <a href="./search.html?area=niigata">新潟</a>
+          <a href="./search.html?area=toyama">富山</a>
+          <a href="./search.html?area=ishikawa">石川</a>
+          <a href="./search.html?area=fukui">福井</a>
+          <a href="./search.html?area=yamanashi">山梨</a>
+          <a href="./search.html?area=nagano">長野</a>
+          <a href="./search.html?area=gifu">岐阜</a>
+          <a href="./search.html?area=shizuoka">静岡</a>
+          <a href="./search.html?area=aichi">愛知</a>
+          <a href="./search.html?area=mie">三重</a>
+          <a href="./search.html?area=shiga">滋賀</a>
+          <a href="./search.html?area=kyoto">京都</a>
+          <a href="./search.html?area=osaka">大阪</a>
+          <a href="./search.html?area=hyogo">兵庫</a>
+          <a href="./search.html?area=nara">奈良</a>
+          <a href="./search.html?area=wakayama">和歌山</a>
+          <a href="./search.html?area=tottori">鳥取</a>
+          <a href="./search.html?area=shimane">島根</a>
+          <a href="./search.html?area=okayama">岡山</a>
+          <a href="./search.html?area=hiroshima">広島</a>
+          <a href="./search.html?area=yamaguchi">山口</a>
+          <a href="./search.html?area=tokushima">徳島</a>
+          <a href="./search.html?area=kagawa">香川</a>
+          <a href="./search.html?area=ehime">愛媛</a>
+          <a href="./search.html?area=kochi">高知</a>
+          <a href="./search.html?area=fukuoka">福岡</a>
+          <a href="./search.html?area=saga">佐賀</a>
+          <a href="./search.html?area=nagasaki">長崎</a>
+          <a href="./search.html?area=kumamoto">熊本</a>
+          <a href="./search.html?area=oita">大分</a>
+          <a href="./search.html?area=miyazaki">宮崎</a>
+          <a href="./search.html?area=kagoshima">鹿児島</a>
+          <a href="./search.html?area=okinawa">沖縄</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <div class="footer__sns">
+          <a href="#" aria-label="Twitter" aria-disabled="true" tabindex="-1">𝕏</a>
+          <a href="#" aria-label="Facebook" aria-disabled="true" tabindex="-1">f</a>
+          <a href="#" aria-label="Instagram" aria-disabled="true" tabindex="-1">📷</a>
+          <a href="#" aria-label="YouTube" aria-disabled="true" tabindex="-1">▶</a>
+        </div>
+        <p class="footer__copyright">&copy; 2026 HomeNavi Corporation. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="ページトップへ戻る">↑</button>
+
+  <!-- ドロワー: お気に入り -->
+  <div class="drawer-overlay" id="favDrawerOverlay"></div>
+  <aside class="drawer" id="favDrawer" aria-label="お気に入り一覧">
+    <div class="drawer__header">
+      <h2 class="drawer__title">⭐ お気に入り</h2>
+      <button class="drawer__close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="drawer__body" id="favDrawerContent"></div>
+  </aside>
+
+  <!-- ドロワー: 最近見た物件 -->
+  <div class="drawer-overlay" id="recentDrawerOverlay"></div>
+  <aside class="drawer" id="recentDrawer" aria-label="最近見た物件">
+    <div class="drawer__header">
+      <h2 class="drawer__title">🕐 最近見た物件</h2>
+      <button class="drawer__close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="drawer__body" id="recentDrawerContent"></div>
+  </aside>
+
+  <!-- ドロワー: 検索した条件 -->
+  <div class="drawer-overlay" id="searchDrawerOverlay"></div>
+  <aside class="drawer" id="searchDrawer" aria-label="検索した条件">
+    <div class="drawer__header">
+      <h2 class="drawer__title">📋 検索した条件</h2>
+      <button class="drawer__close" aria-label="閉じる">✕</button>
+    </div>
+    <div class="drawer__body" id="searchDrawerContent"></div>
+  </aside>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

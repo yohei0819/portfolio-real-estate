@@ -1,0 +1,51 @@
+// ==========================================
+// セクション共通
+// ==========================================
+
+.section
+  padding 60px 0
+
+  +sp()
+    padding 40px 0
+
+  &--pink
+    background $bg-pink
+
+  &--gray
+    background $bg-gray
+
+  &__inner
+    container()
+
+  &__header
+    text-align center
+    margin-bottom 40px
+
+  &__title
+    font-size $font-size-2xl
+    font-weight bold
+    color $text-dark
+    position relative
+    display inline-block
+    padding-bottom 12px
+
+    +sp()
+      font-size 20px
+
+    &::after
+      content ''
+      position absolute
+      bottom 0
+      left 50%
+      transform translateX(-50%) scaleX(var(--underline-scale, 1))
+      width 50px
+      height 3px
+      background $primary
+      border-radius 2px
+      transform-origin center
+      transition transform 0.8s ease
+
+  &__subtitle
+    margin-top 12px
+    font-size $font-size-base
+    color $text-gray

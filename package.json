@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-real-estate",
+  "version": "1.0.0",
+  "description": "賃貸不動産ポートフォリオサイト",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "stylus": "^0.63.0"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5"
+  }
+}

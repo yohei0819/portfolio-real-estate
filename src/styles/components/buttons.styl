@@ -1,0 +1,83 @@
+// ==========================================
+// ボタン
+// ==========================================
+
+.btn
+  btn-base()
+  padding 12px 28px
+  font-size $font-size-base
+  font-weight bold
+  border-radius $border-radius-pill
+  position relative
+  overflow hidden
+
+  &::before
+    content ''
+    position absolute
+    top 0
+    left -100%
+    width 100%
+    height 100%
+    background linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)
+    transition left 0.5s ease
+
+  &:hover::before
+    left 100%
+
+  // プライマリ
+  &--primary
+    background $primary
+    color #fff
+
+    &:hover
+      background $primary-dark
+      transform translateY(-2px)
+      box-shadow $shadow-md
+
+  // セカンダリ
+  &--secondary
+    background $bg-white
+    color $primary
+    border 2px solid $primary
+
+    &:hover
+      background $bg-pink
+
+  // アウトライン
+  &--outline
+    background transparent
+    color $text-dark
+    border 1px solid $border-color
+
+    &:hover
+      border-color $primary
+      color $primary
+
+  // サイズ
+  &--sm
+    padding 8px 20px
+    font-size $font-size-sm
+
+  &--lg
+    padding 16px 40px
+    font-size $font-size-lg
+
+  // ブロック
+  &--block
+    display flex
+    width 100%
+
+  // アイコン付き
+  &__icon
+    margin-right 8px
+    font-size 1.1em
+
+  // 矢印付き
+  &--arrow
+    &::after
+      content '→'
+      margin-left 8px
+      transition transform $transition-base
+
+    &:hover::after
+      transform translateX(4px)

@@ -1,0 +1,139 @@
+// ==========================================
+// ミックスイン
+// ==========================================
+
+// メディアクエリ
+sp()
+  @media (max-width: $bp-sp)
+    {block}
+
+tab()
+  @media (max-width: $bp-tab)
+    {block}
+
+// コンテナ
+container()
+  width 100%
+  max-width $container-width
+  margin 0 auto
+  padding 0 20px
+  box-sizing border-box
+
+// フレックスボックス
+flex-center()
+  display flex
+  justify-content center
+  align-items center
+
+flex-between()
+  display flex
+  justify-content space-between
+  align-items center
+
+// テキスト省略
+text-ellipsis()
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
+// ホバーエフェクト
+hover-opacity()
+  transition opacity $transition-base
+  &:hover
+    opacity 0.7
+
+hover-color()
+  transition color $transition-base
+  &:hover
+    color $primary
+
+// ボタンベース
+btn-base()
+  display inline-flex
+  align-items center
+  justify-content center
+  border none
+  cursor pointer
+  font-family $font-family
+  text-decoration none
+  transition all $transition-base
+  border-radius $border-radius
+
+// カードベース
+card-base()
+  background $bg-white
+  border-radius $border-radius-lg
+  box-shadow $shadow-sm
+  overflow hidden
+  transition box-shadow $transition-base
+  &:hover
+    box-shadow $shadow-md
+
+// 固定ヘッダーオフセット（各ページの最上位コンテンツブロック共通）
+page-offset()
+  margin-top $header-height
+
+// ホバー時の浮き上がりエフェクト
+hover-lift(distance = -4px)
+  transition all $transition-base
+  &:hover
+    transform translateY(distance)
+    box-shadow $shadow-md
+
+// カスタムセレクトボックス（appearance:none + 矢印SVG）
+custom-select()
+  appearance none
+  background $bg-white
+  background-image $select-arrow
+  background-repeat no-repeat
+  background-position right 12px center
+  cursor pointer
+  border 1px solid $border-color
+  border-radius $border-radius
+  font-size $font-size-base
+  transition border-color $transition-fast
+  &:focus
+    outline none
+    border-color $primary
+  &:hover
+    border-color $primary
+
+// チェックボックスラベルスタイル
+checkbox-label()
+  display flex
+  align-items center
+  gap 8px
+  padding 8px 16px
+  border 1px solid $border-color
+  border-radius $border-radius
+  cursor pointer
+  font-size $font-size-sm
+  transition all $transition-fast
+  &:hover
+    border-color $primary
+    background $bg-pink
+  input[type="checkbox"]
+    accent-color $primary
+
+// バッジ（物件カード等で使用）
+badge-base()
+  position absolute
+  z-index 1
+  padding 4px 10px
+  background $primary
+  color #fff
+  font-size $font-size-xs
+  font-weight bold
+  border-radius 3px
+
+// 価格表示
+price-display()
+  font-size $font-size-2xl
+  font-weight bold
+  color $primary
+
+// セクション見出し下線（border-bottom方式）
+section-underline()
+  font-weight bold
+  padding-bottom 8px
+  border-bottom 2px solid $primary
