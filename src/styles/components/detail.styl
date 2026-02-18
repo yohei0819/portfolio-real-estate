@@ -60,6 +60,9 @@
     font-weight bold
     margin-bottom 8px
 
+    +sp()
+      font-size $font-size-xl
+
   &__address
     font-size $font-size-base
     color $text-gray
@@ -83,6 +86,9 @@
     font-weight bold
     color $primary
 
+    +sp()
+      font-size 28px
+
   &__price-unit
     font-size $font-size-base
     color $text-gray
@@ -102,11 +108,20 @@
     font-size $font-size-xl
     margin 32px 0 16px
 
+    +sp()
+      font-size $font-size-lg
+      margin 24px 0 12px
+
   // 概要テーブル
   &__table
     width 100%
     border-collapse collapse
     margin-bottom 24px
+
+    +sp()
+      display block
+      overflow-x auto
+      -webkit-overflow-scrolling touch
 
     th
       background $bg-gray
@@ -118,10 +133,18 @@
       width 28%
       font-weight normal
 
+      +sp()
+        padding 8px 10px
+        font-size $font-size-xs
+
     td
       border 1px solid $border-color
       padding 10px 14px
       font-size $font-size-base
+
+      +sp()
+        padding 8px 10px
+        font-size $font-size-sm
 
   // 設備タグ
   &__features
@@ -172,6 +195,9 @@
     position sticky
     top ($header-height + 20px)
     align-self start
+
+    +sp()
+      position static
 
   &__sidebar-box
     background $bg-white
@@ -253,11 +279,20 @@
       width 100%
       border-collapse collapse
 
+      +sp()
+        display block
+        overflow-x auto
+        -webkit-overflow-scrolling touch
+
       th
       td
         border 1px solid $border-color
         padding 10px 14px
         font-size $font-size-base
+
+        +sp()
+          padding 8px 10px
+          font-size $font-size-sm
 
       th
         background $bg-gray

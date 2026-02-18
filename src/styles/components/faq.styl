@@ -26,6 +26,11 @@
     position relative
     padding-right 32px
 
+    +sp()
+      padding 14px 28px 14px 0
+      gap 8px
+      font-size $font-size-sm
+
     &::-webkit-details-marker
       display none
 
@@ -61,6 +66,11 @@
     color $text-gray
     line-height 1.8
     font-size $font-size-base
+
+    +sp()
+      padding 0 0 16px 0
+      font-size $font-size-sm
+      line-height 1.7
 
   &__a-icon
     display inline-flex

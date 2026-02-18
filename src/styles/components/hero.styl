@@ -150,6 +150,16 @@
     background rgba(255, 255, 255, 0.5)
     cursor pointer
     transition all $transition-base
+    // タッチターゲット拡大（視覚サイズを変えずヒット領域を確保）
+    position relative
+
+    &::before
+      content ''
+      position absolute
+      top -17px
+      left -17px
+      right -17px
+      bottom -17px
 
     &.is-active
       background #fff
