@@ -6,22 +6,22 @@
  */
 
 /** サイト基本情報 */
-export const SITE = {
+export const SITE = Object.freeze({
   name: 'ホームナビ',
   tagline: '賃貸のホームナビ',
   domain: 'https://homenavi.example.com',
-}
+})
 
 /** ページ種別 */
-export const PAGE = {
+export const PAGE = Object.freeze({
   INDEX: 'index',
   SEARCH: 'search',
   PROPERTY: 'property',
   STATION: 'station',
-}
+})
 
 /** DOM セレクタ（JS モジュールが参照するキー要素） */
-export const SELECTOR = {
+export const SELECTOR = Object.freeze({
   // 共通
   header: '#header',
   menuBtn: '#menuBtn',
@@ -73,45 +73,42 @@ export const SELECTOR = {
   stationSummary: '#stationSummary',
   stationSearchBtn: '#stationSearchBtn',
   stationSearchBtnInline: '[data-station-search]',
-}
+})
 
 /** カスタムイベント名 */
-export const EVENT = {
+export const EVENT = Object.freeze({
   LOADING_COMPLETE: 'loadingComplete',
   PAGE_TRANSITION: 'pageTransition',
   RAILWAYS_REPLACED: 'railways:replaced',
-  // 将来の拡張用
   FAVORITE_TOGGLE: 'favorite:toggle',
   RECENTLY_VIEWED: 'recentlyViewed:add',
   SEARCH_FILTER: 'search:filter',
-}
+})
 
 /** アニメーション設定 */
-export const ANIMATION = {
-  fadeIn: { y: 40, duration: 0.8 },
-  stagger: { duration: 0.6, stagger: 0.1 },
-  transition: { duration: 0.5 },
-  loading: { duration: 1.2, hideDelay: 200, fadeDuration: 0.5 },
-}
+export const ANIMATION = Object.freeze({
+  fadeIn: Object.freeze({ y: 40, duration: 0.8 }),
+  stagger: Object.freeze({ duration: 0.6, stagger: 0.1 }),
+  transition: Object.freeze({ duration: 0.5 }),
+  loading: Object.freeze({ duration: 1.2, hideDelay: 200, fadeDuration: 0.5 }),
+})
 
 /** スクロール閾値 */
-export const SCROLL = {
-  headerThreshold: 100,   // ヘッダー非表示になるスクロール量
-  backToTopThreshold: 400, // トップへ戻るボタンの表示閾値
-}
+export const SCROLL = Object.freeze({
+  headerThreshold: 100,
+  backToTopThreshold: 400,
+})
 
 /** カーソルフォロワー設定 */
-export const CURSOR = {
-  /** カーソル要素の半径（px）— DOM 要素サイズの半分 */
+export const CURSOR = Object.freeze({
   offset: 10,
-  /** 追従アニメーション秒数 */
   duration: 0.3,
-}
+})
 
 /** ヒーロースライダー設定 */
-export const SLIDER = {
-  interval: 5000, // 自動再生間隔（ms）
-}
+export const SLIDER = Object.freeze({
+  interval: 5000,
+})
 
 /** ホバーアニメーション対象セレクタ */
 export const HOVER_TARGETS =
@@ -121,15 +118,11 @@ export const HOVER_TARGETS =
 export const CARD_GRIDS = '.category-grid, .info-grid, .support-grid, .area-grid'
 
 /** 検索・フィルタリング設定 */
-export const SEARCH = {
-  /** 1ページあたりの表示件数 */
+export const SEARCH = Object.freeze({
   perPage: 10,
 
-  /**
-   * こだわり条件キー → PropertyData.features 内の照合文字列
-   * HTML の checkbox value と PropertyData の features[] をつなぐ
-   */
-  featureMap: {
+  /** こだわり条件キー → PropertyData.features の照合文字列 */
+  featureMap: Object.freeze({
     parking:      '駐車場',
     pet:          'ペット可',
     autolock:     'オートロック',
@@ -140,26 +133,23 @@ export const SEARCH = {
     flooring:     'フローリング',
     delivery_box: '宅配ボックス',
     internet:     'インターネット',
-  },
+  }),
 
-  /**
-   * 物件タイプキー → PropertyData.type の日本語ラベル
-   * HTML の checkbox value と PropertyData の type をつなぐ
-   */
-  typeMap: {
+  /** 物件タイプキー → PropertyData.type の日本語ラベル */
+  typeMap: Object.freeze({
     mansion:    'マンション',
     apartment:  'アパート',
     house:      '一戸建て',
     maisonette: 'メゾネット',
-  },
+  }),
 
   /** URL パラメータから復元するチェックボックスの name 一覧 */
-  checkboxNames: ['layout', 'type', 'age', 'feature'],
-}
+  checkboxNames: Object.freeze(['layout', 'type', 'age', 'feature']),
+})
 
-/** ローカルストレージキー（将来の拡張用） */
-export const STORAGE_KEY = {
+/** ローカルストレージキー */
+export const STORAGE_KEY = Object.freeze({
   favorites: 'homenavi_favorites',
   recentlyViewed: 'homenavi_recently_viewed',
   searchHistory: 'homenavi_search_history',
-}
+})

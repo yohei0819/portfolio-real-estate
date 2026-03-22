@@ -123,6 +123,8 @@ export function buildPropertyRow(p, favIds) {
   if (p.depositMonths) subParts.push(`敷金${p.depositMonths}ヶ月`)
   const subPrice = subParts.join(' / ')
 
+  const floorsText = p.totalFloors ? `｜${p.totalFloors}階建` : ''
+
   return `
     <div class="property-row js-fade-in">
       <a href="./property.html?id=${p.id}" class="property-row__link">
@@ -131,7 +133,7 @@ export function buildPropertyRow(p, favIds) {
         </div>
         <div class="property-row__body">
           <h2 class="property-row__name">${escapeHTML(p.name)}</h2>
-          <p class="property-row__address">📍 ${escapeHTML(p.address)} ${escapeHTML(p.station)}｜${escapeHTML(String(p.totalFloors ?? ''))}階建</p>
+          <p class="property-row__address">📍 ${escapeHTML(p.address)} ${escapeHTML(p.station)}${floorsText}</p>
           <div class="property-row__specs">
             <div class="property-row__spec">
               <span class="property-row__spec-label">賃料</span> ${p.price}万円

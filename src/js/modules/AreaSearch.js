@@ -45,6 +45,9 @@ const { perPage: PER_PAGE, checkboxNames: CHECKBOX_NAMES } = SEARCH
 /** ソートのデフォルト値 — URL から省略される */
 const DEFAULT_SORT = 'recommended'
 
+/** 築年月が不明な物件のデフォルト築年数（築年数フィルタで「古い物件」として扱う） */
+const UNKNOWN_AGE = 99
+
 // ----------------------------------------------------------------
 // 物件データ構築
 // ----------------------------------------------------------------
@@ -56,7 +59,7 @@ const DEFAULT_SORT = 'recommended'
  */
 function calcAge(buildDate) {
   const year = extractYear(buildDate)
-  return year === 0 ? 99 : CURRENT_YEAR - year
+  return year === 0 ? UNKNOWN_AGE : CURRENT_YEAR - year
 }
 
 /**

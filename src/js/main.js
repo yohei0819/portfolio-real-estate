@@ -76,17 +76,34 @@ const PAGE_MODULES = {
 // ==========================================
 // 初期化
 // ==========================================
+/**
+ * モジュール初期化のラッパー
+ * 1つのモジュールが例外を投げても他のモジュール初期化に影響させない
+ * @param {new () => any} Module  コンストラクタ
+ */
+function safeInit(Module) {
+  try {
+    new Module()
+  } catch (err) {
+    console.error(`[${Module.name}] 初期化に失敗:`, err)
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const page = detectPage()
 
   // ── 共通モジュールの一括初期化 ──
-  for (const Module of COMMON_MODULES) new Module()
+  for (const Module of COMMON_MODULES) safeInit(Module)
 
   // ── ページ固有モジュールの動的初期化 ──
   const loader = PAGE_MODULES[page]
   if (loader) {
-    const modules = await loader()
-    for (const Module of modules) new Module()
+    try {
+      const modules = await loader()
+      for (const Module of modules) safeInit(Module)
+    } catch (err) {
+      console.error(`[${page}] モジュール読み込みに失敗:`, err)
+    }
   }
 
   // index.html 以外はローディング画面が存在しないため

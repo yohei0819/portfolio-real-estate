@@ -112,7 +112,7 @@ export default class ScrollAnimations {
   #staggerCards() {
     const cardGrids = $$(CARD_GRIDS)
     cardGrids.forEach((grid) => {
-      const cards = grid.children
+      const cards = [...grid.children]
       if (cards.length === 0) return
 
       gsap.fromTo(

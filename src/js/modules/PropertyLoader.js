@@ -185,7 +185,7 @@ export default class PropertyLoader {
 
   #renderFloorplan() {
     const { floorplan } = this.#prop
-    if (!floorplan) return
+    if (!floorplan?.rooms?.length) return
 
     setText('.detail__floorplan-label', floorplan.label)
     setHTML(

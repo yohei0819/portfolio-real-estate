@@ -118,8 +118,8 @@ export default class DrawerController {
 
     this.#elDrawer.classList.remove('is-open')
     this.#elOverlay?.classList.remove('is-visible')
-    document.removeEventListener('keydown', this.#handleKeydown)
     openInstances.delete(this)
+    document.removeEventListener('keydown', this.#handleKeydown)
     releaseScrollLock()
   }
 

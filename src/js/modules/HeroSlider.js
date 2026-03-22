@@ -38,9 +38,9 @@ export default class HeroSlider {
     this.#indicators.forEach((indicator) => {
       indicator.addEventListener('click', () => {
         const index = parseInt(indicator.dataset.slide, 10)
-        if (!isNaN(index)) {
+        if (!isNaN(index) && index >= 0 && index < this.#slides.length) {
           this.#goTo(index)
-          this.#startAutoPlay() // クリック後にタイマーリセット
+          this.#startAutoPlay()
         }
       })
     })

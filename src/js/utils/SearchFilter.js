@@ -90,12 +90,14 @@ export function matchFeatures(requiredLabels, propFeatures) {
 /**
  * 築年数フィルタの閾値を計算
  * 「指定なし」が含まれる場合は Infinity を返す
+ * 数値変換できない値を安全に無視する
  * @param {string[]} ages  選択された築年数値の配列
  * @returns {number}
  */
 export function calcAgeThreshold(ages) {
   if (ages.length === 0 || ages.includes('any')) return Infinity
-  return Math.max(...ages.map(Number))
+  const nums = ages.map(Number).filter((n) => !Number.isNaN(n))
+  return nums.length === 0 ? Infinity : Math.max(...nums)
 }
 
 // ----------------------------------------------------------------
