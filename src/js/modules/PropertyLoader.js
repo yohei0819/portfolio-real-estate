@@ -193,7 +193,8 @@ export default class PropertyLoader {
     ]
     setHTML(
       '.detail__table',
-      rows.map(([th, td]) => `<tr><th>${escapeHTML(th)}</th><td>${escapeHTML(String(td ?? ''))}</td></tr>`).join('')
+      `<caption class="sr-only">物件の基本情報一覧</caption>` +
+        rows.map(([th, td]) => `<tr><th scope="row">${escapeHTML(th)}</th><td>${escapeHTML(String(td ?? ''))}</td></tr>`).join('')
     )
   }
 
@@ -224,13 +225,14 @@ export default class PropertyLoader {
       .filter(Boolean)
       .map((c) => {
         const note = c.note ? `（${escapeHTML(c.note)}）` : ''
-        return `<tr><th>${escapeHTML(c.label)}</th><td>${c.amount.toLocaleString()}円${note}</td></tr>`
+        return `<tr><th scope="row">${escapeHTML(c.label)}</th><td>${c.amount.toLocaleString()}円${note}</td></tr>`
       })
       .join('')
 
     costSim.innerHTML =
+      `<caption class="sr-only">初期費用の内訳</caption>` +
       rowsHTML +
-      `<tr class="detail__cost-total"><th>初期費用合計（税込）</th><td>${costs.total.toLocaleString()}円</td></tr>`
+      `<tr class="detail__cost-total"><th scope="row">初期費用合計（税込）</th><td>${costs.total.toLocaleString()}円</td></tr>`
   }
 
   // ── 間取り図 ──

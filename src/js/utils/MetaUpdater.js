@@ -47,6 +47,15 @@ export function updateCanonical(url) {
 }
 
 /**
+ * og:url を更新
+ * @param {string} url - OGP のページ URL
+ */
+export function updateOgUrl(url) {
+  const el = document.querySelector('meta[property="og:url"]')
+  if (el) el.setAttribute('content', url)
+}
+
+/**
  * パンくずリストを更新
  * @param {Array<{label: string, href?: string}>} items
  *   - href なし → 現在のページ（最後の要素）
@@ -90,6 +99,9 @@ export function updatePageMeta({
   if (title) updateTitle(title)
   if (description) updateMetaDescription(description)
   updateOGP(ogTitle || title, ogDescription || description)
-  if (canonical) updateCanonical(canonical)
+  if (canonical) {
+    updateCanonical(canonical)
+    updateOgUrl(canonical)
+  }
   if (breadcrumb) updateBreadcrumb(breadcrumb)
 }

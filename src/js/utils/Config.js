@@ -9,7 +9,7 @@
 export const SITE = Object.freeze({
   name: 'ホームナビ',
   tagline: '賃貸のホームナビ',
-  domain: 'https://homenavi.example.com',
+  domain: 'https://yohei0819.github.io/portfolio-real-estate',
 })
 
 /** ページ種別 */
