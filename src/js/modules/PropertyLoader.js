@@ -23,6 +23,19 @@ const NEARBY_CATEGORIES = [
   { key: 'finance',  icon: '🏦', title: '金融・公共' },
 ]
 
+/**
+ * 室内写真ギャラリーの構成（部屋ラベル + 配色）
+ * 実画像の代わりにグラデーションのプレースホルダーで表現する
+ */
+const GALLERY_ROOMS = [
+  { label: 'リビング',     gradient: 'linear-gradient(135deg, #f5e6d3, #e8d5c4)' },
+  { label: 'キッチン',     gradient: 'linear-gradient(135deg, #d3e5f5, #c4d5e8)' },
+  { label: '浴室',         gradient: 'linear-gradient(135deg, #d3f5e8, #c4e8d5)' },
+  { label: '洗面所',       gradient: 'linear-gradient(135deg, #e8d3f5, #d5c4e8)' },
+  { label: '洋室',         gradient: 'linear-gradient(135deg, #f5d3e0, #e8c4d2)' },
+  { label: 'バルコニー',   gradient: 'linear-gradient(135deg, #f5f0d3, #e8e2c4)' },
+]
+
 export default class PropertyLoader {
   /** @type {Object|null} */
   #prop = null
@@ -91,6 +104,7 @@ export default class PropertyLoader {
     this.#renderFeatures()
     this.#renderCostSimulation()
     this.#renderFloorplan()
+    this.#renderGallery()
     this.#renderNearby()
     this.#renderCompany()
     this.#renderFavoriteButton()
@@ -235,6 +249,20 @@ export default class PropertyLoader {
         })
         .join('')
     )
+  }
+
+  // ── 室内写真ギャラリー ──
+
+  #renderGallery() {
+    const gallery = $('.detail__gallery')
+    if (!gallery) return
+
+    gallery.innerHTML = GALLERY_ROOMS.map((room, i) =>
+      `<button type="button" class="detail__gallery-item" data-gallery-index="${i}" style="background:${room.gradient}" aria-label="${escapeHTML(room.label)}の写真を拡大表示">
+        <span class="detail__gallery-icon" aria-hidden="true">📷</span>
+        <span class="detail__gallery-label">${escapeHTML(room.label)}</span>
+      </button>`,
+    ).join('')
   }
 
   // ── 周辺施設 ──

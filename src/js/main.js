@@ -61,8 +61,13 @@ const PAGE_MODULES = {
   },
 
   [PAGE.PROPERTY]: async () => {
-    const { default: PropertyLoader } = await import('./modules/PropertyLoader.js')
-    return [PropertyLoader]
+    const [{ default: PropertyLoader }, { default: Lightbox }, { default: ContactForm }, { default: ShareButtons }] = await Promise.all([
+      import('./modules/PropertyLoader.js'),
+      import('./modules/Lightbox.js'),
+      import('./modules/ContactForm.js'),
+      import('./modules/ShareButtons.js'),
+    ])
+    return [PropertyLoader, Lightbox, ContactForm, ShareButtons]
   },
 
   [PAGE.STATION]: async () => {

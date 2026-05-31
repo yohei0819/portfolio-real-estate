@@ -293,9 +293,20 @@
       <aside class="detail__sidebar">
         <div class="detail__sidebar-box js-fade-in">
           <h3 class="detail__sidebar-title">この物件に問い合わせる</h3>
-          <a href="#" class="detail__sidebar-btn detail__sidebar-btn--primary" aria-disabled="true" tabindex="-1">📧 メールで問い合わせ</a>
-          <a href="#" class="detail__sidebar-btn detail__sidebar-btn--secondary" aria-disabled="true" tabindex="-1">📞 電話で問い合わせ</a>
+          <button type="button" class="detail__sidebar-btn detail__sidebar-btn--primary" data-contact-open>📧 メールで問い合わせ</button>
+          <a href="tel:0120-000-000" class="detail__sidebar-btn detail__sidebar-btn--secondary">📞 電話で問い合わせ</a>
           <a href="#" class="detail__sidebar-btn detail__sidebar-btn--secondary detail__sidebar-btn--fav" aria-pressed="false">⭐ <span class="fav-btn__label">お気に入りに追加</span></a>
+        </div>
+
+        <div class="detail__sidebar-box detail__sidebar-box--share js-fade-in">
+          <h3 class="detail__sidebar-title">この物件をシェア</h3>
+          <div class="share-buttons" data-share>
+            <a class="share-buttons__btn share-buttons__btn--x" data-share-x target="_blank" rel="noopener noreferrer" aria-label="Xでシェア">𝕏</a>
+            <a class="share-buttons__btn share-buttons__btn--fb" data-share-fb target="_blank" rel="noopener noreferrer" aria-label="Facebookでシェア">f</a>
+            <a class="share-buttons__btn share-buttons__btn--line" data-share-line target="_blank" rel="noopener noreferrer" aria-label="LINEでシェア">L</a>
+            <button type="button" class="share-buttons__btn share-buttons__btn--copy" data-share-copy aria-label="URLをコピー">🔗</button>
+          </div>
+          <p class="share-buttons__feedback" data-share-feedback role="status" aria-live="polite" hidden>URLをコピーしました</p>
         </div>
 
         <div class="detail__sidebar-box js-fade-in">
