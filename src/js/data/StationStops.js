@@ -562,4 +562,22 @@ const STATION_STOPS = {
   ],
 }
 
+/**
+ * 路線の物件件数を駅データから動的に集計する。
+ * 駅データが登録されている路線は各駅件数の合計を返し、
+ * 未登録の路線は fallback（StationData 側の概算値）をそのまま返す。
+ *
+ * これにより路線件数を独立した固定値として二重管理せず、
+ * 駅データを単一の真実の源（single source of truth）とする。
+ *
+ * @param {string} lineValue  路線キー
+ * @param {number} [fallback=0]  駅データ未登録時に返す値
+ * @returns {number}
+ */
+export function getLineStationCount(lineValue, fallback = 0) {
+  const stops = STATION_STOPS[lineValue]
+  if (!stops?.length) return fallback
+  return stops.reduce((sum, s) => sum + (s.count || 0), 0)
+}
+
 export default Object.freeze(STATION_STOPS)

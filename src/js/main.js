@@ -7,6 +7,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { detectPage } from './utils/DOMHelper.js'
 import { PAGE, EVENT } from './utils/Config.js'
+import { renderSiteChrome } from './modules/SiteChrome.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -91,6 +92,10 @@ function safeInit(Module) {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const page = detectPage()
+
+  // ── 共通レイアウト（ヘッダー・フッター・ドロワー）を注入 ──
+  // 他モジュールが参照する DOM を先に生成しておく
+  renderSiteChrome()
 
   // ── 共通モジュールの一括初期化 ──
   for (const Module of COMMON_MODULES) safeInit(Module)

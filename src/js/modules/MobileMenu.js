@@ -36,9 +36,9 @@ export default class MobileMenu {
 
     this.#btn.addEventListener('click', () => this.#toggle())
 
-    // オーバーレイ部分 or ナビ内リンクのクリックで閉じる（イベント委譲）
+    // オーバーレイ部分 or ナビ内項目（リンク・ドロワートグルボタン）のクリックで閉じる（イベント委譲）
     this.#nav.addEventListener('click', (e) => {
-      if (e.target === this.#nav || e.target.closest('a')) this.#close()
+      if (e.target === this.#nav || e.target.closest('.mobile-nav__item')) this.#close()
     })
   }
 

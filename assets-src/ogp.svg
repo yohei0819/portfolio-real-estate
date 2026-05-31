@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e60033"/>
+      <stop offset="1" stop-color="#a3001f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <rect x="70" y="345" width="1060" height="510" rx="28" fill="#ffffff"/>
+  <text x="600" y="520" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="110" text-anchor="middle">🏠</text>
+  <text x="600" y="660" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="96" font-weight="700" fill="#e60033" text-anchor="middle">ホームナビ</text>
+  <text x="600" y="745" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="36" fill="#333333" text-anchor="middle">あなたにぴったりの住まいが見つかる賃貸検索サイト</text>
+</svg>

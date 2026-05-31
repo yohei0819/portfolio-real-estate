@@ -37,7 +37,7 @@ export function buildFavButton(id, name, favIds, variant = 'card') {
   const icon = active ? '❤️' : '🤍'
 
   return `<button class="fav-btn fav-btn--${variant}${cls}" data-fav-id="${id}" aria-label="${escapeHTML(name)}をお気に入りに追加" aria-pressed="${active}">
-      <span class="fav-btn__icon">${icon}</span>
+      <span class="fav-btn__icon" aria-hidden="true">${icon}</span>
     </button>`
 }
 

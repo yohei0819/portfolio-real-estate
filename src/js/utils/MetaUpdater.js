@@ -5,6 +5,7 @@
  */
 
 import { escapeHTML } from './DOMHelper.js'
+import { setJsonLd, buildBreadcrumbSchema } from './JsonLd.js'
 
 /**
  * ページタイトルを更新
@@ -63,6 +64,9 @@ export function updateBreadcrumb(items) {
       return `<li class="breadcrumb__item">${escapeHTML(item.label)}</li>`
     })
     .join('')
+
+  // 構造化データ（BreadcrumbList）も同期更新
+  setJsonLd('breadcrumb', buildBreadcrumbSchema(items))
 }
 
 /**

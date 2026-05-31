@@ -5,6 +5,7 @@
  */
 
 import STATION_DATA, { PREFECTURE_LIST } from '../data/StationData.js'
+import { getLineStationCount } from '../data/StationStops.js'
 import { updatePageMeta } from '../utils/MetaUpdater.js'
 import { SITE, SELECTOR, EVENT } from '../utils/Config.js'
 import { $, getQueryParam, buildRegionOptions, escapeHTML } from '../utils/DOMHelper.js'
@@ -27,7 +28,7 @@ function buildRailwaysHTML(railways) {
           <div class="station-select__line-item">
             <label>
               <input type="checkbox" name="line" value="${escapeHTML(line.value)}">
-              ${escapeHTML(line.name)} <span class="station-select__station-count">(${line.count.toLocaleString()}件)</span>
+              ${escapeHTML(line.name)} <span class="station-select__station-count">(${getLineStationCount(line.value, line.count).toLocaleString()}件)</span>
             </label>
           </div>`,
         )

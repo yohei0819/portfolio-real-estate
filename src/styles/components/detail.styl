@@ -5,6 +5,44 @@
 .detail
   page-offset()
 
+  // 物件が見つからない場合のフォールバック
+  &__not-found
+    max-width 560px
+    margin 0 auto
+    padding 80px 20px
+    text-align center
+
+    +sp()
+      padding 56px 20px
+
+  &__not-found-icon
+    font-size 56px
+    margin-bottom 16px
+
+  &__not-found-title
+    font-size $font-size-2xl
+    color $text-dark
+    margin-bottom 12px
+
+  &__not-found-text
+    font-size $font-size-base
+    color $text-gray
+    margin-bottom 28px
+    line-height 1.7
+
+  &__not-found-link
+    display inline-block
+    padding 12px 32px
+    background $primary
+    color #fff
+    border-radius $border-radius
+    font-weight bold
+    text-decoration none
+    transition opacity $transition-fast
+
+    &:hover
+      opacity 0.85
+
   // ヒーロー画像
   &__hero
     width 100%

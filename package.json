@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:gh": "GITHUB_PAGES=true vite build",
     "preview": "vite preview"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "devDependencies": {
     "vite": "^5.4.0",

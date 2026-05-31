@@ -38,6 +38,9 @@ export default class DrawerController {
   /** @type {(() => void)|null} ドロワーを開く直前に呼ばれるコールバック */
   #onOpen
 
+  /** @type {HTMLElement[]} 開閉トリガー要素（aria-expanded 同期用） */
+  #triggers = []
+
   /**
    * @param {Object} config
    * @param {string} config.drawerId     ドロワー要素の ID
@@ -63,7 +66,8 @@ export default class DrawerController {
    */
   #bind(toggleAttr) {
     // トリガーボタン（ヘッダー・モバイルメニュー内）
-    for (const trigger of $$(`[${toggleAttr}]`)) {
+    this.#triggers = [...$$(`[${toggleAttr}]`)]
+    for (const trigger of this.#triggers) {
       trigger.addEventListener('click', (e) => {
         e.preventDefault()
         this.toggle()
@@ -76,6 +80,18 @@ export default class DrawerController {
     // ✕ ボタンで閉じる
     const closeBtn = this.#elDrawer.querySelector('.drawer__close')
     closeBtn?.addEventListener('click', () => this.close())
+  }
+
+  /**
+   * 全トリガーの aria-expanded を同期
+   * @param {boolean} open
+   */
+  #syncTriggers(open) {
+    for (const trigger of this.#triggers) {
+      if (trigger.hasAttribute('aria-expanded')) {
+        trigger.setAttribute('aria-expanded', String(open))
+      }
+    }
   }
 
   /** Escape キーでドロワーを閉じる（アロー関数でインスタンスにバインド） */
@@ -105,6 +121,7 @@ export default class DrawerController {
     this.#onOpen?.()
     this.#elDrawer.classList.add('is-open')
     this.#elOverlay?.classList.add('is-visible')
+    this.#syncTriggers(true)
     acquireScrollLock()
     document.addEventListener('keydown', this.#handleKeydown)
     openInstances.add(this)
@@ -118,6 +135,7 @@ export default class DrawerController {
 
     this.#elDrawer.classList.remove('is-open')
     this.#elOverlay?.classList.remove('is-visible')
+    this.#syncTriggers(false)
     openInstances.delete(this)
     document.removeEventListener('keydown', this.#handleKeydown)
     releaseScrollLock()

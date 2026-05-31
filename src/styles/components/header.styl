@@ -55,7 +55,13 @@
     font-size $font-size-sm
     color $text-gray
     transition color $transition-base, border-color $transition-base
+    border 0
     border-bottom 2px solid transparent
+    // <a> と <button> 両方で同一外観になるようボタン既定スタイルをリセット
+    background none
+    font-family inherit
+    cursor pointer
+    appearance none
 
     // ホバー時の背景ハイライト（疑似要素）
     &::before
@@ -104,8 +110,8 @@
     +sp()
       display none
 
-    // ホバー時にドロップダウンを表示し、トリガー項目もアクティブ状態に
-    &:hover
+    // ホバー時／キーボードフォーカス時／JSで展開時にドロップダウンを表示し、トリガー項目もアクティブ状態に
+    &:hover, &:focus-within, &:has(.header__nav-item--menu[aria-expanded="true"])
       .header__dropdown
         opacity 1
         visibility visible
@@ -226,11 +232,19 @@
 
   &__item
     display block
+    width 100%
     padding 14px 16px
+    border 0
     border-bottom 1px solid $border-light
     font-size $font-size-base
     color $text-dark
     transition background $transition-fast
+    // <a> と <button> 両方で同一外観になるようボタン既定スタイルをリセット
+    text-align left
+    background none
+    font-family inherit
+    cursor pointer
+    appearance none
 
     &:hover
       background $bg-pink

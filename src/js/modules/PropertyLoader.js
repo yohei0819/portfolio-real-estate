@@ -9,6 +9,7 @@
 
 import PROPERTIES from '../data/PropertyData.js'
 import { updatePageMeta } from '../utils/MetaUpdater.js'
+import { setJsonLd, removeJsonLd, buildResidenceSchema } from '../utils/JsonLd.js'
 import { SITE, EVENT } from '../utils/Config.js'
 import { $, setText, setHTML, getQueryParam, escapeHTML } from '../utils/DOMHelper.js'
 import { isFavorite, getFavorites } from '../utils/StorageHelper.js'
@@ -37,11 +38,45 @@ export default class PropertyLoader {
 
     const rawId = getQueryParam('id')
     const id = rawId !== null ? parseInt(rawId, 10) : NaN
-    if (isNaN(id) || !PROPERTIES[id]) return
+    if (isNaN(id) || !PROPERTIES[id]) {
+      this.#renderNotFound()
+      return
+    }
 
     this.#prop = PROPERTIES[id]
     this.#id = id
     this.#render()
+  }
+
+  /**
+   * 物件が見つからない場合のフォールバック表示
+   * 不正・存在しない ?id 指定時に呼ばれる
+   */
+  #renderNotFound() {
+    const main = $('.detail')
+    if (!main) return
+
+    // 物件詳細用の構造化データは残さない
+    removeJsonLd('residence')
+
+    updatePageMeta({
+      title: `物件が見つかりません｜${SITE.name}`,
+      description: '指定された物件は見つかりませんでした。',
+      breadcrumb: [
+        { label: SITE.tagline, href: './' },
+        { label: '物件が見つかりません' },
+      ],
+    })
+
+    setHTML(
+      '.detail',
+      `<div class="detail__not-found">
+        <p class="detail__not-found-icon" aria-hidden="true">🔍</p>
+        <h1 class="detail__not-found-title">物件が見つかりませんでした</h1>
+        <p class="detail__not-found-text">指定された物件は削除されたか、URLが正しくない可能性があります。</p>
+        <a href="./search.html" class="detail__not-found-link">物件一覧から探す</a>
+      </div>`,
+    )
   }
 
   /**
@@ -86,6 +121,9 @@ export default class PropertyLoader {
         { label: name },
       ],
     })
+
+    // 物件詳細の構造化データ（Residence + Offer）を注入
+    setJsonLd('residence', buildResidenceSchema(this.#prop, this.#id))
   }
 
   // ── ヒーロー ──
