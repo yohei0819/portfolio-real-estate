@@ -30,7 +30,7 @@ function buildRailwaysHTML(railways) {
               <input type="checkbox" name="line" value="${escapeHTML(line.value)}">
               ${escapeHTML(line.name)} <span class="station-select__station-count">(${getLineStationCount(line.value, line.count).toLocaleString()}件)</span>
             </label>
-          </div>`,
+          </div>`
         )
         .join('')
 
@@ -52,7 +52,7 @@ function buildAdjacentHTML(adjacentList) {
   return adjacentList
     .map(
       (adj) =>
-        `<a href="./station.html?area=${encodeURIComponent(adj.key)}" class="btn btn--outline">${escapeHTML(adj.name)}</a>`,
+        `<a href="./station.html?area=${encodeURIComponent(adj.key)}" class="btn btn--outline">${escapeHTML(adj.name)}</a>`
     )
     .join('')
 }
@@ -63,15 +63,15 @@ function buildAdjacentHTML(adjacentList) {
 
 export default class StationSearch {
   // ── キャッシュ済み DOM 要素 ──
-  /** @type {HTMLElement|null} */  #elContainer
+  /** @type {HTMLElement|null} */ #elContainer
   /** @type {HTMLSelectElement|null} */ #elPrefSelect
-  /** @type {HTMLElement|null} */  #elTitle
-  /** @type {HTMLElement|null} */  #elStepBody
-  /** @type {HTMLElement|null} */  #elStepLines
-  /** @type {HTMLElement|null} */  #elStepConditions
-  /** @type {HTMLElement|null} */  #elAdjacentStep
-  /** @type {HTMLElement|null} */  #elAdjacentHeader
-  /** @type {HTMLElement|null} */  #elAdjacentBody
+  /** @type {HTMLElement|null} */ #elTitle
+  /** @type {HTMLElement|null} */ #elStepBody
+  /** @type {HTMLElement|null} */ #elStepLines
+  /** @type {HTMLElement|null} */ #elStepConditions
+  /** @type {HTMLElement|null} */ #elAdjacentStep
+  /** @type {HTMLElement|null} */ #elAdjacentHeader
+  /** @type {HTMLElement|null} */ #elAdjacentBody
 
   constructor() {
     this.#elContainer = $(SELECTOR.stationSelect)
@@ -89,14 +89,14 @@ export default class StationSearch {
 
   /** DOM 要素をキャッシュ（毎回クエリしない） */
   #cacheElements() {
-    this.#elTitle    = $(SELECTOR.stationTitle)
+    this.#elTitle = $(SELECTOR.stationTitle)
     this.#elStepBody = $(SELECTOR.stationStepBody)
     // data-step 属性で堅牢に特定（HTML 構造への依存を排除）
-    this.#elStepLines      = this.#elContainer.querySelector('[data-step="lines"]')
+    this.#elStepLines = this.#elContainer.querySelector('[data-step="lines"]')
     this.#elStepConditions = this.#elContainer.querySelector('[data-step="conditions"]')
-    this.#elAdjacentStep   = this.#elContainer.querySelector('[data-step="adjacent"]')
+    this.#elAdjacentStep = this.#elContainer.querySelector('[data-step="adjacent"]')
     this.#elAdjacentHeader = this.#elAdjacentStep?.querySelector('.station-select__step-header')
-    this.#elAdjacentBody   = this.#elAdjacentStep?.querySelector('.station-select__step-body')
+    this.#elAdjacentBody = this.#elAdjacentStep?.querySelector('.station-select__step-body')
   }
 
   /** URL パラメータ ?area= があれば初期表示を復元 */
@@ -252,8 +252,7 @@ export default class StationSearch {
   /** h1 の見出しを更新 */
   #updateTitle(prefName) {
     if (!this.#elTitle) return
-    this.#elTitle.textContent =
-      `${prefName}の路線・沿線・駅から賃貸物件(賃貸マンション・アパート)を探す`
+    this.#elTitle.textContent = `${prefName}の路線・沿線・駅から賃貸物件(賃貸マンション・アパート)を探す`
   }
 
   /** STEP1: 路線一覧を差し替え */

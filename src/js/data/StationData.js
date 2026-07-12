@@ -20,7 +20,6 @@ import PREFECTURES from './PrefectureData.js'
 const REGION_ORDER = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄']
 
 const STATION_DATA = {
-
   // ==========================================
   // 関東地方（主要都市）
   // ==========================================
@@ -250,14 +249,10 @@ const STATION_DATA = {
       },
       {
         company: '路面電車',
-        lines: [
-          { value: 'shiden', name: '札幌市電', count: 2340 },
-        ],
+        lines: [{ value: 'shiden', name: '札幌市電', count: 2340 }],
       },
     ],
-    adjacent: [
-      { key: 'aomori', name: '青森（新幹線利用）' },
-    ],
+    adjacent: [{ key: 'aomori', name: '青森（新幹線利用）' }],
   },
 
   // ==========================================
@@ -280,21 +275,15 @@ const STATION_DATA = {
       },
       {
         company: '新幹線',
-        lines: [
-          { value: 'shinkansen', name: 'JR山陽新幹線', count: 2912 },
-        ],
+        lines: [{ value: 'shinkansen', name: 'JR山陽新幹線', count: 2912 }],
       },
       {
         company: '井原鉄道',
-        lines: [
-          { value: 'ibara', name: '井原鉄道', count: 309 },
-        ],
+        lines: [{ value: 'ibara', name: '井原鉄道', count: 309 }],
       },
       {
         company: '広島高速交通',
-        lines: [
-          { value: 'astram', name: '広島高速交通アストラムライン', count: 1492 },
-        ],
+        lines: [{ value: 'astram', name: '広島高速交通アストラムライン', count: 1492 }],
       },
       {
         company: '広島電鉄',
@@ -517,9 +506,7 @@ const STATION_DATA = {
       },
       {
         company: '青い森鉄道',
-        lines: [
-          { value: 'aoimori', name: '青い森鉄道線', count: 1860 },
-        ],
+        lines: [{ value: 'aoimori', name: '青い森鉄道線', count: 1860 }],
       },
       {
         company: '弘南鉄道',
@@ -550,9 +537,7 @@ const STATION_DATA = {
       },
       {
         company: 'IGRいわて銀河鉄道',
-        lines: [
-          { value: 'igr', name: 'IGRいわて銀河鉄道線', count: 1540 },
-        ],
+        lines: [{ value: 'igr', name: 'IGRいわて銀河鉄道線', count: 1540 }],
       },
     ],
     adjacent: [
@@ -604,9 +589,7 @@ const STATION_DATA = {
       },
       {
         company: '秋田内陸縦貫鉄道',
-        lines: [
-          { value: 'nairiku', name: '秋田内陸線', count: 240 },
-        ],
+        lines: [{ value: 'nairiku', name: '秋田内陸線', count: 240 }],
       },
     ],
     adjacent: [
@@ -631,9 +614,7 @@ const STATION_DATA = {
       },
       {
         company: '山形鉄道',
-        lines: [
-          { value: 'flower-nagai', name: '山形鉄道フラワー長井線', count: 180 },
-        ],
+        lines: [{ value: 'flower-nagai', name: '山形鉄道フラワー長井線', count: 180 }],
       },
     ],
     adjacent: [
@@ -658,15 +639,11 @@ const STATION_DATA = {
       },
       {
         company: '福島交通',
-        lines: [
-          { value: 'iizaka', name: '福島交通飯坂線', count: 860 },
-        ],
+        lines: [{ value: 'iizaka', name: '福島交通飯坂線', count: 860 }],
       },
       {
         company: '阿武隈急行',
-        lines: [
-          { value: 'abukuma', name: '阿武隈急行線', count: 640 },
-        ],
+        lines: [{ value: 'abukuma', name: '阿武隈急行線', count: 640 }],
       },
     ],
     adjacent: [
@@ -695,15 +672,11 @@ const STATION_DATA = {
       },
       {
         company: 'つくばエクスプレス',
-        lines: [
-          { value: 'tx-ibaraki', name: 'つくばエクスプレス', count: 4560 },
-        ],
+        lines: [{ value: 'tx-ibaraki', name: 'つくばエクスプレス', count: 4560 }],
       },
       {
         company: '関東鉄道',
-        lines: [
-          { value: 'joso', name: '関東鉄道常総線', count: 1840 },
-        ],
+        lines: [{ value: 'joso', name: '関東鉄道常総線', count: 1840 }],
       },
     ],
     adjacent: [
@@ -755,15 +728,11 @@ const STATION_DATA = {
       },
       {
         company: '東武鉄道',
-        lines: [
-          { value: 'tobu-isesaki-gunma', name: '東武伊勢崎線', count: 2840 },
-        ],
+        lines: [{ value: 'tobu-isesaki-gunma', name: '東武伊勢崎線', count: 2840 }],
       },
       {
         company: '上信電鉄',
-        lines: [
-          { value: 'joshin', name: '上信電鉄線', count: 620 },
-        ],
+        lines: [{ value: 'joshin', name: '上信電鉄線', count: 620 }],
       },
     ],
     adjacent: [
@@ -793,9 +762,7 @@ const STATION_DATA = {
       },
       {
         company: '新幹線',
-        lines: [
-          { value: 'joetsu-shinkansen', name: 'JR上越新幹線', count: 2840 },
-        ],
+        lines: [{ value: 'joetsu-shinkansen', name: 'JR上越新幹線', count: 2840 }],
       },
     ],
     adjacent: [
@@ -812,9 +779,7 @@ const STATION_DATA = {
     railways: [
       {
         company: 'あいの風とやま鉄道',
-        lines: [
-          { value: 'ainokaze', name: 'あいの風とやま鉄道線', count: 3420 },
-        ],
+        lines: [{ value: 'ainokaze', name: 'あいの風とやま鉄道線', count: 3420 }],
       },
       {
         company: '富山地方鉄道',
@@ -825,15 +790,11 @@ const STATION_DATA = {
       },
       {
         company: '富山ライトレール・市内電車',
-        lines: [
-          { value: 'toyama-tram', name: '富山市内電車', count: 1860 },
-        ],
+        lines: [{ value: 'toyama-tram', name: '富山市内電車', count: 1860 }],
       },
       {
         company: '新幹線',
-        lines: [
-          { value: 'hokuriku-shinkansen-toyama', name: 'JR北陸新幹線', count: 2240 },
-        ],
+        lines: [{ value: 'hokuriku-shinkansen-toyama', name: 'JR北陸新幹線', count: 2240 }],
       },
     ],
     adjacent: [
@@ -849,15 +810,11 @@ const STATION_DATA = {
     railways: [
       {
         company: 'IRいしかわ鉄道',
-        lines: [
-          { value: 'ir-ishikawa', name: 'IRいしかわ鉄道線', count: 3240 },
-        ],
+        lines: [{ value: 'ir-ishikawa', name: 'IRいしかわ鉄道線', count: 3240 }],
       },
       {
         company: 'JR西日本',
-        lines: [
-          { value: 'nanao', name: 'JR七尾線', count: 1060 },
-        ],
+        lines: [{ value: 'nanao', name: 'JR七尾線', count: 1060 }],
       },
       {
         company: '北陸鉄道',
@@ -868,9 +825,7 @@ const STATION_DATA = {
       },
       {
         company: '新幹線',
-        lines: [
-          { value: 'hokuriku-shinkansen-ishikawa', name: 'JR北陸新幹線', count: 2460 },
-        ],
+        lines: [{ value: 'hokuriku-shinkansen-ishikawa', name: 'JR北陸新幹線', count: 2460 }],
       },
     ],
     adjacent: [
@@ -884,9 +839,7 @@ const STATION_DATA = {
     railways: [
       {
         company: 'ハピラインふくい',
-        lines: [
-          { value: 'hapline', name: 'ハピラインふくい線', count: 2640 },
-        ],
+        lines: [{ value: 'hapline', name: 'ハピラインふくい線', count: 2640 }],
       },
       {
         company: 'えちぜん鉄道',
@@ -897,15 +850,11 @@ const STATION_DATA = {
       },
       {
         company: '福井鉄道',
-        lines: [
-          { value: 'fukutetsu', name: '福井鉄道福武線', count: 460 },
-        ],
+        lines: [{ value: 'fukutetsu', name: '福井鉄道福武線', count: 460 }],
       },
       {
         company: 'JR西日本',
-        lines: [
-          { value: 'obama', name: 'JR小浜線', count: 380 },
-        ],
+        lines: [{ value: 'obama', name: 'JR小浜線', count: 380 }],
       },
     ],
     adjacent: [
@@ -928,9 +877,7 @@ const STATION_DATA = {
       },
       {
         company: '富士急行',
-        lines: [
-          { value: 'fujikyu', name: '富士急行線', count: 860 },
-        ],
+        lines: [{ value: 'fujikyu', name: '富士急行線', count: 860 }],
       },
     ],
     adjacent: [
@@ -962,15 +909,11 @@ const STATION_DATA = {
       },
       {
         company: '長野電鉄',
-        lines: [
-          { value: 'nagaden', name: '長野電鉄長野線', count: 1460 },
-        ],
+        lines: [{ value: 'nagaden', name: '長野電鉄長野線', count: 1460 }],
       },
       {
         company: '新幹線',
-        lines: [
-          { value: 'hokuriku-shinkansen-nagano', name: 'JR北陸新幹線', count: 2860 },
-        ],
+        lines: [{ value: 'hokuriku-shinkansen-nagano', name: 'JR北陸新幹線', count: 2860 }],
       },
     ],
     adjacent: [
@@ -1026,27 +969,19 @@ const STATION_DATA = {
       },
       {
         company: '静岡鉄道',
-        lines: [
-          { value: 'shizutetsu', name: '静岡鉄道静岡清水線', count: 2640 },
-        ],
+        lines: [{ value: 'shizutetsu', name: '静岡鉄道静岡清水線', count: 2640 }],
       },
       {
         company: '遠州鉄道',
-        lines: [
-          { value: 'enshu', name: '遠州鉄道鉄道線', count: 1860 },
-        ],
+        lines: [{ value: 'enshu', name: '遠州鉄道鉄道線', count: 1860 }],
       },
       {
         company: '伊豆急行',
-        lines: [
-          { value: 'izukyu', name: '伊豆急行線', count: 1240 },
-        ],
+        lines: [{ value: 'izukyu', name: '伊豆急行線', count: 1240 }],
       },
       {
         company: '新幹線',
-        lines: [
-          { value: 'tokaido-shinkansen-shizuoka', name: 'JR東海道新幹線', count: 3840 },
-        ],
+        lines: [{ value: 'tokaido-shinkansen-shizuoka', name: 'JR東海道新幹線', count: 3840 }],
       },
     ],
     adjacent: [
@@ -1083,9 +1018,7 @@ const STATION_DATA = {
       },
       {
         company: '伊勢鉄道',
-        lines: [
-          { value: 'ise-railway', name: '伊勢鉄道伊勢線', count: 680 },
-        ],
+        lines: [{ value: 'ise-railway', name: '伊勢鉄道伊勢線', count: 680 }],
       },
     ],
     adjacent: [
@@ -1111,15 +1044,11 @@ const STATION_DATA = {
       },
       {
         company: '近江鉄道',
-        lines: [
-          { value: 'ohmi', name: '近江鉄道本線', count: 1240 },
-        ],
+        lines: [{ value: 'ohmi', name: '近江鉄道本線', count: 1240 }],
       },
       {
         company: '京阪電鉄',
-        lines: [
-          { value: 'keihan-ishiyama', name: '京阪石山坂本線', count: 1640 },
-        ],
+        lines: [{ value: 'keihan-ishiyama', name: '京阪石山坂本線', count: 1640 }],
       },
     ],
     adjacent: [
@@ -1179,9 +1108,7 @@ const STATION_DATA = {
       },
       {
         company: '和歌山電鐵',
-        lines: [
-          { value: 'wakayama-dentetsu', name: '和歌山電鐵貴志川線', count: 340 },
-        ],
+        lines: [{ value: 'wakayama-dentetsu', name: '和歌山電鐵貴志川線', count: 340 }],
       },
     ],
     adjacent: [
@@ -1207,9 +1134,7 @@ const STATION_DATA = {
       },
       {
         company: '若桜鉄道',
-        lines: [
-          { value: 'wakasa', name: '若桜鉄道若桜線', count: 120 },
-        ],
+        lines: [{ value: 'wakasa', name: '若桜鉄道若桜線', count: 120 }],
       },
     ],
     adjacent: [
@@ -1259,9 +1184,7 @@ const STATION_DATA = {
       },
       {
         company: '岡山電気軌道',
-        lines: [
-          { value: 'okaden', name: '岡山電気軌道（路面電車）', count: 1860 },
-        ],
+        lines: [{ value: 'okaden', name: '岡山電気軌道（路面電車）', count: 1860 }],
       },
     ],
     adjacent: [
@@ -1286,9 +1209,7 @@ const STATION_DATA = {
       },
       {
         company: '新幹線',
-        lines: [
-          { value: 'sanyo-shinkansen-yamaguchi', name: 'JR山陽新幹線', count: 2240 },
-        ],
+        lines: [{ value: 'sanyo-shinkansen-yamaguchi', name: 'JR山陽新幹線', count: 2240 }],
       },
     ],
     adjacent: [
@@ -1382,9 +1303,7 @@ const STATION_DATA = {
     railways: [
       {
         company: 'JR四国',
-        lines: [
-          { value: 'dosan', name: 'JR土讃線', count: 2460 },
-        ],
+        lines: [{ value: 'dosan', name: 'JR土讃線', count: 2460 }],
       },
       {
         company: '土佐くろしお鉄道',
@@ -1395,9 +1314,7 @@ const STATION_DATA = {
       },
       {
         company: 'とさでん交通',
-        lines: [
-          { value: 'tosaden', name: 'とさでん交通（路面電車）', count: 1640 },
-        ],
+        lines: [{ value: 'tosaden', name: 'とさでん交通（路面電車）', count: 1640 }],
       },
     ],
     adjacent: [
@@ -1441,20 +1358,14 @@ const STATION_DATA = {
       },
       {
         company: '西九州新幹線',
-        lines: [
-          { value: 'nishi-kyushu-shinkansen', name: 'JR西九州新幹線', count: 1640 },
-        ],
+        lines: [{ value: 'nishi-kyushu-shinkansen', name: 'JR西九州新幹線', count: 1640 }],
       },
       {
         company: '長崎電気軌道',
-        lines: [
-          { value: 'nagasaki-tram', name: '長崎電気軌道（路面電車）', count: 2240 },
-        ],
+        lines: [{ value: 'nagasaki-tram', name: '長崎電気軌道（路面電車）', count: 2240 }],
       },
     ],
-    adjacent: [
-      { key: 'saga', name: '佐賀' },
-    ],
+    adjacent: [{ key: 'saga', name: '佐賀' }],
   },
 
   kumamoto: {
@@ -1470,21 +1381,15 @@ const STATION_DATA = {
       },
       {
         company: '熊本市電',
-        lines: [
-          { value: 'kumamoto-tram', name: '熊本市電（路面電車）', count: 2860 },
-        ],
+        lines: [{ value: 'kumamoto-tram', name: '熊本市電（路面電車）', count: 2860 }],
       },
       {
         company: '熊本電気鉄道',
-        lines: [
-          { value: 'kumaden', name: '熊本電鉄菊池線', count: 640 },
-        ],
+        lines: [{ value: 'kumaden', name: '熊本電鉄菊池線', count: 640 }],
       },
       {
         company: '新幹線',
-        lines: [
-          { value: 'kyushu-shinkansen-kumamoto', name: 'JR九州新幹線', count: 2460 },
-        ],
+        lines: [{ value: 'kyushu-shinkansen-kumamoto', name: 'JR九州新幹線', count: 2460 }],
       },
     ],
     adjacent: [
@@ -1546,21 +1451,15 @@ const STATION_DATA = {
       },
       {
         company: '鹿児島市電',
-        lines: [
-          { value: 'kagoshima-tram', name: '鹿児島市電（路面電車）', count: 2460 },
-        ],
+        lines: [{ value: 'kagoshima-tram', name: '鹿児島市電（路面電車）', count: 2460 }],
       },
       {
         company: '肥薩おれんじ鉄道',
-        lines: [
-          { value: 'hisatsu-orange', name: '肥薩おれんじ鉄道線', count: 460 },
-        ],
+        lines: [{ value: 'hisatsu-orange', name: '肥薩おれんじ鉄道線', count: 460 }],
       },
       {
         company: '新幹線',
-        lines: [
-          { value: 'kyushu-shinkansen-kagoshima', name: 'JR九州新幹線', count: 2860 },
-        ],
+        lines: [{ value: 'kyushu-shinkansen-kagoshima', name: 'JR九州新幹線', count: 2860 }],
       },
     ],
     adjacent: [
@@ -1574,14 +1473,10 @@ const STATION_DATA = {
     railways: [
       {
         company: '沖縄都市モノレール',
-        lines: [
-          { value: 'yui-rail', name: 'ゆいレール', count: 4860 },
-        ],
+        lines: [{ value: 'yui-rail', name: 'ゆいレール', count: 4860 }],
       },
     ],
-    adjacent: [
-      { key: 'kagoshima', name: '鹿児島（航空便）' },
-    ],
+    adjacent: [{ key: 'kagoshima', name: '鹿児島（航空便）' }],
   },
 }
 

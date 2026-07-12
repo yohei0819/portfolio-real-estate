@@ -173,7 +173,7 @@ export default class SearchHistoryManager {
     if (history.length === 0) {
       container.innerHTML = renderEmptyState(
         '保存された検索条件はありません',
-        '物件を検索すると条件が自動的に保存されます',
+        '物件を検索すると条件が自動的に保存されます'
       )
       return
     }

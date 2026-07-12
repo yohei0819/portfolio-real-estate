@@ -63,5 +63,4 @@ export default class NewProperties {
 
     return all.slice(0, MAX_ITEMS)
   }
-
 }

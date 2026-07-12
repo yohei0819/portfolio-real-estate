@@ -1,5 +1,6 @@
 import js from '@eslint/js'
 import globals from 'globals'
+import prettier from 'eslint-config-prettier'
 
 export default [
   {
@@ -38,4 +39,6 @@ export default [
       },
     },
   },
+  // Prettier と競合するフォーマット系ルールを無効化（必ず最後に置く）
+  prettier,
 ]

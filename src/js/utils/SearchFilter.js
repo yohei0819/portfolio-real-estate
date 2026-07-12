@@ -82,9 +82,7 @@ export function matchLayout(selected, layout) {
  * @returns {boolean}
  */
 export function matchFeatures(requiredLabels, propFeatures) {
-  return requiredLabels.every((label) =>
-    propFeatures.some((f) => f.includes(label)),
-  )
+  return requiredLabels.every((label) => propFeatures.some((f) => f.includes(label)))
 }
 
 /**
@@ -110,28 +108,38 @@ export function calcAgeThreshold(ages) {
  * @returns {Object} パース済みフィルタ条件オブジェクト
  */
 export function parseFilterParams(params) {
-  const area    = params.get('area') || ''
-  const rent    = parseRange(params, 'rent_min', 'rent_max')
-  const size    = parseRange(params, 'area_min', 'area_max')
+  const area = params.get('area') || ''
+  const rent = parseRange(params, 'rent_min', 'rent_max')
+  const size = parseRange(params, 'area_min', 'area_max')
   const layouts = getAll(params, 'layout')
-  const types   = getAll(params, 'type')
-  const ages    = getAll(params, 'age')
+  const types = getAll(params, 'type')
+  const ages = getAll(params, 'age')
   const features = getAll(params, 'feature')
 
   // 路線・駅パラメータ（station.html からの遷移時）
-  const lineKeys    = (params.get('lines') || '').split(',').filter(Boolean)
+  const lineKeys = (params.get('lines') || '').split(',').filter(Boolean)
   const stationRaws = (params.get('stations') || '').split(',').filter(Boolean)
-  const { stationNames: targetStations, linesWithStations } = buildTargetStations(lineKeys, stationRaws)
+  const { stationNames: targetStations, linesWithStations } = buildTargetStations(
+    lineKeys,
+    stationRaws
+  )
 
   // 事前にマッピング変換（フィルタループ外で1度だけ計算）
-  const typeLabels    = types.map((t) => TYPE_MAP[t]).filter(Boolean)
+  const typeLabels = types.map((t) => TYPE_MAP[t]).filter(Boolean)
   const featureLabels = features.map((f) => FEATURE_MAP[f]).filter(Boolean)
-  const ageThreshold  = calcAgeThreshold(ages)
+  const ageThreshold = calcAgeThreshold(ages)
 
   return {
-    area, rent, size, layouts,
-    typeLabels, featureLabels, ageThreshold,
-    lineKeys, targetStations, linesWithStations,
+    area,
+    rent,
+    size,
+    layouts,
+    typeLabels,
+    featureLabels,
+    ageThreshold,
+    lineKeys,
+    targetStations,
+    linesWithStations,
   }
 }
 
@@ -143,9 +151,16 @@ export function parseFilterParams(params) {
  */
 export function filterProperties(properties, filters) {
   const {
-    area, rent, size, layouts,
-    typeLabels, featureLabels, ageThreshold,
-    lineKeys, targetStations, linesWithStations,
+    area,
+    rent,
+    size,
+    layouts,
+    typeLabels,
+    featureLabels,
+    ageThreshold,
+    lineKeys,
+    targetStations,
+    linesWithStations,
   } = filters
 
   return properties.filter((p) => {

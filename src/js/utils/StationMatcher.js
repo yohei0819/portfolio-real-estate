@@ -196,7 +196,7 @@ export function buildTargetStations(lineKeys, stationRaws) {
     const colonIdx = raw.indexOf(':')
     if (colonIdx === -1) continue
     const lineKey = raw.slice(0, colonIdx)
-    const name    = raw.slice(colonIdx + 1)
+    const name = raw.slice(colonIdx + 1)
     stationNames.add(name)
     linesWithStations.add(lineKey)
   }
@@ -239,9 +239,7 @@ export function matchStationLine(property, targetStations, lineKeys, linesWithSt
 
   // ── 駅指定がない路線を抽出（Tier 2/3 共通） ──
   // linesWithStations に含まれる路線は Tier 1 で判定済みのためスキップ
-  const linesWithoutExplicitStations = lineKeys.filter(
-    (lk) => !linesWithStations.has(lk),
-  )
+  const linesWithoutExplicitStations = lineKeys.filter((lk) => !linesWithStations.has(lk))
 
   // ── Tier 2: 路線帰属チェック（駅指定がない路線のみ） ──
   // 物件の最寄駅が StationStops に登録されている場合、路線の帰属で判定
@@ -275,9 +273,7 @@ export function getLineLabel(linesRaw) {
   if (keys.length === 0) return ''
 
   const lineNames = getLineNames()
-  const names = keys
-    .map((k) => lineNames.get(k))
-    .filter(Boolean)
+  const names = keys.map((k) => lineNames.get(k)).filter(Boolean)
 
   if (names.length === 0) return ''
   if (names.length <= 2) return names.join('・')

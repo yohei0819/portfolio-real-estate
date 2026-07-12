@@ -35,7 +35,12 @@ import { getFavorites } from '../utils/StorageHelper.js'
 import { buildPropertyRow } from '../utils/CardBuilder.js'
 import { CURRENT_YEAR, extractYear } from '../data/PropertyFactory.js'
 import { extractStationName, resolveLineKeys, getLineLabel } from '../utils/StationMatcher.js'
-import { parseFilterParams, filterProperties, sortProperties, getAll } from '../utils/SearchFilter.js'
+import {
+  parseFilterParams,
+  filterProperties,
+  sortProperties,
+  getAll,
+} from '../utils/SearchFilter.js'
 
 // ----------------------------------------------------------------
 // 定数
@@ -121,12 +126,12 @@ export default class AreaSearch {
 
   /** DOM 要素をキャッシュ */
   #cacheElements() {
-    this.#elItems      = $(SELECTOR.propertyItems)
-    this.#elEmpty      = $(SELECTOR.propertyEmpty)
+    this.#elItems = $(SELECTOR.propertyItems)
+    this.#elEmpty = $(SELECTOR.propertyEmpty)
     this.#elPagination = $(SELECTOR.pagination)
-    this.#elCount      = $(SELECTOR.propertyListCount)
-    this.#elSort       = $(SELECTOR.sortSelect)
-    this.#elForm       = $(SELECTOR.filterForm)
+    this.#elCount = $(SELECTOR.propertyListCount)
+    this.#elSort = $(SELECTOR.sortSelect)
+    this.#elForm = $(SELECTOR.filterForm)
   }
 
   #init() {
@@ -147,7 +152,9 @@ export default class AreaSearch {
     if (!select) return
 
     const prefList = Object.entries(PREFECTURES).map(([key, p]) => ({
-      key, name: p.name, region: p.region,
+      key,
+      name: p.name,
+      region: p.region,
     }))
     select.insertAdjacentHTML('beforeend', buildRegionOptions(prefList))
   }
@@ -248,9 +255,9 @@ export default class AreaSearch {
     if (sort && sort !== DEFAULT_SORT) newParams.set('sort', sort)
 
     // 路線・駅パラメータは form 外なので引き継ぐ（station.html からの遷移）
-    const lines    = this.#params.get('lines')
+    const lines = this.#params.get('lines')
     const stations = this.#params.get('stations')
-    if (lines)    newParams.set('lines', lines)
+    if (lines) newParams.set('lines', lines)
     if (stations) newParams.set('stations', stations)
 
     this.#params = newParams
@@ -286,9 +293,7 @@ export default class AreaSearch {
   #dispatchSearchFilter() {
     const qs = this.#params.toString()
     if (qs) {
-      document.dispatchEvent(
-        new CustomEvent(EVENT.SEARCH_FILTER, { detail: { query: qs } }),
-      )
+      document.dispatchEvent(new CustomEvent(EVENT.SEARCH_FILTER, { detail: { query: qs } }))
     }
   }
 
@@ -298,9 +303,9 @@ export default class AreaSearch {
 
   /** フィルタ + ソート結果をページネーション込みで描画 */
   #render() {
-    const sortKey    = this.#params.get('sort') || DEFAULT_SORT
-    const sorted     = sortProperties(this.#filtered, sortKey)
-    const total      = sorted.length
+    const sortKey = this.#params.get('sort') || DEFAULT_SORT
+    const sorted = sortProperties(this.#filtered, sortKey)
+    const total = sorted.length
     const totalPages = Math.max(1, Math.ceil(total / PER_PAGE))
 
     // [BUG FIX] ページ番号を範囲内に補正し、URL にも反映
@@ -315,7 +320,7 @@ export default class AreaSearch {
       this.#replaceURL()
     }
 
-    const start     = (this.#currentPage - 1) * PER_PAGE
+    const start = (this.#currentPage - 1) * PER_PAGE
     const pageItems = sorted.slice(start, start + PER_PAGE)
 
     this.#updateCount(total)
@@ -341,8 +346,7 @@ export default class AreaSearch {
       areaLabel = '全国'
     }
 
-    this.#elCount.innerHTML =
-      `${escapeHTML(areaLabel)}の賃貸物件 <span>${total.toLocaleString()}</span>件`
+    this.#elCount.innerHTML = `${escapeHTML(areaLabel)}の賃貸物件 <span>${total.toLocaleString()}</span>件`
   }
 
   /** 物件カードの HTML を生成して挿入 */
@@ -361,9 +365,10 @@ export default class AreaSearch {
     // ScrollAnimations が再適用されないため、動的カードを手動でアニメーション表示
     if (this.#initialized) {
       const newCards = this.#elItems.querySelectorAll('.property-row')
-      gsap.fromTo(newCards,
+      gsap.fromTo(
+        newCards,
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' }
       )
     }
   }
@@ -392,7 +397,7 @@ export default class AreaSearch {
     // 前へ
     if (current > 1) {
       parts.push(
-        `<button class="pagination__item pagination__item--prev" data-page="${current - 1}">← 前へ</button>`,
+        `<button class="pagination__item pagination__item--prev" data-page="${current - 1}">← 前へ</button>`
       )
     }
 
@@ -401,7 +406,9 @@ export default class AreaSearch {
       if (p === '...') {
         parts.push('<span class="pagination__item pagination__ellipsis">...</span>')
       } else if (p === current) {
-        parts.push(`<button class="pagination__item is-active" aria-current="page" data-page="${p}">${p}</button>`)
+        parts.push(
+          `<button class="pagination__item is-active" aria-current="page" data-page="${p}">${p}</button>`
+        )
       } else {
         parts.push(`<button class="pagination__item" data-page="${p}">${p}</button>`)
       }
@@ -410,7 +417,7 @@ export default class AreaSearch {
     // 次へ
     if (current < totalPages) {
       parts.push(
-        `<button class="pagination__item pagination__item--next" data-page="${current + 1}">次へ →</button>`,
+        `<button class="pagination__item pagination__item--next" data-page="${current + 1}">次へ →</button>`
       )
     }
 
@@ -432,7 +439,7 @@ export default class AreaSearch {
     if (current > 3) pages.push('...')
 
     const start = Math.max(2, current - 1)
-    const end   = Math.min(total - 1, current + 1)
+    const end = Math.min(total - 1, current + 1)
     for (let i = start; i <= end; i++) pages.push(i)
 
     if (current < total - 2) pages.push('...')
@@ -474,8 +481,7 @@ export default class AreaSearch {
 
     const pref = PREFECTURES[area]
     const title = `${pref.name}の賃貸物件一覧｜${SITE.name}`
-    const description =
-      `${pref.name}の賃貸マンション・アパート物件一覧。${pref.name}の賃貸情報は${SITE.name}。`
+    const description = `${pref.name}の賃貸マンション・アパート物件一覧。${pref.name}の賃貸情報は${SITE.name}。`
 
     updatePageMeta({
       title,

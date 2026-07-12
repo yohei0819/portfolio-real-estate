@@ -82,9 +82,9 @@ export default class Lightbox {
   #bindControls() {
     const root = this.#root
 
-    root.querySelectorAll('[data-lightbox-close]').forEach((el) =>
-      el.addEventListener('click', () => this.#close()),
-    )
+    root
+      .querySelectorAll('[data-lightbox-close]')
+      .forEach((el) => el.addEventListener('click', () => this.#close()))
     $('[data-lightbox-prev]', root).addEventListener('click', () => this.#step(-1))
     $('[data-lightbox-next]', root).addEventListener('click', () => this.#step(1))
 
@@ -97,13 +97,21 @@ export default class Lightbox {
 
     // スワイプ操作（タッチデバイス）
     const content = $('.lightbox__content', root)
-    content.addEventListener('touchstart', (e) => {
-      this.#touchStartX = e.changedTouches[0].clientX
-    }, { passive: true })
-    content.addEventListener('touchend', (e) => {
-      const diff = e.changedTouches[0].clientX - this.#touchStartX
-      if (Math.abs(diff) > SWIPE_THRESHOLD) this.#step(diff < 0 ? 1 : -1)
-    }, { passive: true })
+    content.addEventListener(
+      'touchstart',
+      (e) => {
+        this.#touchStartX = e.changedTouches[0].clientX
+      },
+      { passive: true }
+    )
+    content.addEventListener(
+      'touchend',
+      (e) => {
+        const diff = e.changedTouches[0].clientX - this.#touchStartX
+        if (Math.abs(diff) > SWIPE_THRESHOLD) this.#step(diff < 0 ? 1 : -1)
+      },
+      { passive: true }
+    )
   }
 
   // ── 表示データを DOM から再取得 ──

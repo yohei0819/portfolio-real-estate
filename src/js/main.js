@@ -47,11 +47,12 @@ const COMMON_MODULES = [
  */
 const PAGE_MODULES = {
   [PAGE.INDEX]: async () => {
-    const [{ default: Loading }, { default: HeroSlider }, { default: NewProperties }] = await Promise.all([
-      import('./modules/Loading.js'),
-      import('./modules/HeroSlider.js'),
-      import('./modules/NewProperties.js'),
-    ])
+    const [{ default: Loading }, { default: HeroSlider }, { default: NewProperties }] =
+      await Promise.all([
+        import('./modules/Loading.js'),
+        import('./modules/HeroSlider.js'),
+        import('./modules/NewProperties.js'),
+      ])
     return [Loading, HeroSlider, NewProperties]
   },
 
@@ -61,7 +62,12 @@ const PAGE_MODULES = {
   },
 
   [PAGE.PROPERTY]: async () => {
-    const [{ default: PropertyLoader }, { default: Lightbox }, { default: ContactForm }, { default: ShareButtons }] = await Promise.all([
+    const [
+      { default: PropertyLoader },
+      { default: Lightbox },
+      { default: ContactForm },
+      { default: ShareButtons },
+    ] = await Promise.all([
       import('./modules/PropertyLoader.js'),
       import('./modules/Lightbox.js'),
       import('./modules/ContactForm.js'),

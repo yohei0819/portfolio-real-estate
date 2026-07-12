@@ -18,9 +18,9 @@ import { buildPropertyCard } from '../utils/CardBuilder.js'
 /** 周辺施設カテゴリの定義（追加時はここにエントリを増やすだけ） */
 const NEARBY_CATEGORIES = [
   { key: 'shopping', icon: '🛒', title: '買い物' },
-  { key: 'medical',  icon: '🏥', title: '医療' },
+  { key: 'medical', icon: '🏥', title: '医療' },
   { key: 'education', icon: '🎓', title: '教育' },
-  { key: 'finance',  icon: '🏦', title: '金融・公共' },
+  { key: 'finance', icon: '🏦', title: '金融・公共' },
 ]
 
 /**
@@ -28,12 +28,12 @@ const NEARBY_CATEGORIES = [
  * 実画像の代わりにグラデーションのプレースホルダーで表現する
  */
 const GALLERY_ROOMS = [
-  { label: 'リビング',     gradient: 'linear-gradient(135deg, #f5e6d3, #e8d5c4)' },
-  { label: 'キッチン',     gradient: 'linear-gradient(135deg, #d3e5f5, #c4d5e8)' },
-  { label: '浴室',         gradient: 'linear-gradient(135deg, #d3f5e8, #c4e8d5)' },
-  { label: '洗面所',       gradient: 'linear-gradient(135deg, #e8d3f5, #d5c4e8)' },
-  { label: '洋室',         gradient: 'linear-gradient(135deg, #f5d3e0, #e8c4d2)' },
-  { label: 'バルコニー',   gradient: 'linear-gradient(135deg, #f5f0d3, #e8e2c4)' },
+  { label: 'リビング', gradient: 'linear-gradient(135deg, #f5e6d3, #e8d5c4)' },
+  { label: 'キッチン', gradient: 'linear-gradient(135deg, #d3e5f5, #c4d5e8)' },
+  { label: '浴室', gradient: 'linear-gradient(135deg, #d3f5e8, #c4e8d5)' },
+  { label: '洗面所', gradient: 'linear-gradient(135deg, #e8d3f5, #d5c4e8)' },
+  { label: '洋室', gradient: 'linear-gradient(135deg, #f5d3e0, #e8c4d2)' },
+  { label: 'バルコニー', gradient: 'linear-gradient(135deg, #f5f0d3, #e8e2c4)' },
 ]
 
 export default class PropertyLoader {
@@ -75,10 +75,7 @@ export default class PropertyLoader {
     updatePageMeta({
       title: `物件が見つかりません｜${SITE.name}`,
       description: '指定された物件は見つかりませんでした。',
-      breadcrumb: [
-        { label: SITE.tagline, href: './' },
-        { label: '物件が見つかりません' },
-      ],
+      breadcrumb: [{ label: SITE.tagline, href: './' }, { label: '物件が見つかりません' }],
     })
 
     setHTML(
@@ -88,7 +85,7 @@ export default class PropertyLoader {
         <h1 class="detail__not-found-title">物件が見つかりませんでした</h1>
         <p class="detail__not-found-text">指定された物件は削除されたか、URLが正しくない可能性があります。</p>
         <a href="./search.html" class="detail__not-found-link">物件一覧から探す</a>
-      </div>`,
+      </div>`
     )
   }
 
@@ -111,9 +108,7 @@ export default class PropertyLoader {
     this.#renderSimilarProperties()
 
     // 最近見た物件に追加（カスタムイベント発火）
-    document.dispatchEvent(
-      new CustomEvent(EVENT.RECENTLY_VIEWED, { detail: { id: this.#id } }),
-    )
+    document.dispatchEvent(new CustomEvent(EVENT.RECENTLY_VIEWED, { detail: { id: this.#id } }))
   }
 
   // ── メタ情報 ──
@@ -194,7 +189,12 @@ export default class PropertyLoader {
     setHTML(
       '.detail__table',
       `<caption class="sr-only">物件の基本情報一覧</caption>` +
-        rows.map(([th, td]) => `<tr><th scope="row">${escapeHTML(th)}</th><td>${escapeHTML(String(td ?? ''))}</td></tr>`).join('')
+        rows
+          .map(
+            ([th, td]) =>
+              `<tr><th scope="row">${escapeHTML(th)}</th><td>${escapeHTML(String(td ?? ''))}</td></tr>`
+          )
+          .join('')
     )
   }
 
@@ -218,8 +218,14 @@ export default class PropertyLoader {
     const costs = this.#prop.initialCosts
     if (!costs) return
     const entries = [
-      costs.deposit, costs.keyMoney, costs.rent, costs.management,
-      costs.brokerage, costs.insurance, costs.guarantorFee, costs.keyExchange,
+      costs.deposit,
+      costs.keyMoney,
+      costs.rent,
+      costs.management,
+      costs.brokerage,
+      costs.insurance,
+      costs.guarantorFee,
+      costs.keyExchange,
     ]
     const rowsHTML = entries
       .filter(Boolean)
@@ -259,11 +265,12 @@ export default class PropertyLoader {
     const gallery = $('.detail__gallery')
     if (!gallery) return
 
-    gallery.innerHTML = GALLERY_ROOMS.map((room, i) =>
-      `<button type="button" class="detail__gallery-item" data-gallery-index="${i}" style="background:${room.gradient}" aria-label="${escapeHTML(room.label)}の写真を拡大表示">
+    gallery.innerHTML = GALLERY_ROOMS.map(
+      (room, i) =>
+        `<button type="button" class="detail__gallery-item" data-gallery-index="${i}" style="background:${room.gradient}" aria-label="${escapeHTML(room.label)}の写真を拡大表示">
         <span class="detail__gallery-icon" aria-hidden="true">📷</span>
         <span class="detail__gallery-label">${escapeHTML(room.label)}</span>
-      </button>`,
+      </button>`
     ).join('')
   }
 
@@ -273,24 +280,22 @@ export default class PropertyLoader {
     const nearbyEl = $('.detail__nearby')
     if (!nearbyEl) return
 
-    nearbyEl.innerHTML = NEARBY_CATEGORIES
-      .map((cat) => {
-        const items = this.#prop.nearby?.[cat.key]
-        if (!items || items.length === 0) return ''
+    nearbyEl.innerHTML = NEARBY_CATEGORIES.map((cat) => {
+      const items = this.#prop.nearby?.[cat.key]
+      if (!items || items.length === 0) return ''
 
-        const list = items
-          .map(
-            (item) =>
-              `<li><span class="detail__nearby-name">${escapeHTML(item.name)}</span><span class="detail__nearby-distance">${escapeHTML(item.distance)}</span></li>`
-          )
-          .join('')
-        return `
+      const list = items
+        .map(
+          (item) =>
+            `<li><span class="detail__nearby-name">${escapeHTML(item.name)}</span><span class="detail__nearby-distance">${escapeHTML(item.distance)}</span></li>`
+        )
+        .join('')
+      return `
           <div class="detail__nearby-category">
             <h3 class="detail__nearby-category-title"><span aria-hidden="true">${cat.icon}</span> ${cat.title}</h3>
             <ul class="detail__nearby-list">${list}</ul>
           </div>`
-      })
-      .join('')
+    }).join('')
   }
 
   // ── 管理会社 ──

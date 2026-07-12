@@ -79,9 +79,9 @@ export function detectPage() {
   const path = window.location.pathname
   // 末尾のファイル名（例: '/search.html' → 'search.html'）を取得
   const filename = path.split('/').pop() || ''
-  if (filename.startsWith('search'))   return 'search'
+  if (filename.startsWith('search')) return 'search'
   if (filename.startsWith('property')) return 'property'
-  if (filename.startsWith('station'))  return 'station'
+  if (filename.startsWith('station')) return 'station'
   return 'index'
 }
 
@@ -108,7 +108,5 @@ export function buildRegionOptions(prefList, defaultLabel = '') {
     })
     .join('')
 
-  return defaultLabel
-    ? `<option value="">${escapeHTML(defaultLabel)}</option>${groups}`
-    : groups
+  return defaultLabel ? `<option value="">${escapeHTML(defaultLabel)}</option>${groups}` : groups
 }

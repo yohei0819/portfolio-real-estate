@@ -55,7 +55,6 @@ const HOVER_RULES = Object.freeze([
 ])
 
 export default class HoverAnimations {
-
   constructor() {
     // タッチデバイスではホバー不要
     if (!window.matchMedia('(pointer: fine)').matches) return

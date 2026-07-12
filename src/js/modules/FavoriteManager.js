@@ -93,9 +93,7 @@ export default class FavoriteManager {
       }
 
       // カスタムイベント
-      document.dispatchEvent(
-        new CustomEvent(EVENT.FAVORITE_TOGGLE, { detail: { id, added } }),
-      )
+      document.dispatchEvent(new CustomEvent(EVENT.FAVORITE_TOGGLE, { detail: { id, added } }))
 
       // ドロワーが開いていれば再描画
       if (this.#drawer.isOpen) this.#renderDrawerContent()

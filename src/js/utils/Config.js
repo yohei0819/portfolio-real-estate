@@ -123,23 +123,23 @@ export const SEARCH = Object.freeze({
 
   /** こだわり条件キー → PropertyData.features の照合文字列 */
   featureMap: Object.freeze({
-    parking:      '駐車場',
-    pet:          'ペット可',
-    autolock:     'オートロック',
-    bath_toilet:  'バス・トイレ別',
-    aircon:       'エアコン',
-    '2f_above':   '2階以上',
-    corner:       '角部屋',
-    flooring:     'フローリング',
+    parking: '駐車場',
+    pet: 'ペット可',
+    autolock: 'オートロック',
+    bath_toilet: 'バス・トイレ別',
+    aircon: 'エアコン',
+    '2f_above': '2階以上',
+    corner: '角部屋',
+    flooring: 'フローリング',
     delivery_box: '宅配ボックス',
-    internet:     'インターネット',
+    internet: 'インターネット',
   }),
 
   /** 物件タイプキー → PropertyData.type の日本語ラベル */
   typeMap: Object.freeze({
-    mansion:    'マンション',
-    apartment:  'アパート',
-    house:      '一戸建て',
+    mansion: 'マンション',
+    apartment: 'アパート',
+    house: '一戸建て',
     maisonette: 'メゾネット',
   }),
 

@@ -21,9 +21,9 @@ const CB_NAME = Object.freeze({ LINE: 'line', STATION: 'station' })
 
 /** DOM クエリ用セレクタ（name 属性ベースで繰り返し使う） */
 const Q = Object.freeze({
-  lineChecked:    `input[name="${CB_NAME.LINE}"]:checked`,
+  lineChecked: `input[name="${CB_NAME.LINE}"]:checked`,
   stationChecked: `input[name="${CB_NAME.STATION}"]:checked`,
-  stationAll:     `input[name="${CB_NAME.STATION}"]`,
+  stationAll: `input[name="${CB_NAME.STATION}"]`,
 })
 
 export default class LineSelector {
@@ -59,10 +59,10 @@ export default class LineSelector {
 
   /** フローティング選択バー + STEP2 ボタンの要素をキャッシュ */
   #cacheSummaryElements() {
-    this.#summaryBar      = $(SELECTOR.stationSummary)
-    this.#lineCountEl     = $('[data-selected-line-count]')
-    this.#stationCountEl  = $('[data-selected-station-count]')
-    this.#searchBtn       = $(SELECTOR.stationSearchBtn)
+    this.#summaryBar = $(SELECTOR.stationSummary)
+    this.#lineCountEl = $('[data-selected-line-count]')
+    this.#stationCountEl = $('[data-selected-station-count]')
+    this.#searchBtn = $(SELECTOR.stationSearchBtn)
     this.#searchBtnInline = $(SELECTOR.stationSearchBtnInline)
   }
 
@@ -154,12 +154,14 @@ export default class LineSelector {
     const safeLine = escapeHTML(lineValue)
 
     const stopsHTML = stops
-      .map((s) => `
+      .map(
+        (s) => `
         <label class="station-stops__item">
           <input type="checkbox" name="${CB_NAME.STATION}" value="${safeLine}:${escapeHTML(s.name)}" checked>
           <span class="station-stops__name">${escapeHTML(s.name)}</span>
           <span class="station-stops__count">${s.count.toLocaleString()}件</span>
-        </label>`)
+        </label>`
+      )
       .join('')
 
     // 展開直後は全駅チェック済みなので「すべて解除」を表示
@@ -193,7 +195,9 @@ export default class LineSelector {
     stopsEl.addEventListener('transitionend', onEnd)
 
     // transitionend が発火しない場合のフォールバック
-    setTimeout(() => { if (stopsEl.parentNode) stopsEl.remove() }, COLLAPSE_DURATION_MS)
+    setTimeout(() => {
+      if (stopsEl.parentNode) stopsEl.remove()
+    }, COLLAPSE_DURATION_MS)
   }
 
   /**
@@ -221,7 +225,9 @@ export default class LineSelector {
     const allChecked = checkboxes.every((cb) => cb.checked)
     const newState = !allChecked
 
-    checkboxes.forEach((cb) => { cb.checked = newState })
+    checkboxes.forEach((cb) => {
+      cb.checked = newState
+    })
     toggleBtn.textContent = newState ? 'すべて解除' : 'すべて選択'
 
     this.#updateSummary()
@@ -233,7 +239,7 @@ export default class LineSelector {
 
   /** フローティングバーの選択数を更新 */
   #updateSummary() {
-    const lineCheckboxes    = $$(Q.lineChecked, this.#container)
+    const lineCheckboxes = $$(Q.lineChecked, this.#container)
     const stationCheckboxes = $$(Q.stationChecked, this.#container)
 
     const lineCount = lineCheckboxes.length

@@ -73,20 +73,19 @@ export default class ScrollAnimations {
     const ease = 'power3.out'
 
     if (heroTitle) {
-      tl.fromTo(heroTitle,
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: 1, ease }
-      )
+      tl.fromTo(heroTitle, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1, ease })
     }
     if (heroSubtitle) {
-      tl.fromTo(heroSubtitle,
+      tl.fromTo(
+        heroSubtitle,
         { opacity: 0, y: 40 },
         { opacity: 1, y: 0, duration: 1, ease },
         '-=0.7'
       )
     }
     if (heroSearch) {
-      tl.fromTo(heroSearch,
+      tl.fromTo(
+        heroSearch,
         { opacity: 0, y: 30, scale: 0.95 },
         { opacity: 1, y: 0, scale: 1, duration: 0.8, ease },
         '-=0.6'

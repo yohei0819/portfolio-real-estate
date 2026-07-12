@@ -101,11 +101,10 @@ export function renderPropertyItem(id, { removable = false } = {}) {
  * @param {string}   [options.emptyHint]        空時のヒント
  * @returns {string}  HTML 文字列
  */
-export function renderPropertyList(ids, {
-  removable = false,
-  emptyMessage = '物件がありません',
-  emptyHint = '',
-} = {}) {
+export function renderPropertyList(
+  ids,
+  { removable = false, emptyMessage = '物件がありません', emptyHint = '' } = {}
+) {
   if (ids.length === 0) {
     return renderEmptyState(emptyMessage, emptyHint)
   }

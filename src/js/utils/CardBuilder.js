@@ -109,9 +109,7 @@ export function buildPropertyCard(id, prop, favIds, { location, age } = {}) {
  * @returns {string}  HTML 文字列
  */
 export function buildPropertyRow(p, favIds) {
-  const badge = p.badge
-    ? `<span class="property-row__badge">${escapeHTML(p.badge)}</span>`
-    : ''
+  const badge = p.badge ? `<span class="property-row__badge">${escapeHTML(p.badge)}</span>` : ''
 
   const features = p.features
     .slice(0, 4)

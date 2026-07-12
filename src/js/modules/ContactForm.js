@@ -45,9 +45,9 @@ export default class ContactForm {
     root.setAttribute('aria-labelledby', 'contactModalTitle')
     root.hidden = true
 
-    const options = INQUIRY_TYPES
-      .map((t) => `<option value="${escapeHTML(t)}">${escapeHTML(t)}</option>`)
-      .join('')
+    const options = INQUIRY_TYPES.map(
+      (t) => `<option value="${escapeHTML(t)}">${escapeHTML(t)}</option>`
+    ).join('')
 
     root.innerHTML = `
       <div class="contact-modal__overlay" data-contact-close></div>
@@ -118,19 +118,23 @@ export default class ContactForm {
       this.#open()
     })
 
-    this.#root.querySelectorAll('[data-contact-close]').forEach((el) =>
-      el.addEventListener('click', () => this.#close()),
-    )
+    this.#root
+      .querySelectorAll('[data-contact-close]')
+      .forEach((el) => el.addEventListener('click', () => this.#close()))
 
     document.addEventListener('keydown', (e) => {
       if (!this.#root.hidden && e.key === 'Escape') this.#close()
     })
 
     // リアルタイム検証（blur 時に各フィールドを検証）
-    this.#form.addEventListener('blur', (e) => {
-      const field = e.target
-      if (field.name) this.#validateField(field)
-    }, true)
+    this.#form.addEventListener(
+      'blur',
+      (e) => {
+        const field = e.target
+        if (field.name) this.#validateField(field)
+      },
+      true
+    )
 
     // 入力中はエラーを消す（再検証は次の blur で）
     this.#form.addEventListener('input', (e) => {

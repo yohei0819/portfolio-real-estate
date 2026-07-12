@@ -38,10 +38,10 @@ const GRADIENTS = [
 // 構造体マッピング
 // ================================================================
 const STRUCTURE_MAP = {
-  'マンション': 'RC造（鉄筋コンクリート）',
-  'アパート': '軽量鉄骨造',
-  '一戸建て': '木造2階建',
-  'メゾネット': 'RC造（鉄筋コンクリート）',
+  マンション: 'RC造（鉄筋コンクリート）',
+  アパート: '軽量鉄骨造',
+  一戸建て: '木造2階建',
+  メゾネット: 'RC造（鉄筋コンクリート）',
 }
 
 // ================================================================
@@ -69,8 +69,14 @@ const COST_CONFIG = {
 // ================================================================
 /** 初期費用の合計計算に使用するキー一覧 */
 export const COST_KEYS = [
-  'deposit', 'keyMoney', 'rent', 'management',
-  'brokerage', 'insurance', 'guarantorFee', 'keyExchange',
+  'deposit',
+  'keyMoney',
+  'rent',
+  'management',
+  'brokerage',
+  'insurance',
+  'guarantorFee',
+  'keyExchange',
 ]
 
 // ================================================================
@@ -109,10 +115,24 @@ function getCityLabel(city) {
 
 /** シードに必須のフィールド一覧 */
 const REQUIRED_SEED_KEYS = [
-  'name', 'areaKey', 'prefecture', 'city', 'address', 'station',
-  'totalFloors', 'floor', 'direction',
-  'price', 'managementFee', 'depositMonths', 'keyMoneyMonths',
-  'type', 'layout', 'area', 'buildDate', 'features',
+  'name',
+  'areaKey',
+  'prefecture',
+  'city',
+  'address',
+  'station',
+  'totalFloors',
+  'floor',
+  'direction',
+  'price',
+  'managementFee',
+  'depositMonths',
+  'keyMoneyMonths',
+  'type',
+  'layout',
+  'area',
+  'buildDate',
+  'features',
 ]
 
 /**
@@ -121,10 +141,10 @@ const REQUIRED_SEED_KEYS = [
  * @param {number} index  シード配列内のインデックス
  */
 function validateSeed(seed, index) {
-  const missing = REQUIRED_SEED_KEYS.filter(key => seed[key] === undefined)
+  const missing = REQUIRED_SEED_KEYS.filter((key) => seed[key] === undefined)
   if (missing.length > 0) {
     console.warn(
-      `[PropertyFactory] シード #${index}（${seed.name ?? '名称不明'}）に必須フィールドが不足: ${missing.join(', ')}`,
+      `[PropertyFactory] シード #${index}（${seed.name ?? '名称不明'}）に必須フィールドが不足: ${missing.join(', ')}`
     )
   }
 }
@@ -181,10 +201,7 @@ function buildFloorplan(layout, area, type = 'マンション') {
     const isSldk = rt === 'SLDK'
 
     // リビング面積比率（間取りタイプ別）
-    const ratio = rt === 'R' ? 1.0
-      : rt === 'K' ? 0.15
-      : rt === 'DK' ? 0.30
-      : n === 1 ? 0.55 : 0.45
+    const ratio = rt === 'R' ? 1.0 : rt === 'K' ? 0.15 : rt === 'DK' ? 0.3 : n === 1 ? 0.55 : 0.45
 
     const livingM2 = usable * ratio
     // SLDK はサービスルーム分を加味して按分
@@ -209,7 +226,7 @@ function buildFloorplan(layout, area, type = 'マンション') {
   rooms.push(
     { type: 'bath', name: '浴室' },
     { type: 'wc', name: 'WC' },
-    { type: 'entrance', name: '玄関' },
+    { type: 'entrance', name: '玄関' }
   )
   if (type === '一戸建て') {
     rooms.push({ type: 'garden', name: '庭' })
@@ -231,14 +248,18 @@ function buildInitialCosts(price, mgmt, depM, keyM) {
   const keyAmt = price >= KEY_EXCHANGE.threshold ? KEY_EXCHANGE.high : KEY_EXCHANGE.low
 
   return {
-    deposit:      { label: '敷金',          amount: yen * depM,                        note: depM ? `${depM}ヶ月` : 'なし' },
-    keyMoney:     { label: '礼金',          amount: yen * keyM,                        note: keyM ? `${keyM}ヶ月` : 'なし' },
-    rent:         { label: '前家賃',         amount: yen,                              note: '1ヶ月' },
-    management:   { label: '管理費・共益費',   amount: mgmt },
-    brokerage:    { label: '仲介手数料',      amount: Math.round(yen * BROKERAGE_RATE), note: '税込' },
-    insurance:    { label: '火災保険料',      amount: insAmt,                           note: '2年間' },
-    guarantorFee: { label: '保証会社利用料',   amount: Math.round(yen * GUARANTOR_RATE), note: '賃料50%' },
-    keyExchange:  { label: '鍵交換費用',      amount: keyAmt,                           note: '税込' },
+    deposit: { label: '敷金', amount: yen * depM, note: depM ? `${depM}ヶ月` : 'なし' },
+    keyMoney: { label: '礼金', amount: yen * keyM, note: keyM ? `${keyM}ヶ月` : 'なし' },
+    rent: { label: '前家賃', amount: yen, note: '1ヶ月' },
+    management: { label: '管理費・共益費', amount: mgmt },
+    brokerage: { label: '仲介手数料', amount: Math.round(yen * BROKERAGE_RATE), note: '税込' },
+    insurance: { label: '火災保険料', amount: insAmt, note: '2年間' },
+    guarantorFee: {
+      label: '保証会社利用料',
+      amount: Math.round(yen * GUARANTOR_RATE),
+      note: '賃料50%',
+    },
+    keyExchange: { label: '鍵交換費用', amount: keyAmt, note: '税込' },
     // total は PropertyData.js で全物件一括計算される（手動物件も含む）
     total: 0,
   }
@@ -249,9 +270,7 @@ function buildInitialCosts(price, mgmt, depM, keyM) {
  */
 function buildNearby(prefecture, city) {
   // 北海道は「道」を除去しない（「北海」にならないよう特別扱い）
-  const prefShort = prefecture === '北海道'
-    ? '北海道'
-    : prefecture.replace(/[都府県]$/, '')
+  const prefShort = prefecture === '北海道' ? '北海道' : prefecture.replace(/[都府県]$/, '')
   const label = getCityLabel(city)
   const idx = (label.charCodeAt(0) || 0) % 3
 
@@ -312,14 +331,16 @@ export function createProperty(id, seed) {
     // ── シードで上書き ──
     ...seed,
     // ── 自動計算フィールド（シードに無い場合のみ生成） ──
-    age:          seed.age          || buildAge(seed.buildDate),
-    structure:    seed.structure    || STRUCTURE_MAP[seed.type] || 'RC造（鉄筋コンクリート）',
-    gradient:     seed.gradient     || GRADIENTS[id % GRADIENTS.length],
-    floorplan:    seed.floorplan    || buildFloorplan(seed.layout, seed.area, seed.type),
-    initialCosts: seed.initialCosts || buildInitialCosts(seed.price, seed.managementFee, seed.depositMonths, seed.keyMoneyMonths),
-    nearby:       seed.nearby       || buildNearby(seed.prefecture, seed.city),
-    company:      seed.company      || buildCompany(seed.prefecture, seed.city),
-    similarIds:   seed.similarIds   || [],
+    age: seed.age || buildAge(seed.buildDate),
+    structure: seed.structure || STRUCTURE_MAP[seed.type] || 'RC造（鉄筋コンクリート）',
+    gradient: seed.gradient || GRADIENTS[id % GRADIENTS.length],
+    floorplan: seed.floorplan || buildFloorplan(seed.layout, seed.area, seed.type),
+    initialCosts:
+      seed.initialCosts ||
+      buildInitialCosts(seed.price, seed.managementFee, seed.depositMonths, seed.keyMoneyMonths),
+    nearby: seed.nearby || buildNearby(seed.prefecture, seed.city),
+    company: seed.company || buildCompany(seed.prefecture, seed.city),
+    similarIds: seed.similarIds || [],
   }
 }
 
